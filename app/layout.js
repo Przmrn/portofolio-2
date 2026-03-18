@@ -3,6 +3,7 @@ import LenisProvider from "@/components/LenisProvider";
 import CustomCursor from "@/components/CustomCursor";
 import CornerLabels from "@/components/CornerLabels";
 import Nav from "@/components/Nav";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "Ammar — Developer & Engineer",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
           <CornerLabels />
           <Nav />
           {children}
+          <SpeedInsights />
         </LenisProvider>
       </body>
     </html>
