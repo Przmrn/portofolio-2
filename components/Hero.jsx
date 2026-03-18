@@ -129,7 +129,7 @@ export default function Hero() {
           bottom:         0,
           left:           0,
           right:          0,
-          padding:        "18px 5vw",
+          padding:        "3px 5vw",
           borderTop:      "1px solid #CCCCCA",
           display:        "flex",
           justifyContent: "space-between",

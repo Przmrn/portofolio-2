@@ -8,16 +8,16 @@ const PROJECTS = [
     title:    "Smart Traffic System",
     sub:      "YOLOv8 & Computer Vision",
     desc:     "Real-time vehicle detection and congestion prediction pipeline running on live CCTV streams. Processes HD video to extract density maps and flag critical junctions.",
-    tags:     ["Python", "YOLOv8", "OpenCV", "FastAPI"],
-    year:     "2024",
+    tags:     ["Python", "YOLOv8", "OpenCV", "FastAPI", "Laravel"],
+    year:     "2025",
   },
   {
     id:       "02",
-    title:    "Mail Management Portal",
+    title:    "Mail Management System",
     sub:      "OCR & Web Development",
     desc:     "Automated mail intake system with OCR-powered data extraction, status tracking, and a full audit trail. Replaced entirely manual logging.",
-    tags:     ["Laravel", "PHP", "MySQL", "Tesseract"],
-    year:     "2024",
+    tags:     ["Laravel", "PHP", "MySQL", "PaddleOCR", "Python"],
+    year:     "2025",
   },
   {
     id:       "03",
@@ -25,7 +25,7 @@ const PROJECTS = [
     sub:      "React & Logic",
     desc:     "Browser-based games that visualise sorting and pathfinding algorithms in real time. Built as an interactive learning tool for CS fundamentals.",
     tags:     ["React", "Framer Motion", "TypeScript"],
-    year:     "2025",
+    year:     "2026",
   },
 ];
 

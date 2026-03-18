@@ -15,8 +15,8 @@ export default function Nav() {
       transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
       style={{
         position:     "fixed",
-        top:          "28px",
-        left:         "50%",
+        top:          "24px",
+        left:         "42%",
         transform:    "translateX(-50%)",
         zIndex:       100,
         display:      "flex",
