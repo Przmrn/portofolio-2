@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option M — Manifesto | Ammar Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0C0C0C;
+            --w: #fff;
+            --off: #E0DDD5;
+            --g1: #aaa;
+            --g2: #666;
+            --g3: #333;
+            --g4: #1a1a1a;
+            --f: 'Inter', system-ui, sans-serif;
+            --g: clamp(24px, 4vw, 64px)
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--f);
+            background: var(--bg);
+            color: var(--w);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--g)
+        }
+
+        .lbl {
+            font-size: .5rem;
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--g2)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            mix-blend-mode: difference
+        }
+
+        nav .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 56px
+        }
+
+        .nav-l {
+            font-size: .875rem;
+            font-weight: 900;
+            letter-spacing: .1em
+        }
+
+        .links {
+            display: flex;
+            gap: 32px;
+            list-style: none
+        }
+
+        .links a {
+            font-size: .5625rem;
+            font-weight: 500;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--w);
+            opacity: .5;
+            transition: opacity .2s
+        }
+
+        .links a:hover {
+            opacity: 1
+        }
+
+        /* HERO — dramatic full-bleed name */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero-name {
+            font-size: clamp(100px, 25vw, 420px);
+            font-weight: 900;
+            line-height: .76;
+            letter-spacing: -.08em;
+            text-align: center;
+            color: var(--w)
+        }
+
+        .hero-name span {
+            display: block;
+            font-size: .4em;
+            font-weight: 300;
+            letter-spacing: .15em;
+            color: var(--g1);
+            margin-top: 16px;
+            text-transform: uppercase
+        }
+
+        /* Horizontal lines through hero for that editorial feel */
+        .hero::before,
+        .hero::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--g3)
+        }
+
+        .hero::before {
+            top: 33vh
+        }
+
+        .hero::after {
+            top: 66vh
+        }
+
+        .hero-corner {
+            position: absolute;
+            font-size: .5rem;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--g2)
+        }
+
+        .hero-tl {
+            top: 80px;
+            left: var(--g)
+        }
+
+        .hero-tr {
+            top: 80px;
+            right: var(--g);
+            text-align: right
+        }
+
+        .hero-bl {
+            bottom: 32px;
+            left: var(--g)
+        }
+
+        .hero-br {
+            bottom: 32px;
+            right: var(--g);
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--w);
+            animation: dp 2s ease-in-out infinite
+        }
+
+        @keyframes dp {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .2
+            }
+        }
+
+        /* full-width divider section */
+        .divider-section {
+            border-top: 1px solid var(--g3);
+            padding: 14px var(--g);
+            display: flex;
+            justify-content: space-between
+        }
+
+        .divider-section span {
+            font-size: .5rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--g2)
+        }
+
+        .projects {
+            padding: 80px 0
+        }
+
+        .proj-h {
+            margin-bottom: 56px
+        }
+
+        .proj-h h2 {
+            font-size: clamp(40px, 7vw, 100px);
+            font-weight: 900;
+            letter-spacing: -.05em;
+            line-height: .86
+        }
+
+        .proj {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--g4);
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 20px;
+            cursor: pointer;
+            transition: padding-left .3s
+        }
+
+        .proj:first-of-type {
+            border-top: 1px solid var(--g4)
+        }
+
+        .proj:hover {
+            padding-left: 16px
+        }
+
+        .pn {
+            font-size: .6875rem;
+            font-weight: 600;
+            color: var(--g2);
+            padding-top: 4px
+        }
+
+        .pt {
+            font-size: clamp(24px, 4vw, 56px);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: 1;
+            margin-bottom: 6px
+        }
+
+        .ps {
+            font-size: .5rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--g2);
+            margin-bottom: 12px
+        }
+
+        .pd {
+            font-size: .8125rem;
+            color: var(--g1);
+            line-height: 1.7;
+            max-width: 480px;
+            font-weight: 300;
+            margin-bottom: 14px
+        }
+
+        .ptags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap
+        }
+
+        .ptags span {
+            font-size: .4375rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--g1);
+            background: var(--g4);
+            padding: 3px 8px;
+            border-radius: 2px
+        }
+
+        /* ABOUT — split dark/light */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr
+        }
+
+        .about-left {
+            background: var(--off);
+            color: var(--bg);
+            padding: 80px var(--g)
+        }
+
+        .about-h {
+            font-size: clamp(32px, 4.5vw, 64px);
+            font-weight: 900;
+            letter-spacing: -.04em;
+            line-height: .92;
+            margin-bottom: 28px
+        }
+
+        .about-p {
+            font-size: .875rem;
+            color: var(--g2);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 380px
+        }
+
+        .about-p+.about-p {
+            margin-top: 14px
+        }
+
+        .about-right {
+            padding: 80px var(--g)
+        }
+
+        .sk {
+            border-top: 1px solid var(--g4);
+            padding: 18px 0
+        }
+
+        .sk-t {
+            font-size: .4375rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--g2);
+            margin-bottom: 8px
+        }
+
+        .sk-i {
+            font-size: .8125rem;
+            color: var(--g1);
+            font-weight: 300
+        }
+
+        .stg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            border-top: 1px solid var(--g4);
+            padding-top: 20px
+        }
+
+        .stn {
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 900;
+            color: var(--w);
+            line-height: 1;
+            margin-bottom: 4px
+        }
+
+        .stl {
+            font-size: .4375rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--g2)
+        }
+
+        .contact {
+            padding: 100px 0 80px;
+            border-top: 1px solid var(--g4);
+            text-align: center
+        }
+
+        .ch {
+            font-size: clamp(48px, 12vw, 180px);
+            font-weight: 900;
+            letter-spacing: -.06em;
+            line-height: .82;
+            margin-bottom: 48px
+        }
+
+        .cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--g4);
+            padding-top: 32px;
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .cta-btn {
+            font-family: var(--f);
+            font-size: .6875rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--w);
+            padding: 14px 36px;
+            border: none;
+            cursor: pointer;
+            transition: opacity .25s
+        }
+
+        .cta-btn:hover {
+            opacity: .8
+        }
+
+        .cta-link {
+            font-size: .5625rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--g2);
+            transition: color .2s;
+            padding: 14px 0
+        }
+
+        .cta-link:hover {
+            color: var(--w)
+        }
+
+        .ft {
+            margin-top: 80px;
+            padding-top: 16px;
+            border-top: 1px solid var(--g4);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 24px;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: var(--g);
+            padding-right: var(--g)
+        }
+
+        .ft span {
+            font-size: .4375rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--g2)
+        }
+
+        @media(max-width:768px) {
+            .about {
+                grid-template-columns: 1fr
+            }
+
+            .proj {
+                grid-template-columns: 40px 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrap"><span class="nav-l">AMMAR</span>
+            <ul class="links">
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <h1 class="hero-name">AM<br>MAR<span>Developer & Engineer</span></h1>
+        <div class="hero-corner hero-tl">Portfolio / 2026</div>
+        <div class="hero-corner hero-tr">Full-Stack Developer<br>Computer Vision Eng.</div>
+        <div class="hero-corner hero-bl">Banda Aceh, ID</div>
+        <div class="hero-corner hero-br"><span class="dot"></span>Available</div>
+    </section>
+
+    <div class="divider-section"><span>Python · Laravel · YOLOv8 · React · OpenCV</span><span>Scroll ↓</span></div>
+
+    <section class="projects" id="projects">
+        <div class="wrap">
+            <div class="proj-h">
+                <h2>Selected<br>Work</h2>
+            </div>
+            <div class="proj"><span class="pn">01</span>
+                <div>
+                    <h3 class="pt">Smart Traffic System</h3>
+                    <p class="ps">YOLOv8 & Computer Vision · 2025</p>
+                    <p class="pd">Real-time vehicle detection and congestion prediction on live CCTV.</p>
+                    <div class="ptags">
+                        <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span>
+                    </div>
+                </div>
+            </div>
+            <div class="proj"><span class="pn">02</span>
+                <div>
+                    <h3 class="pt">Mail Management</h3>
+                    <p class="ps">OCR & Web Dev · 2025</p>
+                    <p class="pd">Automated mail intake with OCR extraction and audit trail.</p>
+                    <div class="ptags">
+                        <span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span>
+                    </div>
+                </div>
+            </div>
+            <div class="proj"><span class="pn">03</span>
+                <div>
+                    <h3 class="pt">Algorithm Arcade</h3>
+                    <p class="ps">React & Logic · 2026</p>
+                    <p class="pd">Interactive games visualising sorting and pathfinding algorithms.</p>
+                    <div class="ptags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-left"><span class="lbl" style="display:block;margin-bottom:32px;color:var(--g2)">About</span>
+            <h2 class="about-h">Building<br>Systems<br>That Work.</h2>
+            <p class="about-p">IT student from Banda Aceh. CV, full-stack web, real-world deployment.</p>
+            <p class="about-p">Code that ships — reliability, data integrity, users first.</p>
+        </div>
+        <div class="about-right">
+            <div class="sk">
+                <div class="sk-t">Web Development</div>
+                <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+            </div>
+            <div class="sk">
+                <div class="sk-t">Data & Vision</div>
+                <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+            </div>
+            <div class="sk">
+                <div class="sk-t">Design & Tooling</div>
+                <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+            </div>
+            <div class="stg">
+                <div>
+                    <div class="stn">2+</div>
+                    <div class="stl">Years Exp.</div>
+                </div>
+                <div>
+                    <div class="stn">4</div>
+                    <div class="stl">Projects</div>
+                </div>
+                <div>
+                    <div class="stn">3</div>
+                    <div class="stl">Domains</div>
+                </div>
+                <div>
+                    <div class="stn">∞</div>
+                    <div class="stl">Curiosity</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="wrap">
+            <span class="lbl" style="display:block;margin-bottom:24px">Contact</span>
+            <h2 class="ch">LET'S<br>BUILD IT.</h2>
+            <div class="cta"><a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch</a><a href="#"
+                    class="cta-link">LinkedIn ↗</a><a href="#" class="cta-link">GitHub ↗</a></div>
+        </div>
+        <div class="ft"><span>2026 Ammar</span><span style="display:flex;align-items:center;gap:6px"><span
+                    class="dot"></span>Available</span></div>
+    </section>
+</body>
+
+</html>

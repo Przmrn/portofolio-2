@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option L — Geist | Ammar Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #000;
+            --s: #0a0a0a;
+            --s2: #111;
+            --b: #1a1a1a;
+            --b2: #252525;
+            --w: #EDEDED;
+            --g0: #ccc;
+            --g1: #999;
+            --g2: #666;
+            --g3: #444;
+            --g4: #222;
+            --f: 'Inter', system-ui, sans-serif;
+            --m: 'Fira Code', monospace;
+            --g: clamp(24px, 4vw, 64px)
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--f);
+            background: var(--bg);
+            color: var(--w);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--g)
+        }
+
+        .lbl {
+            font-family: var(--m);
+            font-size: .5rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--g2)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, .7);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--b)
+        }
+
+        nav .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 48px
+        }
+
+        .nav-l {
+            font-size: .8125rem;
+            font-weight: 700;
+            letter-spacing: .06em
+        }
+
+        .links {
+            display: flex;
+            gap: 24px;
+            list-style: none
+        }
+
+        .links a {
+            font-size: .5625rem;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--g1);
+            transition: color .15s
+        }
+
+        .links a:hover {
+            color: var(--w)
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 48px 0;
+            text-align: center
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--m);
+            font-size: .5rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--g1);
+            border: 1px solid var(--b);
+            border-radius: 99px;
+            padding: 6px 16px;
+            margin: 0 auto 40px
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--w);
+            animation: dp 2s ease-in-out infinite
+        }
+
+        @keyframes dp {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .2
+            }
+        }
+
+        .hero-name {
+            font-size: clamp(80px, 18vw, 280px);
+            font-weight: 900;
+            line-height: .82;
+            letter-spacing: -.06em;
+            margin-bottom: 32px
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--g1);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 300
+        }
+
+        .hero-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap
+        }
+
+        .hero-chip {
+            font-family: var(--m);
+            font-size: .5rem;
+            color: var(--g1);
+            background: var(--s2);
+            border: 1px solid var(--b);
+            padding: 6px 14px;
+            border-radius: 6px
+        }
+
+        .matrix {
+            padding: 64px 0;
+            border-top: 1px solid var(--b);
+            overflow: hidden
+        }
+
+        .matrix-inner {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 1px;
+            max-width: 800px;
+            margin: 0 auto
+        }
+
+        .matrix-cell {
+            aspect-ratio: 1;
+            background: var(--s);
+            border: 1px solid var(--b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--m);
+            font-size: .5rem;
+            color: var(--g3)
+        }
+
+        .matrix-cell.active {
+            background: var(--w);
+            color: var(--bg)
+        }
+
+        .matrix-cell.dim {
+            background: var(--s2)
+        }
+
+        .matrix-label {
+            text-align: center;
+            margin-top: 24px;
+            font-family: var(--m);
+            font-size: .4375rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--g3)
+        }
+
+        .projects {
+            padding: 80px 0;
+            border-top: 1px solid var(--b)
+        }
+
+        .proj-h {
+            text-align: center;
+            margin-bottom: 64px
+        }
+
+        .proj-h h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            margin-top: 12px
+        }
+
+        .proj {
+            background: var(--s);
+            border: 1px solid var(--b);
+            border-radius: 12px;
+            padding: 32px 36px;
+            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: 48px 1fr 72px;
+            gap: 20px;
+            cursor: pointer;
+            transition: border-color .2s, transform .15s
+        }
+
+        .proj:hover {
+            border-color: var(--b2);
+            transform: translateY(-1px)
+        }
+
+        .pn {
+            font-family: var(--m);
+            font-size: .625rem;
+            color: var(--g2);
+            padding-top: 4px
+        }
+
+        .pt {
+            font-size: clamp(20px, 2.5vw, 36px);
+            font-weight: 700;
+            letter-spacing: -.025em;
+            line-height: 1.1;
+            margin-bottom: 4px
+        }
+
+        .ps {
+            font-family: var(--m);
+            font-size: .4375rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--g2);
+            margin-bottom: 10px
+        }
+
+        .pd {
+            font-size: .8125rem;
+            color: var(--g1);
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 440px
+        }
+
+        .ptags {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-top: 12px
+        }
+
+        .ptags span {
+            font-family: var(--m);
+            font-size: .4375rem;
+            color: var(--g0);
+            background: var(--g4);
+            padding: 3px 8px;
+            border-radius: 4px
+        }
+
+        .py {
+            font-family: var(--m);
+            font-size: .5rem;
+            color: var(--g3);
+            text-align: right
+        }
+
+        .pa {
+            display: block;
+            margin-top: 6px;
+            text-align: right;
+            color: var(--g3);
+            transition: color .2s
+        }
+
+        .proj:hover .pa {
+            color: var(--w)
+        }
+
+        .about {
+            padding: 80px 0;
+            border-top: 1px solid var(--b)
+        }
+
+        .about-g {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px
+        }
+
+        .about-h {
+            font-size: clamp(32px, 4.5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: .92;
+            margin-bottom: 28px
+        }
+
+        .about-p {
+            font-size: .875rem;
+            color: var(--g1);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 400px
+        }
+
+        .about-p+.about-p {
+            margin-top: 14px
+        }
+
+        .sk {
+            border-top: 1px solid var(--b);
+            padding: 18px 0
+        }
+
+        .sk-t {
+            font-family: var(--m);
+            font-size: .4375rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--g3);
+            margin-bottom: 6px
+        }
+
+        .sk-i {
+            font-size: .8125rem;
+            color: var(--g1);
+            font-weight: 300
+        }
+
+        .stg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            border-top: 1px solid var(--b);
+            padding-top: 18px
+        }
+
+        .st-card {
+            background: var(--s);
+            border: 1px solid var(--b);
+            border-radius: 8px;
+            padding: 16px
+        }
+
+        .stn {
+            font-size: clamp(28px, 3vw, 44px);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 4px
+        }
+
+        .stl {
+            font-family: var(--m);
+            font-size: .375rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--g3)
+        }
+
+        .contact {
+            padding: 80px 0;
+            border-top: 1px solid var(--b);
+            text-align: center
+        }
+
+        .ch {
+            font-size: clamp(48px, 10vw, 140px);
+            font-weight: 900;
+            letter-spacing: -.05em;
+            line-height: .84;
+            margin-bottom: 40px
+        }
+
+        .cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px
+        }
+
+        .cta-btn {
+            font-family: var(--f);
+            font-size: .6875rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--w);
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity .2s
+        }
+
+        .cta-btn:hover {
+            opacity: .8
+        }
+
+        .cta-o {
+            font-family: var(--f);
+            font-size: .6875rem;
+            font-weight: 500;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--g1);
+            padding: 14px 32px;
+            border: 1px solid var(--b);
+            border-radius: 8px;
+            transition: border-color .2s, color .2s
+        }
+
+        .cta-o:hover {
+            border-color: var(--g2);
+            color: var(--w)
+        }
+
+        .ft {
+            margin-top: 80px;
+            padding-top: 16px;
+            border-top: 1px solid var(--b);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 24px
+        }
+
+        .ft span {
+            font-family: var(--m);
+            font-size: .375rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--g3)
+        }
+
+        @media(max-width:768px) {
+            .about-g {
+                grid-template-columns: 1fr;
+                gap: 40px
+            }
+
+            .proj {
+                grid-template-columns: 36px 1fr;
+                border-radius: 8px
+            }
+
+            .matrix-inner {
+                grid-template-columns: repeat(8, 1fr)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrap"><span class="nav-l">AMMAR</span>
+            <ul class="links">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="hero" id="hero">
+        <div class="wrap">
+            <div class="hero-badge"><span class="dot"></span>Available for work</div>
+            <h1 class="hero-name">Ammar.</h1>
+            <p class="hero-desc">Full-Stack Developer & Computer Vision Engineer. Building systems that ship — from
+                Banda Aceh to the world.</p>
+            <div class="hero-row"><span class="hero-chip">Python</span><span class="hero-chip">Laravel</span><span
+                    class="hero-chip">YOLOv8</span><span class="hero-chip">React</span><span
+                    class="hero-chip">OpenCV</span></div>
+        </div>
+    </section>
+    <section class="matrix">
+        <div class="wrap">
+            <div class="matrix-inner">
+                <div class="matrix-cell">A</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">M</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">M</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">A</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">R</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell active"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">P</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">Y</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">T</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell active"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">L</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">R</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell">V</div>
+                <div class="matrix-cell dim"></div>
+                <div class="matrix-cell dim"></div>
+            </div>
+            <div class="matrix-label">Full-Stack × Computer Vision</div>
+        </div>
+    </section>
+    <section class="projects" id="projects">
+        <div class="wrap">
+            <div class="proj-h"><span class="lbl">Selected Work</span>
+                <h2>Projects</h2>
+            </div>
+            <div class="proj"><span class="pn">01</span>
+                <div>
+                    <h3 class="pt">Smart Traffic System</h3>
+                    <p class="ps">YOLOv8 & Computer Vision</p>
+                    <p class="pd">Real-time vehicle detection and congestion prediction on live CCTV.</p>
+                    <div class="ptags">
+                        <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="py">2025</div><span class="pa">→</span>
+                </div>
+            </div>
+            <div class="proj"><span class="pn">02</span>
+                <div>
+                    <h3 class="pt">Mail Management System</h3>
+                    <p class="ps">OCR & Web Dev</p>
+                    <p class="pd">Automated mail intake with OCR extraction and audit trail.</p>
+                    <div class="ptags">
+                        <span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="py">2025</div><span class="pa">→</span>
+                </div>
+            </div>
+            <div class="proj"><span class="pn">03</span>
+                <div>
+                    <h3 class="pt">Algorithm Arcade</h3>
+                    <p class="ps">React & Logic</p>
+                    <p class="pd">Interactive games visualising sorting and pathfinding algorithms.</p>
+                    <div class="ptags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+                </div>
+                <div>
+                    <div class="py">2026</div><span class="pa">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="wrap"><span class="lbl" style="display:block;margin-bottom:40px">About</span>
+            <div class="about-g">
+                <div>
+                    <h2 class="about-h">BUILDING<br>SYSTEMS<br>THAT WORK.</h2>
+                    <p class="about-p">IT student from Banda Aceh — CV, full-stack web, and real-world deployment.</p>
+                    <p class="about-p">Code that ships. Reliability, data integrity, and users first.</p>
+                </div>
+                <div>
+                    <div class="sk">
+                        <div class="sk-t">Web Development</div>
+                        <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Data & Vision</div>
+                        <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Design & Tooling</div>
+                        <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+                    </div>
+                    <div class="stg">
+                        <div class="st-card">
+                            <div class="stn">2+</div>
+                            <div class="stl">Years Exp.</div>
+                        </div>
+                        <div class="st-card">
+                            <div class="stn">4</div>
+                            <div class="stl">Projects</div>
+                        </div>
+                        <div class="st-card">
+                            <div class="stn">3</div>
+                            <div class="stl">Domains</div>
+                        </div>
+                        <div class="st-card">
+                            <div class="stn">∞</div>
+                            <div class="stl">Curiosity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <div class="wrap"><span class="lbl" style="display:block;margin-bottom:24px">Contact</span>
+            <h2 class="ch">What will you<br>build next?</h2>
+            <div class="cta"><a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch</a><a href="#"
+                    class="cta-o">LinkedIn ↗</a><a href="#" class="cta-o">GitHub ↗</a></div>
+            <div class="ft"><span>2026 Ammar</span><span style="display:flex;align-items:center;gap:6px"><span
+                        class="dot"></span>Available</span></div>
+        </div>
+    </section>
+</body>
+
+</html>

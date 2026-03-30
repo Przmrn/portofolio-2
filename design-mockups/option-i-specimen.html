@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option I — Specimen | Ammar Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0B0B0D;
+            --surface: #111114;
+            --border: #1c1c22;
+            --white: #F0EDE8;
+            --cream: #D8D4CC;
+            --gray1: #999;
+            --gray2: #555;
+            --gray3: #333;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Inter', sans-serif;
+            --mono: 'IBM Plex Mono', monospace;
+            --gutter: clamp(24px, 4vw, 64px)
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--gutter)
+        }
+
+        .lbl {
+            font-family: var(--mono);
+            font-size: .5rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--gray2)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(11, 11, 13, .85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        nav .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 52px
+        }
+
+        .nav-l {
+            font-family: var(--serif);
+            font-size: 1.125rem;
+            font-style: italic;
+            color: var(--white)
+        }
+
+        .links {
+            display: flex;
+            gap: 32px;
+            list-style: none
+        }
+
+        .links a {
+            font-family: var(--mono);
+            font-size: .5rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            transition: color .2s
+        }
+
+        .links a:hover {
+            color: var(--white)
+        }
+
+        /* HERO — type specimen style */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 52px 0 60px
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: .5rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            margin-bottom: 24px
+        }
+
+        .hero-name {
+            font-family: var(--serif);
+            font-size: clamp(80px, 18vw, 300px);
+            font-weight: 400;
+            font-style: italic;
+            line-height: .82;
+            letter-spacing: -.03em;
+            color: var(--white)
+        }
+
+        .hero-name-sans {
+            font-family: var(--sans);
+            font-weight: 900;
+            font-style: normal;
+            display: block;
+            font-size: clamp(60px, 12vw, 200px);
+            letter-spacing: -.06em;
+            color: var(--cream);
+            margin-top: 8px
+        }
+
+        .hero-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 40px 0 24px
+        }
+
+        .hero-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px
+        }
+
+        .hero-val {
+            font-size: .75rem;
+            color: var(--gray1);
+            line-height: 1.9;
+            margin-top: 8px
+        }
+
+        .hero-status {
+            font-family: var(--mono);
+            font-size: .5625rem;
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cream);
+            animation: dp 2s ease-in-out infinite
+        }
+
+        @keyframes dp {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .projects {
+            padding: 100px 0;
+            border-top: 1px solid var(--border)
+        }
+
+        .proj-h {
+            margin-bottom: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end
+        }
+
+        .proj-h h2 {
+            font-family: var(--serif);
+            font-size: clamp(36px, 6vw, 80px);
+            font-style: italic;
+            font-weight: 400
+        }
+
+        .proj {
+            display: grid;
+            grid-template-columns: 64px 1fr 80px;
+            gap: 24px;
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: padding-left .3s
+        }
+
+        .proj:first-of-type {
+            border-top: 1px solid var(--border)
+        }
+
+        .proj:hover {
+            padding-left: 16px
+        }
+
+        .pn {
+            font-family: var(--mono);
+            font-size: .625rem;
+            color: var(--cream);
+            padding-top: 4px
+        }
+
+        .pt {
+            font-size: clamp(22px, 3vw, 44px);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1.1;
+            margin-bottom: 4px
+        }
+
+        .ps {
+            font-family: var(--mono);
+            font-size: .4375rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            margin-bottom: 12px
+        }
+
+        .pd {
+            font-size: .8125rem;
+            color: var(--gray2);
+            line-height: 1.7;
+            max-width: 460px;
+            font-weight: 300
+        }
+
+        .ptags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 14px
+        }
+
+        .ptags span {
+            font-family: var(--mono);
+            font-size: .4375rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--gray1);
+            border: 1px solid var(--gray3);
+            padding: 3px 8px
+        }
+
+        .py {
+            font-family: var(--mono);
+            font-size: .5625rem;
+            color: var(--gray3);
+            text-align: right
+        }
+
+        .pa {
+            display: block;
+            margin-top: 8px;
+            text-align: right;
+            color: var(--gray3);
+            transition: color .2s
+        }
+
+        .proj:hover .pa {
+            color: var(--cream)
+        }
+
+        .about {
+            padding: 100px 0;
+            border-top: 1px solid var(--border)
+        }
+
+        .about-g {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px
+        }
+
+        .about-h {
+            font-family: var(--serif);
+            font-size: clamp(36px, 5vw, 72px);
+            font-style: italic;
+            font-weight: 400;
+            line-height: .95;
+            margin-bottom: 32px
+        }
+
+        .about-h em {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-style: normal;
+            font-size: .85em
+        }
+
+        .about-p {
+            font-size: .875rem;
+            color: var(--gray2);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 400px
+        }
+
+        .about-p+.about-p {
+            margin-top: 14px
+        }
+
+        .sk {
+            border-top: 1px solid var(--border);
+            padding: 20px 0
+        }
+
+        .sk-t {
+            font-family: var(--mono);
+            font-size: .4375rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            margin-bottom: 8px
+        }
+
+        .sk-i {
+            font-size: .8125rem;
+            color: var(--gray2);
+            font-weight: 300
+        }
+
+        .stg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px
+        }
+
+        .stn {
+            font-family: var(--serif);
+            font-size: clamp(36px, 4vw, 56px);
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1;
+            margin-bottom: 4px
+        }
+
+        .stl {
+            font-family: var(--mono);
+            font-size: .4375rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        .contact {
+            padding: 100px 0 80px;
+            border-top: 1px solid var(--border)
+        }
+
+        .ch {
+            font-family: var(--serif);
+            font-size: clamp(48px, 10vw, 160px);
+            font-style: italic;
+            font-weight: 400;
+            line-height: .88;
+            margin-bottom: 48px
+        }
+
+        .ch em {
+            font-family: var(--sans);
+            font-weight: 900;
+            font-style: normal
+        }
+
+        .cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 32px
+        }
+
+        .cta-btn {
+            font-family: var(--mono);
+            font-size: .625rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--cream);
+            padding: 14px 36px;
+            border: none;
+            cursor: pointer;
+            transition: opacity .25s
+        }
+
+        .cta-btn:hover {
+            opacity: .8
+        }
+
+        .cta-link {
+            font-family: var(--mono);
+            font-size: .5rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            transition: color .2s
+        }
+
+        .cta-link:hover {
+            color: var(--cream)
+        }
+
+        .ft {
+            margin-top: 80px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 24px
+        }
+
+        .ft span {
+            font-family: var(--mono);
+            font-size: .4375rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        @media(max-width:768px) {
+            .hero-row {
+                grid-template-columns: 1fr;
+                gap: 16px
+            }
+
+            .about-g {
+                grid-template-columns: 1fr;
+                gap: 40px
+            }
+
+            .proj {
+                grid-template-columns: 48px 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrap"><span class="nav-l">Ammar</span>
+            <ul class="links">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="wrap">
+            <div class="hero-eyebrow">Portfolio / 2026</div>
+            <h1 class="hero-name">Ammar<span class="hero-name-sans">AMMAR</span></h1>
+            <div class="hero-divider"></div>
+            <div class="hero-row">
+                <div><span class="lbl">Role</span>
+                    <div class="hero-val">Full-Stack Developer<br>Computer Vision Engineer</div>
+                </div>
+                <div><span class="lbl">Stack</span>
+                    <div class="hero-val">Python · Laravel · YOLOv8<br>React · OpenCV</div>
+                </div>
+                <div><span class="lbl">Status</span>
+                    <div class="hero-status"><span class="dot"></span>Available for work</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="wrap">
+            <div class="proj-h">
+                <h2>Selected Work</h2><span class="lbl">3 Projects</span>
+            </div>
+            <div class="proj"><span class="pn">01</span>
+                <div>
+                    <h3 class="pt">Smart Traffic System</h3>
+                    <p class="ps">YOLOv8 & Computer Vision</p>
+                    <p class="pd">Real-time vehicle detection and congestion prediction on live CCTV streams.</p>
+                    <div class="ptags">
+                        <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="py">2025</div><span class="pa">→</span>
+                </div>
+            </div>
+            <div class="proj"><span class="pn">02</span>
+                <div>
+                    <h3 class="pt">Mail Management System</h3>
+                    <p class="ps">OCR & Web Development</p>
+                    <p class="pd">Automated mail intake with OCR extraction and full audit trail.</p>
+                    <div class="ptags">
+                        <span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="py">2025</div><span class="pa">→</span>
+                </div>
+            </div>
+            <div class="proj"><span class="pn">03</span>
+                <div>
+                    <h3 class="pt">Algorithm Minigame Arcade</h3>
+                    <p class="ps">React & Logic</p>
+                    <p class="pd">Interactive games visualising sorting and pathfinding algorithms.</p>
+                    <div class="ptags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+                </div>
+                <div>
+                    <div class="py">2026</div><span class="pa">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="wrap">
+            <span class="lbl" style="display:block;margin-bottom:40px">About</span>
+            <div class="about-g">
+                <div>
+                    <h2 class="about-h">Building<br>Systems<br>That <em>Work</em>.</h2>
+                    <p class="about-p">IT student from Banda Aceh. CV, full-stack web, and real-world deployment.</p>
+                    <p class="about-p">Code that ships — built with reliability, data integrity, and users in mind.</p>
+                </div>
+                <div>
+                    <div class="sk">
+                        <div class="sk-t">Web Development</div>
+                        <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Data & Vision</div>
+                        <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Design & Tooling</div>
+                        <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+                    </div>
+                    <div class="stg">
+                        <div>
+                            <div class="stn">2+</div>
+                            <div class="stl">Years Exp.</div>
+                        </div>
+                        <div>
+                            <div class="stn">4</div>
+                            <div class="stl">Projects</div>
+                        </div>
+                        <div>
+                            <div class="stn">3</div>
+                            <div class="stl">Domains</div>
+                        </div>
+                        <div>
+                            <div class="stn">∞</div>
+                            <div class="stl">Curiosity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="wrap">
+            <span class="lbl" style="display:block;margin-bottom:24px">Contact</span>
+            <h2 class="ch">Let's<br><em>Build</em><br>It.</h2>
+            <div class="cta"><a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch</a><a href="#"
+                    class="cta-link">LinkedIn ↗</a><a href="#" class="cta-link">GitHub ↗</a></div>
+            <div class="ft"><span>2026 Ammar — All Rights Reserved</span><span
+                    style="display:flex;align-items:center;gap:6px;color:var(--cream)"><span
+                        class="dot"></span>Available</span></div>
+        </div>
+    </section>
+</body>
+
+</html>

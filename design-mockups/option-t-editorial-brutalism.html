@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option T — Editorial Brutalism | Ammar Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ─── RESET ─── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black:  #000000;
+    --white:  #FFFFFF;
+    --red:    #FF0000;
+    --gray1:  #1A1A1A;
+    --gray2:  #333333;
+    --gray3:  #666666;
+    --gray4:  #999999;
+    --gray5:  #CCCCCC;
+    --gray6:  #F0F0F0;
+    --sans:   'Inter', system-ui, sans-serif;
+    --mono:   'Space Mono', monospace;
+    --border: 1px solid var(--black);
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.4;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--red); color: var(--white); }
+
+  /* ─── UTILITY ─── */
+  .label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray3);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    height: 44px;
+  }
+  .nav-left {
+    display: flex; align-items: center;
+    padding: 0 20px;
+    font-size: 0.6875rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border-right: var(--border);
+  }
+  .nav-right {
+    display: flex; align-items: center; gap: 0;
+  }
+  .nav-right a {
+    display: flex; align-items: center;
+    height: 100%; padding: 0 20px;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray3);
+    border-left: var(--border);
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-right a:hover { color: var(--white); background: var(--black); }
+
+  /* ─── HERO ─── */
+  .hero {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 44px);
+    border-bottom: var(--border);
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: space-between;
+    border-right: var(--border);
+  }
+  .hero-name-wrap {
+    padding: 48px 40px;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-name {
+    font-size: clamp(72px, 12vw, 180px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+  .hero-name-sub {
+    font-size: clamp(12px, 1vw, 16px);
+    font-weight: 300;
+    color: var(--gray3);
+    margin-top: 24px;
+    max-width: 320px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+  .hero-footer {
+    border-top: var(--border);
+    padding: 16px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .hero-status {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+
+  /* Hero right — grid of info blocks */
+  .hero-right {
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+  }
+  .hero-intro {
+    padding: 48px 40px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-bottom: var(--border);
+  }
+  .hero-intro-heading {
+    font-size: 0.5rem;
+    font-family: var(--mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    margin-bottom: 20px;
+  }
+  .hero-intro-text {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    max-width: 440px;
+  }
+  .hero-intro-text strong { font-weight: 700; }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: var(--border);
+  }
+  .stat-block {
+    padding: 20px 24px;
+    border-right: var(--border);
+  }
+  .stat-block:last-child { border-right: none; }
+  .stat-num {
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.4375rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray4);
+  }
+  .hero-stack {
+    padding: 16px 24px;
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  }
+  .hero-stack span {
+    font-family: var(--mono);
+    font-size: 0.4375rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray3);
+    padding: 4px 10px; border: var(--border);
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-bottom: var(--border);
+    background: var(--black);
+    color: var(--white);
+    padding: 14px 0;
+  }
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-track span {
+    font-family: var(--mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-right: 4px;
+  }
+  .marquee-track .dot {
+    color: var(--red);
+    padding: 0 16px;
+  }
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION TAG ─── */
+  .section-tag {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    border-bottom: var(--border);
+  }
+  .section-tag-text {
+    padding: 12px 24px;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    border-right: var(--border);
+  }
+  .section-tag-line { /* empty stretcher */ }
+
+  /* ─── SELECT WORKS ─── */
+  .works {
+    border-bottom: var(--border);
+  }
+  .works-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .work-card {
+    border-bottom: var(--border);
+    border-right: var(--border);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .work-card:nth-child(2n) { border-right: none; }
+  .work-card:nth-last-child(-n+2) { border-bottom: none; }
+
+  .work-img {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    border-bottom: var(--border);
+  }
+  .work-img-inner {
+    width: 100%; height: 110%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease, transform 0.5s ease;
+  }
+  .work-card:hover .work-img-inner {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+  .work-info {
+    padding: 20px 24px;
+  }
+  .work-num {
+    font-family: var(--mono);
+    font-size: 0.4375rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    margin-bottom: 6px;
+  }
+  .work-title {
+    font-size: clamp(18px, 2vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .work-sub {
+    font-size: 0.75rem;
+    color: var(--gray3);
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+  .work-tags {
+    display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .work-tags span {
+    font-family: var(--mono);
+    font-size: 0.375rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: var(--border);
+    color: var(--gray2);
+  }
+  .work-arrow {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 1rem;
+    color: var(--gray5);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .work-card:hover .work-arrow {
+    color: var(--red);
+    transform: translate(3px, -3px);
+  }
+
+  /* ─── MANIFESTO ─── */
+  .manifesto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: var(--border);
+  }
+  .manifesto-left {
+    padding: 80px 40px;
+    background: var(--black);
+    color: var(--white);
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: var(--border);
+  }
+  .manifesto-heading {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  .manifesto-right {
+    padding: 80px 40px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .manifesto-text {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    font-weight: 300;
+    color: var(--gray2);
+    max-width: 440px;
+  }
+  .manifesto-text + .manifesto-text { margin-top: 16px; }
+  .manifesto-sig {
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray4);
+  }
+
+  /* ─── ABOUT / SKILLS ─── */
+  .about {
+    border-bottom: var(--border);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .about-main {
+    padding: 60px 40px;
+    border-right: var(--border);
+  }
+  .about-heading {
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .about-heading .red { color: var(--red); }
+  .about-para {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    font-weight: 300;
+    color: var(--gray2);
+    max-width: 440px;
+  }
+  .about-para + .about-para { margin-top: 12px; }
+
+  .skills-col {
+    border-right: var(--border);
+    display: flex; flex-direction: column;
+  }
+  .skills-col:last-child { border-right: none; }
+  .skill-group { border-bottom: var(--border); padding: 20px 20px; }
+  .skill-group:last-child { border-bottom: none; }
+  .skill-title {
+    font-family: var(--mono);
+    font-size: 0.4375rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    margin-bottom: 8px;
+  }
+  .skill-list {
+    font-size: 0.8125rem;
+    color: var(--gray2);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* Red accent block */
+  .red-block {
+    background: var(--red);
+    color: var(--white);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 24px;
+    text-align: center;
+  }
+  .red-block-num {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .red-block-label {
+    font-family: var(--mono);
+    font-size: 0.375rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ─── JOURNAL ─── */
+  .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: var(--border);
+  }
+  .journal-card {
+    border-right: var(--border);
+    cursor: pointer;
+  }
+  .journal-card:last-child { border-right: none; }
+  .journal-img {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-bottom: var(--border);
+  }
+  .journal-img-inner {
+    width: 100%; height: 110%;
+    background-size: cover; background-position: center;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease, transform 0.5s ease;
+  }
+  .journal-card:hover .journal-img-inner {
+    filter: grayscale(0%); transform: scale(1.05);
+  }
+  .journal-info { padding: 16px 20px; }
+  .journal-date {
+    font-family: var(--mono); font-size: 0.375rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gray4); margin-bottom: 6px;
+  }
+  .journal-title {
+    font-size: 0.9375rem; font-weight: 600;
+    letter-spacing: -0.01em; margin-bottom: 4px;
+  }
+  .journal-desc {
+    font-size: 0.75rem; color: var(--gray3);
+    font-weight: 300; line-height: 1.5;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: var(--border);
+  }
+  .contact-left {
+    padding: 80px 40px;
+    border-right: var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .contact-heading {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+  .contact-heading .red { color: var(--red); }
+  .contact-right {
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .contact-cta {
+    padding: 40px;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 20px;
+    border-bottom: var(--border);
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    padding: 16px 32px;
+    border: none; cursor: pointer;
+    transition: background 0.2s;
+    width: fit-content;
+  }
+  .cta-btn:hover { background: var(--red); }
+  .contact-links {
+    padding: 16px 40px;
+    display: flex; gap: 20px;
+  }
+  .contact-links a {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray3);
+    transition: color 0.2s;
+  }
+  .contact-links a:hover { color: var(--red); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-bottom: var(--border);
+  }
+  footer .ft-left {
+    padding: 16px 24px;
+    font-family: var(--mono);
+    font-size: 0.4375rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    border-right: var(--border);
+    display: flex; align-items: center;
+  }
+  footer .ft-right {
+    padding: 16px 24px;
+    font-family: var(--mono);
+    font-size: 0.4375rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ─── PLACEHOLDER IMAGES ─── */
+  .img-placeholder-1 { background: linear-gradient(135deg, #1a1a1a 0%, #333 50%, #222 100%); }
+  .img-placeholder-2 { background: linear-gradient(135deg, #2a2a2a 0%, #444 50%, #333 100%); }
+  .img-placeholder-3 { background: linear-gradient(135deg, #222 0%, #3a3a3a 50%, #2a2a2a 100%); }
+  .img-placeholder-4 { background: linear-gradient(135deg, #181818 0%, #383838 50%, #282828 100%); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { border-right: none; border-bottom: var(--border); }
+    .manifesto { grid-template-columns: 1fr; }
+    .manifesto-left { border-right: none; border-bottom: var(--border); }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-main { border-right: none; border-bottom: var(--border); }
+    .skills-col { border-right: none; border-bottom: var(--border); }
+    .works-grid { grid-template-columns: 1fr; }
+    .work-card { border-right: none !important; }
+    .journal-grid { grid-template-columns: 1fr; }
+    .journal-card { border-right: none !important; border-bottom: var(--border); }
+    .contact { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-left">AMMAR.</div>
+  <div class="nav-right">
+    <a href="#works">Work</a>
+    <a href="#about">About</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-name-wrap">
+      <h1 class="hero-name">AMMAR</h1>
+      <p class="hero-name-sub">Full-Stack Developer & Computer Vision Engineer — building systems that matter with clean code and quiet precision.</p>
+    </div>
+    <div class="hero-footer">
+      <span class="label">Banda Aceh, Indonesia</span>
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        <span class="label" style="color:var(--black)">Available for Work</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-intro">
+      <div class="hero-intro-heading">About</div>
+      <p class="hero-intro-text">I build <strong>production-grade systems</strong> — from real-time computer vision pipelines to full-stack web platforms. Code that ships, not demos.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Exp.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Domains</div>
+      </div>
+    </div>
+    <div class="hero-stack">
+      <span>Python</span><span>Laravel</span><span>YOLOv8</span><span>React</span><span>OpenCV</span><span>FastAPI</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>IT DEVELOPER<span class="dot">•</span>BACKEND & VISION<span class="dot">•</span>SMART TRAFFIC SYSTEMS (YOLOv8)<span class="dot">•</span>MAIL-TRACKING PLATFORM<span class="dot">•</span>ALGORITHM ARCADE<span class="dot">•</span>IT DEVELOPER<span class="dot">•</span>BACKEND & VISION<span class="dot">•</span>SMART TRAFFIC SYSTEMS (YOLOv8)<span class="dot">•</span>MAIL-TRACKING PLATFORM<span class="dot">•</span>ALGORITHM ARCADE<span class="dot">•</span></span>
+    <span>IT DEVELOPER<span class="dot">•</span>BACKEND & VISION<span class="dot">•</span>SMART TRAFFIC SYSTEMS (YOLOv8)<span class="dot">•</span>MAIL-TRACKING PLATFORM<span class="dot">•</span>ALGORITHM ARCADE<span class="dot">•</span>IT DEVELOPER<span class="dot">•</span>BACKEND & VISION<span class="dot">•</span>SMART TRAFFIC SYSTEMS (YOLOv8)<span class="dot">•</span>MAIL-TRACKING PLATFORM<span class="dot">•</span>ALGORITHM ARCADE<span class="dot">•</span></span>
+  </div>
+</div>
+
+<!-- ─── SELECT WORKS ─── -->
+<section class="works" id="works">
+  <div class="section-tag">
+    <div class="section-tag-text">Select Works</div>
+    <div class="section-tag-line"></div>
+  </div>
+  <div class="works-grid">
+    <!-- Project 01 -->
+    <div class="work-card">
+      <div class="work-img">
+        <div class="work-img-inner img-placeholder-1"></div>
+      </div>
+      <div class="work-info">
+        <div class="work-num">01</div>
+        <h3 class="work-title">Smart Traffic System</h3>
+        <p class="work-sub">Real-time vehicle detection & congestion prediction on live CCTV streams.</p>
+        <div class="work-tags"><span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span></div>
+      </div>
+      <span class="work-arrow">↗</span>
+    </div>
+    <!-- Project 02 -->
+    <div class="work-card">
+      <div class="work-img">
+        <div class="work-img-inner img-placeholder-2"></div>
+      </div>
+      <div class="work-info">
+        <div class="work-num">02</div>
+        <h3 class="work-title">Mail Management System</h3>
+        <p class="work-sub">Automated mail intake with OCR extraction and full audit trail.</p>
+        <div class="work-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span></div>
+      </div>
+      <span class="work-arrow">↗</span>
+    </div>
+    <!-- Project 03 -->
+    <div class="work-card">
+      <div class="work-img">
+        <div class="work-img-inner img-placeholder-3"></div>
+      </div>
+      <div class="work-info">
+        <div class="work-num">03</div>
+        <h3 class="work-title">Algorithm Minigame Arcade</h3>
+        <p class="work-sub">Interactive games visualising sorting and pathfinding algorithms.</p>
+        <div class="work-tags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+      </div>
+      <span class="work-arrow">↗</span>
+    </div>
+    <!-- Project 04 — red accent -->
+    <div class="work-card" style="display:grid; grid-template-rows:1fr auto;">
+      <div class="red-block" style="border-bottom:var(--border); aspect-ratio:16/10;">
+        <div class="red-block-num" style="font-size:clamp(32px,4vw,64px); letter-spacing:-0.04em;">MORE<br>SOON</div>
+        <div class="red-block-label" style="margin-top:8px;">Coming 2026</div>
+      </div>
+      <div class="work-info">
+        <div class="work-num">04</div>
+        <h3 class="work-title">Next Project</h3>
+        <p class="work-sub">Currently under development.</p>
+        <div class="work-tags"><span>TBD</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MANIFESTO ─── -->
+<section class="manifesto">
+  <div class="manifesto-left">
+    <h2 class="manifesto-heading">BORN<br>FROM<br>THE<br>GRID.</h2>
+  </div>
+  <div class="manifesto-right">
+    <p class="manifesto-text">I believe that digital interfaces should be architecturally honest — structured on a visible grid, stripped of decoration, and built to communicate with absolute clarity.</p>
+    <p class="manifesto-text">The success of modern UX is rooted in Swiss Design principles: typography as interface, structure as expression, constraint as freedom.</p>
+    <p class="manifesto-text">I build software the same way — break the rigidity of the grid only when the content demands it.</p>
+    <div class="manifesto-sig">— Ammar, 2026</div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE 2 ─── -->
+<div class="marquee-wrap" style="background:var(--red);">
+  <div class="marquee-track">
+    <span>QUIET TOOLS<span class="dot" style="color:var(--white)">•</span>LOUD IMPACT<span class="dot" style="color:var(--white)">•</span>CLEAN CODE<span class="dot" style="color:var(--white)">•</span>REAL SYSTEMS<span class="dot" style="color:var(--white)">•</span>QUIET TOOLS<span class="dot" style="color:var(--white)">•</span>LOUD IMPACT<span class="dot" style="color:var(--white)">•</span>CLEAN CODE<span class="dot" style="color:var(--white)">•</span>REAL SYSTEMS<span class="dot" style="color:var(--white)">•</span></span>
+    <span>QUIET TOOLS<span class="dot" style="color:var(--white)">•</span>LOUD IMPACT<span class="dot" style="color:var(--white)">•</span>CLEAN CODE<span class="dot" style="color:var(--white)">•</span>REAL SYSTEMS<span class="dot" style="color:var(--white)">•</span>QUIET TOOLS<span class="dot" style="color:var(--white)">•</span>LOUD IMPACT<span class="dot" style="color:var(--white)">•</span>CLEAN CODE<span class="dot" style="color:var(--white)">•</span>REAL SYSTEMS<span class="dot" style="color:var(--white)">•</span></span>
+  </div>
+</div>
+
+<!-- ─── ABOUT / SKILLS ─── -->
+<section class="about" id="about">
+  <div class="section-tag">
+    <div class="section-tag-text">About & Skills</div>
+    <div class="section-tag-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-main">
+      <h2 class="about-heading">Building<br>Systems<br>That Work<span class="red">.</span></h2>
+      <p class="about-para">IT student from Banda Aceh, Indonesia. I work at the intersection of computer vision, full-stack web development, and real-world deployment.</p>
+      <p class="about-para">I care about code that ships — not just demos. Every project is built with reliability, data integrity, and the end user in mind.</p>
+    </div>
+    <div class="skills-col">
+      <div class="skill-group">
+        <div class="skill-title">Web Development</div>
+        <div class="skill-list">Laravel · PHP · React · Next.js · MySQL</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-title">Data & Vision</div>
+        <div class="skill-list">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-title">Design & Tooling</div>
+        <div class="skill-list">Figma · Tailwind · Git · Linux · REST APIs</div>
+      </div>
+    </div>
+    <div class="skills-col">
+      <div class="red-block" style="flex:1;">
+        <div class="red-block-num">∞</div>
+        <div class="red-block-label">Curiosity</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-title">Philosophy</div>
+        <div class="skill-list" style="font-style:italic; color:var(--gray3);">"Quiet tools, loud impact."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── JOURNAL ─── -->
+<section id="journal">
+  <div class="section-tag">
+    <div class="section-tag-text">Journal</div>
+    <div class="section-tag-line"></div>
+  </div>
+  <div class="journal-grid">
+    <div class="journal-card">
+      <div class="journal-img">
+        <div class="journal-img-inner img-placeholder-2"></div>
+      </div>
+      <div class="journal-info">
+        <div class="journal-date">Mar 2026</div>
+        <h3 class="journal-title">New Project Launch: Traffic AI</h3>
+        <p class="journal-desc">How I built a real-time traffic monitoring system using YOLOv8.</p>
+      </div>
+    </div>
+    <div class="journal-card">
+      <div class="journal-img">
+        <div class="journal-img-inner img-placeholder-3"></div>
+      </div>
+      <div class="journal-info">
+        <div class="journal-date">Feb 2026</div>
+        <h3 class="journal-title">The Brutalist Portfolio</h3>
+        <p class="journal-desc">Designing a grid-first developer portfolio with Swiss principles.</p>
+      </div>
+    </div>
+    <div class="journal-card">
+      <div class="journal-img">
+        <div class="journal-img-inner img-placeholder-4"></div>
+      </div>
+      <div class="journal-info">
+        <div class="journal-date">Jan 2026</div>
+        <h3 class="journal-title">OCR in Production</h3>
+        <p class="journal-desc">Lessons from deploying PaddleOCR in a mail management system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <h2 class="contact-heading">LET'S<br>BUILD<br>IT<span class="red">.</span></h2>
+  </div>
+  <div class="contact-right">
+    <div class="contact-cta">
+      <p style="font-size:0.875rem; color:var(--gray3); font-weight:300; line-height:1.7; max-width:360px;">
+        Open to freelance, collaboration, and full-time roles. Let's talk about your next project.
+      </p>
+      <a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch ↗</a>
+    </div>
+    <div class="contact-links">
+      <a href="#">LinkedIn ↗</a>
+      <a href="#">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="ft-left">© 2026 Ammar — Banda Aceh, Indonesia</div>
+  <div class="ft-right">
+    <span class="status-dot" style="width:5px;height:5px;"></span>
+    Available
+  </div>
+</footer>
+
+</body>
+</html>

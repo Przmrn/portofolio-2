@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option O — Chronicle | Ammar Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1E1D1B;
+  --surface:#26251F;
+  --card:#2E2D27;
+  --border:#3E3C34;
+  --white:#F2EFE6;
+  --cream:#D4CFC2;
+  --gold:#D4A853;
+  --gold2:#B8923F;
+  --warm:#8B7B5E;
+  --g1:#A09882;
+  --g2:#6E6758;
+  --g3:#4A453C;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --g:clamp(24px,4vw,64px)
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--g)}
+.lbl{font-family:var(--mono);font-size:.5rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--g2)}
+
+/* Film grain subtle overlay */
+body::after{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:9999;opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size:256px 256px
+}
+
+/* NAV — cinematic minimal */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(30,29,27,.85);backdrop-filter:blur(16px)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+.nav-l{font-family:var(--serif);font-size:1.125rem;color:var(--white)}
+.links{display:flex;gap:32px;list-style:none}
+.links a{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);transition:color .2s}
+.links a:hover{color:var(--gold)}
+
+/* HERO — cinematic widescreen feel */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 0 64px;position:relative}
+/* Widescreen bars for that movie feel */
+.hero::before,.hero::after{content:'';position:absolute;left:0;right:0;height:clamp(40px,6vh,100px);background:var(--bg);z-index:2}
+.hero::before{top:0}.hero::after{bottom:0}
+.hero-content{position:relative;z-index:3}
+
+.chapter{display:flex;align-items:center;gap:16px;margin-bottom:48px}
+.chapter-line{width:40px;height:1px;background:var(--gold)}
+.chapter-text{font-family:var(--mono);font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+
+.hero-name{font-family:var(--serif);font-size:clamp(80px,18vw,280px);font-weight:400;line-height:.82;letter-spacing:-.02em;color:var(--white);margin-bottom:32px}
+.hero-desc{font-size:1rem;color:var(--g1);line-height:1.8;font-weight:300;max-width:480px;margin-bottom:40px}
+.hero-meta{display:flex;gap:48px;padding-top:24px;border-top:1px solid var(--border)}
+.meta-block .lbl{display:block;margin-bottom:8px}
+.meta-val{font-size:.75rem;color:var(--cream);line-height:1.9}
+.meta-status{display:flex;align-items:center;gap:8px;font-size:.625rem;font-weight:500;color:var(--gold)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:dp 2.5s ease-in-out infinite}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* PROJECTS — chapters */
+.projects{padding:80px 0}
+.chapter-section{margin-bottom:56px}
+.proj{padding:36px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:64px 1fr 80px;gap:24px;cursor:pointer;transition:padding-left .3s}
+.proj:first-of-type{border-top:1px solid var(--border)}
+.proj:hover{padding-left:16px}
+.pn{font-family:var(--serif);font-size:1.25rem;color:var(--gold);padding-top:2px}
+.pt{font-size:clamp(22px,3vw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:4px}
+.ps{font-family:var(--mono);font-size:.4375rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:12px}
+.pd{font-size:.8125rem;color:var(--g1);line-height:1.7;font-weight:300;max-width:460px}
+.ptags{display:flex;gap:5px;flex-wrap:wrap;margin-top:14px}
+.ptags span{font-family:var(--mono);font-size:.4375rem;color:var(--cream);border:1px solid var(--border);padding:3px 8px;border-radius:2px}
+.py{font-family:var(--mono);font-size:.5rem;color:var(--g3);text-align:right}
+.pa{display:block;margin-top:8px;text-align:right;color:var(--g3);transition:color .2s}
+.proj:hover .pa{color:var(--gold)}
+
+/* ABOUT */
+.about{padding:80px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.about-h{font-family:var(--serif);font-size:clamp(36px,5vw,64px);font-weight:400;line-height:.95;margin-bottom:28px}
+.about-h em{color:var(--gold);font-style:normal}
+.about-p{font-size:.875rem;color:var(--g1);line-height:1.8;font-weight:300;max-width:400px}
+.about-p+.about-p{margin-top:14px}
+.sk{border-top:1px solid var(--border);padding:20px 0}
+.sk-t{font-family:var(--mono);font-size:.4375rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g3);margin-bottom:6px}
+.sk-i{font-size:.8125rem;color:var(--g1);font-weight:300}
+.stg{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid var(--border);padding-top:20px}
+.stn{font-family:var(--serif);font-size:clamp(32px,3.5vw,48px);color:var(--gold);line-height:1;margin-bottom:4px}
+.stl{font-family:var(--mono);font-size:.375rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g3)}
+
+/* CONTACT */
+.contact{padding:80px 0;border-top:1px solid var(--border)}
+.c-h{font-family:var(--serif);font-size:clamp(48px,10vw,140px);font-weight:400;line-height:.88;margin-bottom:48px}
+.c-h em{color:var(--gold);font-style:normal}
+.cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding-top:28px;border-top:1px solid var(--border)}
+.cta-btn{font-family:var(--mono);font-size:.625rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:14px 32px;border:none;border-radius:4px;cursor:pointer;transition:opacity .25s}
+.cta-btn:hover{opacity:.85}
+.cta-link{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);transition:color .2s}
+.cta-link:hover{color:var(--gold)}
+.ft{margin-top:80px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:24px}
+.ft span{font-family:var(--mono);font-size:.375rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
+
+/* Closing credits-style text */
+.credits{padding:40px 0;text-align:center;border-top:1px solid var(--border)}
+.credits p{font-family:var(--mono);font-size:.4375rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);line-height:2.4}
+
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:40px}.proj{grid-template-columns:48px 1fr}.hero-meta{flex-direction:column;gap:20px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <span class="nav-l">Ammar</span>
+    <ul class="links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="wrap hero-content">
+    <div class="chapter">
+      <div class="chapter-line"></div>
+      <span class="chapter-text">Chapter I — Introduction</span>
+    </div>
+    <h1 class="hero-name">Ammar</h1>
+    <p class="hero-desc">Full-Stack Developer & Computer Vision Engineer from Banda Aceh — quietly building systems that matter, one commit at a time.</p>
+    <div class="hero-meta">
+      <div class="meta-block"><span class="lbl">Role</span><div class="meta-val">Full-Stack Developer<br>Computer Vision Engineer</div></div>
+      <div class="meta-block"><span class="lbl">Stack</span><div class="meta-val">Python · Laravel · YOLOv8<br>React · OpenCV</div></div>
+      <div class="meta-block"><span class="lbl">Status</span><div class="meta-status"><span class="dot"></span> Available for work</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="chapter-section">
+      <div class="chapter"><div class="chapter-line"></div><span class="chapter-text">Chapter II — Selected Work</span></div>
+    </div>
+    <div class="proj"><span class="pn">I</span><div><h3 class="pt">Smart Traffic System</h3><p class="ps">YOLOv8 & Computer Vision</p><p class="pd">Real-time vehicle detection and congestion prediction on live CCTV streams. When you make software see, roads get smarter.</p><div class="ptags"><span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span></div></div><div><div class="py">2025</div><span class="pa">→</span></div></div>
+    <div class="proj"><span class="pn">II</span><div><h3 class="pt">Mail Management System</h3><p class="ps">OCR & Web Development</p><p class="pd">Automated mail intake with OCR extraction and full audit trail. Paper meets code — every letter accounted for.</p><div class="ptags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span></div></div><div><div class="py">2025</div><span class="pa">→</span></div></div>
+    <div class="proj"><span class="pn">III</span><div><h3 class="pt">Algorithm Minigame Arcade</h3><p class="ps">React & Interactive Logic</p><p class="pd">Interactive games visualising sorting and pathfinding algorithms. Making the invisible visible, one bubble sort at a time.</p><div class="ptags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div></div><div><div class="py">2026</div><span class="pa">→</span></div></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="chapter" style="margin-bottom:40px"><div class="chapter-line"></div><span class="chapter-text">Chapter III — About</span></div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-h">Building<br>Systems<br>That <em>Work</em>.</h2>
+        <p class="about-p">IT student from Banda Aceh, Indonesia — at the intersection of computer vision, full-stack web dev, and real-world deployment.</p>
+        <p class="about-p">Code that ships. Built with reliability, data integrity, and the end user in mind. Every project is a story worth telling.</p>
+      </div>
+      <div>
+        <div class="sk"><div class="sk-t">Web Development</div><div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div></div>
+        <div class="sk"><div class="sk-t">Data & Vision</div><div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div></div>
+        <div class="sk"><div class="sk-t">Design & Tooling</div><div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div></div>
+        <div class="stg">
+          <div><div class="stn">2+</div><div class="stl">Years Exp.</div></div>
+          <div><div class="stn">4</div><div class="stl">Projects</div></div>
+          <div><div class="stn">3</div><div class="stl">Domains</div></div>
+          <div><div class="stn">∞</div><div class="stl">Curiosity</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="chapter" style="margin-bottom:40px"><div class="chapter-line"></div><span class="chapter-text">Chapter IV — What's Next</span></div>
+    <h2 class="c-h">Let's write<br>the next <em>chapter</em>.</h2>
+    <div class="cta">
+      <a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch</a>
+      <a href="#" class="cta-link">LinkedIn ↗</a>
+      <a href="#" class="cta-link">GitHub ↗</a>
+    </div>
+    <div class="ft">
+      <span>© 2026 Ammar</span>
+      <span style="display:flex;align-items:center;gap:6px"><span class="dot"></span> Available</span>
+    </div>
+  </div>
+</section>
+
+<div class="credits">
+  <p>Designed & Built by Ammar<br>Banda Aceh, Indonesia<br>MMXXVI</p>
+</div>
+</body>
+</html>

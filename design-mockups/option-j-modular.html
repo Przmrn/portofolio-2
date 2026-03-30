@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option J — Modular | Ammar Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #F7F7F5;
+            --card: #FFFFFF;
+            --black: #111;
+            --gray1: #333;
+            --gray2: #777;
+            --gray3: #aaa;
+            --gray4: #d4d4d4;
+            --gray5: #eee;
+            --accent: #222;
+            --sans: 'Inter', system-ui, sans-serif;
+            --gutter: clamp(20px, 3vw, 48px);
+            --radius: 12px
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--black);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 var(--gutter)
+        }
+
+        .lbl {
+            font-size: .5625rem;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(247, 247, 245, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray5)
+        }
+
+        nav .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 56px
+        }
+
+        .nav-l {
+            font-size: .8125rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase
+        }
+
+        .links {
+            display: flex;
+            gap: 28px;
+            list-style: none
+        }
+
+        .links a {
+            font-size: .625rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            transition: color .2s
+        }
+
+        .links a:hover {
+            color: var(--black)
+        }
+
+        /* HERO — card-based */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 56px 0 48px
+        }
+
+        .hero-cards {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px
+        }
+
+        .hero-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: clamp(32px, 4vw, 56px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04)
+        }
+
+        .hero-name {
+            font-size: clamp(72px, 14vw, 200px);
+            font-weight: 900;
+            line-height: .84;
+            letter-spacing: -.06em
+        }
+
+        .hero-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 32px
+        }
+
+        .hero-roles {
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            line-height: 2.2
+        }
+
+        .hero-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .625rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray1)
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--black);
+            animation: dp 2s ease-in-out infinite
+        }
+
+        @keyframes dp {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .hero-tech {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 16px clamp(24px, 3vw, 40px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04)
+        }
+
+        .hero-tech span {
+            font-size: .5625rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        /* PROJECTS as cards */
+        .projects {
+            padding: 80px 0
+        }
+
+        .proj-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 32px
+        }
+
+        .proj-header h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -.03em
+        }
+
+        .proj-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px
+        }
+
+        .proj-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 36px 40px;
+            display: grid;
+            grid-template-columns: 56px 1fr 80px;
+            gap: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+            cursor: pointer;
+            transition: box-shadow .3s, transform .2s
+        }
+
+        .proj-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+            transform: translateY(-2px)
+        }
+
+        .pc-n {
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--gray3);
+            padding-top: 4px
+        }
+
+        .pc-t {
+            font-size: clamp(20px, 2.5vw, 36px);
+            font-weight: 700;
+            letter-spacing: -.025em;
+            line-height: 1.1;
+            margin-bottom: 4px
+        }
+
+        .pc-s {
+            font-size: .5625rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            margin-bottom: 10px
+        }
+
+        .pc-d {
+            font-size: .8125rem;
+            color: var(--gray2);
+            line-height: 1.7;
+            max-width: 440px;
+            font-weight: 300
+        }
+
+        .pc-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 12px
+        }
+
+        .pc-tags span {
+            font-size: .4375rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--gray1);
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 6px
+        }
+
+        .pc-y {
+            font-size: .625rem;
+            color: var(--gray3);
+            text-align: right
+        }
+
+        .pc-a {
+            display: block;
+            margin-top: 8px;
+            text-align: right;
+            color: var(--gray4);
+            transition: color .2s
+        }
+
+        .proj-card:hover .pc-a {
+            color: var(--black)
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 80px 0
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .about-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04)
+        }
+
+        .about-h {
+            font-size: clamp(32px, 4.5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: .92;
+            margin-bottom: 28px
+        }
+
+        .about-p {
+            font-size: .875rem;
+            color: var(--gray2);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 380px
+        }
+
+        .about-p+.about-p {
+            margin-top: 14px
+        }
+
+        .sk {
+            padding: 18px 0;
+            border-top: 1px solid var(--gray5)
+        }
+
+        .sk:first-of-type {
+            border-top: none
+        }
+
+        .sk-t {
+            font-size: .5rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            font-weight: 500;
+            margin-bottom: 6px
+        }
+
+        .sk-i {
+            font-size: .8125rem;
+            color: var(--gray2);
+            font-weight: 300
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 8px
+        }
+
+        .stat-card {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 16px
+        }
+
+        .stat-n {
+            font-size: clamp(28px, 3vw, 44px);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            line-height: 1;
+            margin-bottom: 4px
+        }
+
+        .stat-l {
+            font-size: .4375rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        /* CONTACT */
+        .contact {
+            padding: 80px 0 60px
+        }
+
+        .contact-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: clamp(40px, 5vw, 72px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04)
+        }
+
+        .c-h {
+            font-size: clamp(40px, 8vw, 120px);
+            font-weight: 900;
+            letter-spacing: -.05em;
+            line-height: .86;
+            margin-bottom: 40px
+        }
+
+        .c-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            padding-top: 28px;
+            border-top: 1px solid var(--gray5)
+        }
+
+        .c-btn {
+            font-family: var(--sans);
+            font-size: .6875rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--card);
+            background: var(--black);
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity .25s
+        }
+
+        .c-btn:hover {
+            opacity: .8
+        }
+
+        .c-link {
+            font-size: .625rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            transition: color .2s
+        }
+
+        .c-link:hover {
+            color: var(--black)
+        }
+
+        .ft {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .ft span {
+            font-size: .5rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        @media(max-width:768px) {
+            .hero-cards {
+                grid-template-columns: 1fr
+            }
+
+            .about-cards {
+                grid-template-columns: 1fr
+            }
+
+            .proj-card {
+                grid-template-columns: 40px 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrap"><span class="nav-l">Ammar</span>
+            <ul class="links">
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="wrap">
+            <div class="hero-cards">
+                <div class="hero-card">
+                    <h1 class="hero-name">AM<br>MAR.</h1>
+                </div>
+                <div class="hero-card hero-side">
+                    <div class="hero-roles">Full-Stack Developer<br>Computer Vision Engineer</div>
+                    <div class="hero-status"><span class="dot"></span>Available for work</div>
+                </div>
+            </div>
+            <div class="hero-tech"><span>Python · Laravel · YOLOv8 · React · OpenCV</span></div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="wrap">
+            <div class="proj-header">
+                <h2>Selected Work</h2><span class="lbl">3 Projects</span>
+            </div>
+            <div class="proj-cards">
+                <div class="proj-card"><span class="pc-n">01</span>
+                    <div>
+                        <h3 class="pc-t">Smart Traffic System</h3>
+                        <p class="pc-s">YOLOv8 & Computer Vision</p>
+                        <p class="pc-d">Real-time vehicle detection and congestion prediction on live CCTV.</p>
+                        <div class="pc-tags">
+                            <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pc-y">2025</div><span class="pc-a">→</span>
+                    </div>
+                </div>
+                <div class="proj-card"><span class="pc-n">02</span>
+                    <div>
+                        <h3 class="pc-t">Mail Management System</h3>
+                        <p class="pc-s">OCR & Web Development</p>
+                        <p class="pc-d">Automated mail intake with OCR extraction and audit trail.</p>
+                        <div class="pc-tags">
+                            <span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pc-y">2025</div><span class="pc-a">→</span>
+                    </div>
+                </div>
+                <div class="proj-card"><span class="pc-n">03</span>
+                    <div>
+                        <h3 class="pc-t">Algorithm Minigame Arcade</h3>
+                        <p class="pc-s">React & Logic</p>
+                        <p class="pc-d">Interactive games visualising sorting and pathfinding algorithms.</p>
+                        <div class="pc-tags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+                    </div>
+                    <div>
+                        <div class="pc-y">2026</div><span class="pc-a">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="wrap">
+            <span class="lbl" style="display:block;margin-bottom:24px">About</span>
+            <div class="about-cards">
+                <div class="about-card">
+                    <h2 class="about-h">Building<br>Systems<br>That Work.</h2>
+                    <p class="about-p">IT student from Banda Aceh — CV, full-stack web, and real-world deployment.</p>
+                    <p class="about-p">Code that ships. Reliability, data integrity, and users first.</p>
+                </div>
+                <div class="about-card">
+                    <div class="sk">
+                        <div class="sk-t">Web Development</div>
+                        <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Data & Vision</div>
+                        <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Design & Tooling</div>
+                        <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-card">
+                            <div class="stat-n">2+</div>
+                            <div class="stat-l">Years Exp.</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-n">4</div>
+                            <div class="stat-l">Projects</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-n">3</div>
+                            <div class="stat-l">Domains</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-n">∞</div>
+                            <div class="stat-l">Curiosity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="wrap">
+            <div class="contact-card">
+                <span class="lbl" style="display:block;margin-bottom:24px">Contact</span>
+                <h2 class="c-h">Let's<br>Build It.</h2>
+                <div class="c-actions"><a href="mailto:amarnfl238@gmail.com" class="c-btn">Get in Touch</a><a href="#"
+                        class="c-link">LinkedIn ↗</a><a href="#" class="c-link">GitHub ↗</a></div>
+            </div>
+            <div class="ft"><span>2026 Ammar — All Rights Reserved</span><span
+                    style="display:flex;align-items:center;gap:6px"><span class="dot"
+                        style="width:6px;height:6px"></span>Available</span></div>
+        </div>
+    </section>
+</body>
+
+</html>

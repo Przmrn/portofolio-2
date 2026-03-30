@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Projects/Portofolio/portfolio-2/**)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

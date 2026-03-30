@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option E — Konstrukt | Ammar Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0C0C0C;
+            --surface: #141414;
+            --white: #F0F0EC;
+            --gray1: #C8C8C2;
+            --gray2: #888;
+            --gray3: #555;
+            --gray4: #333;
+            --gray5: #1C1C1C;
+            --red: #E8372D;
+            --font: 'Space Grotesk', sans-serif;
+            --gutter: clamp(24px, 4vw, 64px)
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--gutter)
+        }
+
+        .lbl {
+            font-size: .5625rem;
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--bg);
+            border-bottom: 1px solid var(--gray5)
+        }
+
+        nav .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px
+        }
+
+        .logo {
+            font-size: .875rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase
+        }
+
+        .logo span {
+            color: var(--red)
+        }
+
+        .links {
+            display: flex;
+            gap: 36px;
+            list-style: none
+        }
+
+        .links a {
+            font-size: .625rem;
+            font-weight: 500;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            transition: color .2s
+        }
+
+        .links a:hover {
+            color: var(--white)
+        }
+
+        /* HERO — constructivist blocks */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-top: 60px;
+            position: relative
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px var(--gutter) 80px 0;
+            border-right: 1px solid var(--gray5)
+        }
+
+        .hero-name {
+            font-size: clamp(72px, 14vw, 220px);
+            font-weight: 700;
+            line-height: .82;
+            letter-spacing: -.06em
+        }
+
+        /* red geometric block */
+        .hero-block {
+            width: clamp(60px, 8vw, 120px);
+            height: clamp(60px, 8vw, 120px);
+            background: var(--red);
+            margin-top: 40px
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 80px 0 80px var(--gutter)
+        }
+
+        .hero-roles {
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            line-height: 2.2;
+            margin-bottom: 32px
+        }
+
+        .hero-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .625rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--red)
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+            animation: pu 2s ease-in-out infinite
+        }
+
+        @keyframes pu {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .hero-ft {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 1px solid var(--gray5);
+            display: flex;
+            justify-content: space-between;
+            padding: 14px var(--gutter)
+        }
+
+        .hero-ft span {
+            font-size: .5rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        /* PROJECTS */
+        .projects {
+            padding: 100px 0;
+            border-top: 1px solid var(--gray5)
+        }
+
+        .project {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            border-bottom: 1px solid var(--gray5);
+            cursor: pointer;
+            transition: background .3s
+        }
+
+        .project:first-of-type {
+            border-top: 1px solid var(--gray5)
+        }
+
+        .project:hover {
+            background: var(--surface)
+        }
+
+        .proj-n {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid var(--gray5);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--red)
+        }
+
+        .proj-body {
+            padding: 40px 32px;
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            gap: 24px
+        }
+
+        .proj-t {
+            font-size: clamp(22px, 3vw, 44px);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1.1;
+            margin-bottom: 6px
+        }
+
+        .proj-s {
+            font-size: .5625rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            margin-bottom: 12px
+        }
+
+        .proj-d {
+            font-size: .875rem;
+            color: var(--gray2);
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 460px
+        }
+
+        .proj-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 16px
+        }
+
+        .proj-tags span {
+            font-size: .5rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--gray2);
+            background: var(--gray5);
+            padding: 4px 10px
+        }
+
+        .proj-m {
+            text-align: right;
+            font-size: .625rem;
+            letter-spacing: .1em;
+            color: var(--gray3)
+        }
+
+        .proj-arr {
+            font-size: 1.25rem;
+            color: var(--gray4);
+            display: block;
+            margin-top: 12px;
+            transition: color .2s, transform .3s
+        }
+
+        .project:hover .proj-arr {
+            color: var(--red);
+            transform: translateX(4px)
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 100px 0;
+            border-top: 1px solid var(--gray5)
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px
+        }
+
+        .about-h {
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 700;
+            letter-spacing: -.045em;
+            line-height: .92;
+            margin-bottom: 36px
+        }
+
+        .about-h span {
+            color: var(--red)
+        }
+
+        .about-p {
+            font-size: .9375rem;
+            color: var(--gray2);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 400px
+        }
+
+        .about-p+.about-p {
+            margin-top: 16px
+        }
+
+        .sk {
+            border-top: 1px solid var(--gray5);
+            padding: 22px 0
+        }
+
+        .sk-t {
+            font-size: .5rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            margin-bottom: 8px
+        }
+
+        .sk-i {
+            font-size: .875rem;
+            color: var(--gray2);
+            font-weight: 300
+        }
+
+        .st-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            border-top: 1px solid var(--gray5);
+            padding-top: 24px
+        }
+
+        .st-n {
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 700;
+            letter-spacing: -.04em;
+            color: var(--red);
+            line-height: 1;
+            margin-bottom: 4px
+        }
+
+        .st-l {
+            font-size: .5rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        /* CONTACT */
+        .contact {
+            padding: 100px 0 80px;
+            border-top: 1px solid var(--gray5)
+        }
+
+        .contact-h {
+            font-size: clamp(48px, 10vw, 156px);
+            font-weight: 700;
+            letter-spacing: -.05em;
+            line-height: .84;
+            margin-bottom: 56px
+        }
+
+        .contact-h span {
+            color: var(--red)
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            border-top: 1px solid var(--gray5);
+            padding-top: 36px
+        }
+
+        .cta-btn {
+            font-family: var(--font);
+            font-size: .6875rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--red);
+            padding: 14px 36px;
+            border: none;
+            cursor: pointer;
+            transition: opacity .25s
+        }
+
+        .cta-btn:hover {
+            opacity: .85
+        }
+
+        .cta-link {
+            font-size: .625rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray3);
+            transition: color .2s
+        }
+
+        .cta-link:hover {
+            color: var(--white)
+        }
+
+        .footer {
+            margin-top: 100px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 24px
+        }
+
+        .footer span {
+            font-size: .5rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray3)
+        }
+
+        @media(max-width:768px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .hero-left {
+                border-right: none;
+                border-bottom: 1px solid var(--gray5);
+                padding: 120px var(--gutter) 40px
+            }
+
+            .hero-right {
+                padding: 40px var(--gutter)
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px
+            }
+
+            .project {
+                grid-template-columns: 56px 1fr
+            }
+
+            .proj-body {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrap"><span class="logo">AMMAR<span>.</span></span>
+            <ul class="links">
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="hero" id="hero">
+        <div class="hero-left wrap">
+            <h1 class="hero-name">AM<br>MAR</h1>
+            <div class="hero-block"></div>
+        </div>
+        <div class="hero-right">
+            <div>
+                <div class="lbl" style="margin-bottom:16px">Role</div>
+                <div class="hero-roles">Full-Stack Developer<br>Computer Vision Engineer</div>
+                <div class="hero-status"><span class="dot"></span>Available for Work</div>
+            </div>
+        </div>
+        <div class="hero-ft"><span>Python · Laravel · YOLOv8 · React · OpenCV</span><span>Scroll ↓</span></div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="wrap">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px">
+                <h2 style="font-size:clamp(32px,5vw,64px);font-weight:700;letter-spacing:-.04em;line-height:.9">Selected
+                    Work</h2><span class="lbl">3 Projects</span>
+            </div>
+            <div class="project">
+                <div class="proj-n">01</div>
+                <div class="proj-body">
+                    <div>
+                        <h3 class="proj-t">Smart Traffic System</h3>
+                        <p class="proj-s">YOLOv8 & Computer Vision</p>
+                        <p class="proj-d">Real-time vehicle detection and congestion prediction on live CCTV streams.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span>
+                        </div>
+                    </div>
+                    <div class="proj-m">2025<span class="proj-arr">→</span></div>
+                </div>
+            </div>
+            <div class="project">
+                <div class="proj-n">02</div>
+                <div class="proj-body">
+                    <div>
+                        <h3 class="proj-t">Mail Management System</h3>
+                        <p class="proj-s">OCR & Web Development</p>
+                        <p class="proj-d">Automated mail intake with OCR extraction, tracking, and full audit trail.</p>
+                        <div class="proj-tags">
+                            <span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span>
+                        </div>
+                    </div>
+                    <div class="proj-m">2025<span class="proj-arr">→</span></div>
+                </div>
+            </div>
+            <div class="project">
+                <div class="proj-n">03</div>
+                <div class="proj-body">
+                    <div>
+                        <h3 class="proj-t">Algorithm Minigame Arcade</h3>
+                        <p class="proj-s">React & Logic</p>
+                        <p class="proj-d">Browser-based games visualising sorting and pathfinding algorithms.</p>
+                        <div class="proj-tags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+                    </div>
+                    <div class="proj-m">2026<span class="proj-arr">→</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="wrap">
+            <span class="lbl" style="display:block;margin-bottom:48px">About</span>
+            <div class="about-grid">
+                <div>
+                    <h2 class="about-h">BUILDING<br>SYSTEMS<br>THAT WORK<span>.</span></h2>
+                    <p class="about-p">IT student from Banda Aceh, Indonesia. Working at the intersection of computer
+                        vision, full-stack web development, and real-world deployment.</p>
+                    <p class="about-p">Code that ships — not just demos. Every project built with reliability, data
+                        integrity, and the end user in mind.</p>
+                </div>
+                <div>
+                    <div class="sk">
+                        <div class="sk-t">Web Development</div>
+                        <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Data & Vision</div>
+                        <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+                    </div>
+                    <div class="sk">
+                        <div class="sk-t">Design & Tooling</div>
+                        <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+                    </div>
+                    <div class="st-grid">
+                        <div>
+                            <div class="st-n">2+</div>
+                            <div class="st-l">Years Exp.</div>
+                        </div>
+                        <div>
+                            <div class="st-n">4</div>
+                            <div class="st-l">Projects</div>
+                        </div>
+                        <div>
+                            <div class="st-n">3</div>
+                            <div class="st-l">Domains</div>
+                        </div>
+                        <div>
+                            <div class="st-n">∞</div>
+                            <div class="st-l">Curiosity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="wrap">
+            <span class="lbl" style="display:block;margin-bottom:28px">Contact</span>
+            <h2 class="contact-h">LET'S<br>BUILD<br><span>IT.</span></h2>
+            <div class="cta-row"><a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch</a><a href="#"
+                    class="cta-link">LinkedIn ↗</a><a href="#" class="cta-link">GitHub ↗</a></div>
+            <div class="footer"><span>2026 Ammar — All Rights Reserved</span><span
+                    style="display:flex;align-items:center;gap:8px;color:var(--red)"><span class="dot"
+                        style="width:6px;height:6px"></span>Available for work</span></div>
+        </div>
+    </section>
+</body>
+
+</html>

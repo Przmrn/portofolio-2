@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zürich Bone | Ammar Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:       #E8E0D4;
+    --surface:  #DDD5C8;
+    --card:     #F2ECE2;
+    --border:   #C9BFAF;
+    --border2:  #B5AA98;
+    --ink:      #2A251E;
+    --ink2:     #3D372E;
+    --accent:   #C75B3A;
+    --g1:       #6B6256;
+    --g2:       #8A8176;
+    --g3:       #A8A094;
+    --sans:     'Inter', system-ui, sans-serif;
+    --mono:     'Space Mono', monospace;
+    --g:        clamp(24px, 4vw, 64px);
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 var(--g); }
+  .lbl {
+    font-family: var(--mono);
+    font-size: .5rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--g2);
+  }
+
+  /* Batik pattern — very subtle on bone */
+  body::before {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; z-index: 0; opacity: .025;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%232A251E' stroke-width='0.4'/%3E%3Ccircle cx='30' cy='30' r='8' fill='none' stroke='%232A251E' stroke-width='0.3'/%3E%3Ccircle cx='30' cy='30' r='3' fill='none' stroke='%232A251E' stroke-width='0.3'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+  body > * { position: relative; z-index: 1; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(232, 224, 212, .88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  nav .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 56px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-l {
+    font-family: var(--mono); font-size: .75rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  }
+  .nav-tag {
+    font-family: var(--mono); font-size: .4375rem;
+    background: var(--accent); color: var(--card);
+    padding: 2px 8px; margin-left: 8px;
+    letter-spacing: .06em; vertical-align: middle;
+  }
+  .links { display: flex; gap: 32px; list-style: none; }
+  .links a {
+    font-family: var(--mono); font-size: .5rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--g2); transition: color .2s;
+  }
+  .links a:hover { color: var(--ink); }
+
+  /* ─── HERO — full-width centered, editorial ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 56px 0 0; position: relative;
+  }
+  .hero-center {
+    text-align: center;
+    padding: 0 var(--g);
+    margin-bottom: 64px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: .5rem;
+    letter-spacing: .25em; text-transform: uppercase;
+    color: var(--g2); margin-bottom: 32px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 24px; height: 1px; background: var(--border);
+  }
+
+  .hero-name {
+    font-size: clamp(72px, 16vw, 240px);
+    font-weight: 900; line-height: .82; letter-spacing: -.06em;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero-name .dot { color: var(--accent); }
+
+  .hero-desc {
+    font-size: 1rem; color: var(--g1); line-height: 1.8; font-weight: 300;
+    max-width: 520px; margin: 0 auto 40px;
+  }
+  .hero-desc strong { color: var(--ink2); font-weight: 500; }
+
+  .hero-status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: .5625rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+  }
+  .dot-pulse {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    animation: dp 2.5s ease-in-out infinite;
+  }
+  @keyframes dp { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  /* Hero footer — horizontal tech strip */
+  .hero-foot {
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: repeat(5, 1fr);
+  }
+  .hero-foot-item {
+    padding: 18px 0; text-align: center;
+    font-family: var(--mono); font-size: .5rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--g2); border-right: 1px solid var(--border);
+  }
+  .hero-foot-item:last-child { border-right: none; }
+
+  /* ─── PROJECTS — card grid layout instead of list ─── */
+  .projects { padding: 100px 0; }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 20px;
+  }
+  .section-header h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800; letter-spacing: -.03em; line-height: .9;
+    text-transform: uppercase;
+  }
+
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    cursor: pointer;
+    transition: border-color .25s, transform .15s;
+    position: relative;
+  }
+  .proj-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+  /* Feature project — spans full width */
+  .proj-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: start;
+  }
+  .pc-num {
+    font-family: var(--mono); font-size: .75rem; font-weight: 700;
+    color: var(--accent); padding-top: 2px;
+  }
+  .pc-title {
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 700; letter-spacing: -.025em; line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .pc-sub {
+    font-family: var(--mono); font-size: .4375rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--g2); margin-bottom: 12px;
+  }
+  .pc-desc {
+    font-size: .8125rem; color: var(--g1); line-height: 1.7;
+    font-weight: 300; max-width: 460px;
+  }
+  .pc-tags {
+    display: flex; gap: 5px; flex-wrap: wrap; margin-top: 14px;
+  }
+  .pc-tags span {
+    font-family: var(--mono); font-size: .4375rem;
+    color: var(--ink2); background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+  }
+  .pc-arrow {
+    font-size: 1rem; color: var(--border2);
+    transition: color .2s, transform .2s;
+    align-self: start; padding-top: 4px;
+  }
+  .proj-card:hover .pc-arrow {
+    color: var(--accent); transform: translateX(4px);
+  }
+
+  /* ─── ABOUT — horizontal split, inverted panel ─── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .about-left {
+    padding: 80px var(--g);
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .about-right {
+    padding: 80px var(--g);
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .about-h {
+    font-size: clamp(32px, 4.5vw, 56px);
+    font-weight: 800; letter-spacing: -.04em; line-height: .92;
+    margin-bottom: 28px; text-transform: uppercase;
+  }
+  .about-h .dot { color: var(--accent); }
+  .about-p {
+    font-size: .875rem; line-height: 1.8; font-weight: 300;
+    max-width: 400px; opacity: .7;
+  }
+  .about-p + .about-p { margin-top: 14px; }
+  .about-tagline {
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 800; line-height: 1.15;
+    text-transform: uppercase; letter-spacing: -.02em;
+    margin-top: 40px; color: var(--accent);
+  }
+
+  .sk { border-top: 1px solid var(--border); padding: 18px 0; }
+  .sk-t {
+    font-family: var(--mono); font-size: .4375rem;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--g2); margin-bottom: 6px;
+  }
+  .sk-i { font-size: .8125rem; color: var(--g1); font-weight: 300; }
+
+  .stat-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;
+  }
+  .stat-n {
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 800; color: var(--accent); line-height: 1;
+    margin-bottom: 4px; letter-spacing: -.03em;
+  }
+  .stat-l {
+    font-family: var(--mono); font-size: .4375rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--g2);
+  }
+
+  /* ─── CONTACT — clean centered ─── */
+  .contact { padding: 100px 0 64px; }
+  .contact-inner { text-align: center; }
+  .contact-h {
+    font-size: clamp(48px, 10vw, 140px);
+    font-weight: 900; letter-spacing: -.05em; line-height: .84;
+    margin-bottom: 48px; text-transform: uppercase;
+  }
+  .contact-h .dot { color: var(--accent); }
+  .cta-row {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+    padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .cta-btn {
+    font-family: var(--mono); font-size: .625rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--card); background: var(--ink);
+    padding: 16px 36px; border: none; cursor: pointer;
+    transition: background .25s;
+  }
+  .cta-btn:hover { background: var(--accent); }
+  .cta-link {
+    font-family: var(--mono); font-size: .5rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--g2); transition: color .2s;
+  }
+  .cta-link:hover { color: var(--ink); }
+
+  /* Footer */
+  .footer {
+    margin-top: 80px; padding: 20px 0;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer span {
+    font-family: var(--mono); font-size: .4375rem;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--g2);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .about { grid-template-columns: 1fr; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .proj-card.featured { grid-template-columns: auto 1fr; }
+    .pc-arrow { display: none; }
+    .hero-foot { grid-template-columns: repeat(3, 1fr); }
+    .hero-foot-item:nth-child(n+4) { border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="wrap">
+    <span class="nav-l">AMMAR<span class="nav-tag">v2.0</span></span>
+    <ul class="links">
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── HERO — centered editorial ─── -->
+<section class="hero" id="hero">
+  <div class="hero-center">
+    <div class="hero-eyebrow">Portfolio / 2026</div>
+    <h1 class="hero-name">AMMAR<span class="dot">.</span></h1>
+    <p class="hero-desc"><strong>Full-Stack Developer</strong> & <strong>Computer Vision Engineer</strong> from Banda Aceh — quietly building the systems that matter, one commit at a time.</p>
+    <div class="hero-status"><span class="dot-pulse"></span> Available for work</div>
+  </div>
+  <div class="hero-foot">
+    <div class="hero-foot-item">Python</div>
+    <div class="hero-foot-item">Laravel</div>
+    <div class="hero-foot-item">YOLOv8</div>
+    <div class="hero-foot-item">React</div>
+    <div class="hero-foot-item">OpenCV</div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS — card grid ─── -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Selected Work</h2>
+      <span class="lbl">3 Projects</span>
+    </div>
+
+    <div class="proj-grid">
+      <!-- Featured project — full width -->
+      <div class="proj-card featured">
+        <span class="pc-num">01</span>
+        <div>
+          <h3 class="pc-title">Smart Traffic System</h3>
+          <p class="pc-sub">YOLOv8 & Computer Vision · 2025</p>
+          <p class="pc-desc">Real-time vehicle detection and congestion prediction pipeline running on live CCTV streams. Processes HD video to extract density maps and flag critical junctions.</p>
+          <div class="pc-tags"><span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span></div>
+        </div>
+        <span class="pc-arrow">→</span>
+      </div>
+
+      <!-- Two side-by-side projects -->
+      <div class="proj-card">
+        <span class="pc-num">02</span>
+        <h3 class="pc-title" style="margin-top:16px">Mail Management System</h3>
+        <p class="pc-sub">OCR & Web Development · 2025</p>
+        <p class="pc-desc">Automated mail intake with OCR extraction and full audit trail.</p>
+        <div class="pc-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="pc-num">03</span>
+        <h3 class="pc-title" style="margin-top:16px">Algorithm Arcade</h3>
+        <p class="pc-sub">React & Logic · 2026</p>
+        <p class="pc-desc">Interactive games visualising sorting and pathfinding algorithms.</p>
+        <div class="pc-tags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT — horizontal split ─── -->
+<section class="about" id="about">
+  <div class="about-left">
+    <span class="lbl" style="color:var(--g3); display:block; margin-bottom:32px">About</span>
+    <h2 class="about-h">Building<br>Systems<br>That Work<span class="dot">.</span></h2>
+    <p class="about-p">IT student from Banda Aceh, Indonesia — at the intersection of computer vision, full-stack web dev, and real-world deployment.</p>
+    <p class="about-p">Code that ships — not demos. Built with reliability, data integrity, and the end user in mind.</p>
+    <div class="about-tagline">Quiet tools.<br>Loud impact.</div>
+  </div>
+  <div class="about-right">
+    <div class="sk" style="border-top:none">
+      <div class="sk-t">Web Development</div>
+      <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+    </div>
+    <div class="sk">
+      <div class="sk-t">Data & Vision</div>
+      <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+    </div>
+    <div class="sk">
+      <div class="sk-t">Design & Tooling</div>
+      <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-n">2+</div><div class="stat-l">Years Exp.</div></div>
+      <div><div class="stat-n">4</div><div class="stat-l">Projects</div></div>
+      <div><div class="stat-n">3</div><div class="stat-l">Domains</div></div>
+      <div><div class="stat-n">∞</div><div class="stat-l">Curiosity</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT — centered ─── -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <span class="lbl" style="display:block; margin-bottom:24px">Contact</span>
+      <h2 class="contact-h">Let's<br>Build It<span class="dot">.</span></h2>
+      <div class="cta-row">
+        <a href="mailto:amarnfl238@gmail.com" class="cta-btn">Get in Touch</a>
+        <a href="#" class="cta-link">LinkedIn ↗</a>
+        <a href="#" class="cta-link">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="footer">
+      <span>© 2026 Ammar — Banda Aceh</span>
+      <span style="display:flex; align-items:center; gap:7px; color:var(--accent);">
+        <span class="dot-pulse" style="width:6px;height:6px;"></span>
+        Available
+      </span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

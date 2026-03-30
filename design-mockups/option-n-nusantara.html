@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option N — Nusantara | Ammar Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1B1F1A;
+  --surface:#222721;
+  --card:#2A302A;
+  --border:#3A413A;
+  --border2:#4A524A;
+  --white:#F0EDE5;
+  --cream:#D8D3C7;
+  --terra:#C75B3A;
+  --green:#5A8F6E;
+  --green2:#3D6B4F;
+  --g1:#A8A498;
+  --g2:#787468;
+  --g3:#4E4B44;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --g:clamp(24px,4vw,64px)
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--g)}
+.lbl{font-family:var(--mono);font-size:.5rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g2)}
+
+/* Batik-inspired SVG pattern overlay */
+body::before{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23C75B3A' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='30' r='8' fill='none' stroke='%235A8F6E' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='30' r='3' fill='none' stroke='%23C75B3A' stroke-width='0.5'/%3E%3Cpath d='M30 22L38 30L30 38L22 30Z' fill='none' stroke='%235A8F6E' stroke-width='0.3'/%3E%3C/svg%3E");
+  background-size:60px 60px
+}
+body>*{position:relative;z-index:1}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(27,31,26,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:52px}
+.nav-l{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--white)}
+.nav-l span{color:var(--terra)}
+.links{display:flex;gap:28px;list-style:none}
+.links a{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);transition:color .2s}
+.links a:hover{color:var(--white)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:52px 0 48px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:48px}
+.hero-eyebrow{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g2)}
+.hero-status{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:dp 2.5s ease-in-out infinite}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.25}}
+
+.hero-name{font-size:clamp(72px,16vw,260px);font-weight:900;line-height:.82;letter-spacing:-.06em;margin-bottom:24px}
+.hero-name .accent{color:var(--terra)}
+.hero-sub{font-size:clamp(.875rem,1.2vw,1.125rem);color:var(--g1);font-weight:300;line-height:1.8;max-width:520px;margin-bottom:40px}
+.hero-sub strong{color:var(--cream);font-weight:500}
+.hero-divider{width:100%;height:1px;background:linear-gradient(90deg,var(--terra),var(--green),transparent);margin-bottom:24px}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:.5rem;color:var(--g1);background:var(--card);border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:border-color .2s}
+.chip:hover{border-color:var(--terra)}
+
+/* Batik divider between sections */
+.batik-divider{padding:20px 0;text-align:center;position:relative;overflow:hidden}
+.batik-divider::before{content:'◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆';font-size:.5rem;letter-spacing:.6em;color:var(--terra);opacity:.25}
+.batik-divider::after{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border);z-index:-1}
+
+/* PROJECTS */
+.projects{padding:80px 0}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.proj-header h2{font-size:clamp(32px,5vw,64px);font-weight:800;letter-spacing:-.04em;line-height:.9}
+.proj-header h2 span{color:var(--terra)}
+.proj-cards{display:flex;flex-direction:column;gap:12px}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:32px 36px;display:grid;grid-template-columns:48px 1fr auto;gap:24px;cursor:pointer;transition:border-color .25s,transform .15s,background .25s}
+.proj-card:hover{border-color:var(--green2);background:var(--card);transform:translateY(-1px)}
+.pc-n{font-family:var(--mono);font-size:.625rem;color:var(--terra);padding-top:4px;font-weight:500}
+.pc-t{font-size:clamp(20px,2.5vw,36px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:4px}
+.pc-s{font-family:var(--mono);font-size:.4375rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:10px}
+.pc-d{font-size:.8125rem;color:var(--g1);line-height:1.7;font-weight:300;max-width:460px}
+.pc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
+.pc-tags span{font-family:var(--mono);font-size:.4375rem;color:var(--cream);background:rgba(90,143,110,.12);border:1px solid rgba(90,143,110,.2);padding:3px 8px;border-radius:3px}
+.pc-meta{text-align:right}
+.pc-y{font-family:var(--mono);font-size:.5rem;color:var(--g3)}
+.pc-a{display:block;margin-top:8px;color:var(--g3);transition:color .2s,transform .2s;font-size:1rem}
+.proj-card:hover .pc-a{color:var(--terra);transform:translateX(4px)}
+
+/* ABOUT */
+.about{padding:80px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:40px;overflow:hidden;position:relative}
+.about-card.highlight{background:linear-gradient(135deg,rgba(199,91,58,.08),rgba(90,143,110,.06));border-color:rgba(199,91,58,.2)}
+.about-h{font-size:clamp(32px,4.5vw,56px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin-bottom:24px}
+.about-h span{color:var(--green)}
+.about-p{font-size:.875rem;color:var(--g1);line-height:1.8;font-weight:300;max-width:400px}
+.about-p+.about-p{margin-top:14px}
+/* Batik corner ornament on the highlight card */
+.about-card.highlight::after{
+  content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='60' cy='60' r='55' fill='none' stroke='%23C75B3A' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='40' fill='none' stroke='%235A8F6E' stroke-width='0.5'/%3E%3Ccircle cx='60' cy='60' r='25' fill='none' stroke='%23C75B3A' stroke-width='0.5'/%3E%3Cpath d='M60 5L115 60L60 115L5 60Z' fill='none' stroke='%235A8F6E' stroke-width='0.5'/%3E%3Cpath d='M60 20L100 60L60 100L20 60Z' fill='none' stroke='%23C75B3A' stroke-width='0.3'/%3E%3C/svg%3E")
+}
+.sk{border-top:1px solid var(--border);padding:18px 0}
+.sk-t{font-family:var(--mono);font-size:.4375rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g3);margin-bottom:6px}
+.sk-i{font-size:.8125rem;color:var(--g1);font-weight:300}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.stat-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+.stat-n{font-size:clamp(28px,3vw,44px);font-weight:800;color:var(--terra);line-height:1;margin-bottom:4px}
+.stat-l{font-family:var(--mono);font-size:.375rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g3)}
+
+/* CONTACT */
+.contact{padding:80px 0}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:clamp(40px,5vw,72px);position:relative;overflow:hidden}
+.contact-card::before{
+  content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%23C75B3A' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%235A8F6E' stroke-width='0.5'/%3E%3Ccircle cx='100' cy='100' r='45' fill='none' stroke='%23C75B3A' stroke-width='0.5'/%3E%3Ccircle cx='100' cy='100' r='20' fill='none' stroke='%235A8F6E' stroke-width='0.5'/%3E%3Cpath d='M100 5L195 100L100 195L5 100Z' fill='none' stroke='%23C75B3A' stroke-width='0.5'/%3E%3C/svg%3E")
+}
+.c-lbl{display:block;margin-bottom:24px}
+.c-h{font-size:clamp(40px,8vw,100px);font-weight:900;letter-spacing:-.05em;line-height:.86;margin-bottom:40px}
+.c-h span{color:var(--green)}
+.c-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-top:28px;border-top:1px solid var(--border)}
+.c-btn{font-family:var(--sans);font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--terra);padding:14px 32px;border:none;border-radius:6px;cursor:pointer;transition:opacity .25s}
+.c-btn:hover{opacity:.85}
+.c-outline{font-family:var(--sans);font-size:.6875rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g1);padding:14px 24px;border:1px solid var(--border);border-radius:6px;transition:border-color .2s,color .2s}
+.c-outline:hover{border-color:var(--green);color:var(--white)}
+.ft{margin-top:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft span{font-family:var(--mono);font-size:.375rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
+
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}.proj-card{grid-template-columns:36px 1fr}.hero-top{flex-direction:column;gap:12px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <span class="nav-l">AMMAR<span>.</span></span>
+    <ul class="links">
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="hero-eyebrow">Portfolio / 2026</span>
+      <div class="hero-status"><span class="dot"></span> Available for work</div>
+    </div>
+    <h1 class="hero-name">AM<br>MAR<span class="accent">.</span></h1>
+    <p class="hero-sub"><strong>Full-Stack Developer</strong> & <strong>Computer Vision Engineer</strong> from Banda Aceh — building systems that ship, from real-time detection to pixel-perfect interfaces.</p>
+    <div class="hero-divider"></div>
+    <div class="hero-chips">
+      <span class="chip">Python</span>
+      <span class="chip">Laravel</span>
+      <span class="chip">YOLOv8</span>
+      <span class="chip">React</span>
+      <span class="chip">OpenCV</span>
+    </div>
+  </div>
+</section>
+
+<div class="batik-divider"></div>
+
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="proj-header">
+      <h2>Selected <span>Work</span></h2>
+      <span class="lbl">3 Projects</span>
+    </div>
+    <div class="proj-cards">
+      <div class="proj-card">
+        <span class="pc-n">01</span>
+        <div>
+          <h3 class="pc-t">Smart Traffic System</h3>
+          <p class="pc-s">YOLOv8 & Computer Vision · 2025</p>
+          <p class="pc-d">Real-time vehicle detection and congestion prediction on live CCTV streams.</p>
+          <div class="pc-tags"><span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span></div>
+        </div>
+        <div class="pc-meta"><span class="pc-y">2025</span><span class="pc-a">→</span></div>
+      </div>
+      <div class="proj-card">
+        <span class="pc-n">02</span>
+        <div>
+          <h3 class="pc-t">Mail Management System</h3>
+          <p class="pc-s">OCR & Web Development · 2025</p>
+          <p class="pc-d">Automated mail intake with OCR extraction and full audit trail.</p>
+          <div class="pc-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span></div>
+        </div>
+        <div class="pc-meta"><span class="pc-y">2025</span><span class="pc-a">→</span></div>
+      </div>
+      <div class="proj-card">
+        <span class="pc-n">03</span>
+        <div>
+          <h3 class="pc-t">Algorithm Minigame Arcade</h3>
+          <p class="pc-s">React & Interactive Logic · 2026</p>
+          <p class="pc-d">Interactive games visualising sorting and pathfinding algorithms.</p>
+          <div class="pc-tags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+        </div>
+        <div class="pc-meta"><span class="pc-y">2026</span><span class="pc-a">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="batik-divider"></div>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <span class="lbl" style="display:block;margin-bottom:24px">About</span>
+    <div class="about-grid">
+      <div class="about-card highlight">
+        <h2 class="about-h">Building<br>Systems<br>That <span>Work</span>.</h2>
+        <p class="about-p">IT student from Banda Aceh, Indonesia — at the intersection of computer vision, full-stack web, and real-world deployment.</p>
+        <p class="about-p">Code that ships — not demos. Built with reliability, data integrity, and the end user in mind.</p>
+      </div>
+      <div class="about-card">
+        <div class="sk" style="border-top:none">
+          <div class="sk-t">Web Development</div>
+          <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+        </div>
+        <div class="sk">
+          <div class="sk-t">Data & Vision</div>
+          <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+        </div>
+        <div class="sk">
+          <div class="sk-t">Design & Tooling</div>
+          <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-item"><div class="stat-n">2+</div><div class="stat-l">Years Exp.</div></div>
+          <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">Projects</div></div>
+          <div class="stat-item"><div class="stat-n">3</div><div class="stat-l">Domains</div></div>
+          <div class="stat-item"><div class="stat-n">∞</div><div class="stat-l">Curiosity</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="batik-divider"></div>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <span class="lbl c-lbl">Contact</span>
+      <h2 class="c-h">Let's <span>Build</span><br>Something.</h2>
+      <div class="c-actions">
+        <a href="mailto:amarnfl238@gmail.com" class="c-btn">Get in Touch</a>
+        <a href="#" class="c-outline">LinkedIn ↗</a>
+        <a href="#" class="c-outline">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="ft">
+      <span>© 2026 Ammar</span>
+      <span style="display:flex;align-items:center;gap:6px"><span class="dot"></span> Available</span>
+    </div>
+  </div>
+</section>
+</body>
+</html>

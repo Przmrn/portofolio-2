@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option P — Botanical | Ammar Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#141E17;
+  --surface:rgba(26,42,30,.6);
+  --card:rgba(30,50,35,.5);
+  --border:rgba(90,160,100,.12);
+  --border2:rgba(90,160,100,.2);
+  --white:#F5F0E3;
+  --cream:#D4CEBD;
+  --green:#6ECB8A;
+  --green2:#4DA66A;
+  --green3:#2D7A47;
+  --moss:#3A5A42;
+  --g1:#A8B89E;
+  --g2:#6B7A63;
+  --g3:#3D4D38;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --g:clamp(24px,4vw,64px)
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--g)}
+.lbl{font-family:var(--mono);font-size:.5rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--g2)}
+
+/* Organic radial gradient backgrounds */
+body::before{
+  content:'';position:fixed;top:-30%;left:-20%;width:80vw;height:80vw;
+  background:radial-gradient(circle,rgba(110,203,138,.06) 0%,transparent 70%);
+  pointer-events:none;z-index:0
+}
+body::after{
+  content:'';position:fixed;bottom:-20%;right:-10%;width:60vw;height:60vw;
+  background:radial-gradient(circle,rgba(77,166,106,.04) 0%,transparent 70%);
+  pointer-events:none;z-index:0
+}
+body>*{position:relative;z-index:1}
+
+/* NAV — glass */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,30,23,.75);backdrop-filter:saturate(150%) blur(20px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:52px}
+.nav-l{font-size:.8125rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.nav-l span{color:var(--green)}
+.links{display:flex;gap:28px;list-style:none}
+.links a{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);transition:color .2s}
+.links a:hover{color:var(--green)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:52px 0 48px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);border:1px solid var(--border2);border-radius:99px;padding:7px 18px;margin-bottom:48px;background:rgba(110,203,138,.04);width:fit-content}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:dp 2.5s ease-in-out infinite}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero-name{font-size:clamp(72px,16vw,260px);font-weight:900;line-height:.82;letter-spacing:-.06em;margin-bottom:28px}
+.hero-name span{background:linear-gradient(135deg,var(--green),var(--green2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1rem;color:var(--g1);line-height:1.8;font-weight:300;max-width:500px;margin-bottom:40px}
+.hero-desc strong{color:var(--cream);font-weight:500}
+
+/* Glass tech row */
+.tech-row{display:flex;gap:8px;flex-wrap:wrap}
+.tech-chip{font-family:var(--mono);font-size:.5rem;color:var(--g1);background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);padding:7px 16px;border-radius:8px;transition:border-color .2s,background .2s}
+.tech-chip:hover{border-color:var(--green);background:rgba(110,203,138,.06)}
+
+/* Organic divider — leaf-like wave */
+.organic-divider{padding:32px 0;text-align:center;position:relative}
+.organic-divider svg{width:100%;height:24px;display:block}
+.organic-divider path{fill:none;stroke:var(--green3);stroke-width:.5;opacity:.3}
+
+/* PROJECTS */
+.projects{padding:80px 0}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.proj-header h2{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-.03em;margin-top:8px}
+.proj-cards{display:flex;flex-direction:column;gap:12px}
+.proj-card{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:32px 36px;display:grid;grid-template-columns:48px 1fr 72px;gap:20px;cursor:pointer;transition:border-color .25s,transform .15s,box-shadow .25s}
+.proj-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.pc-n{font-family:var(--mono);font-size:.625rem;color:var(--green);padding-top:4px;font-weight:500}
+.pc-t{font-size:clamp(20px,2.5vw,36px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:4px}
+.pc-s{font-family:var(--mono);font-size:.4375rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:10px}
+.pc-d{font-size:.8125rem;color:var(--g1);line-height:1.7;font-weight:300;max-width:440px}
+.pc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
+.pc-tags span{font-family:var(--mono);font-size:.4375rem;color:var(--cream);background:rgba(110,203,138,.08);border:1px solid rgba(110,203,138,.15);padding:3px 8px;border-radius:4px}
+.pc-y{font-family:var(--mono);font-size:.5rem;color:var(--g3);text-align:right}
+.pc-a{display:block;margin-top:8px;text-align:right;color:var(--g3);transition:color .2s,transform .2s;font-size:1rem}
+.proj-card:hover .pc-a{color:var(--green);transform:translateX(4px)}
+
+/* ABOUT */
+.about{padding:80px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-card{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:40px;position:relative;overflow:hidden}
+.about-card.main::before{
+  content:'';position:absolute;top:0;right:0;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(110,203,138,.08) 0%,transparent 70%);pointer-events:none
+}
+.about-h{font-size:clamp(32px,4.5vw,56px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin-bottom:24px}
+.about-h span{color:var(--green)}
+.about-p{font-size:.875rem;color:var(--g1);line-height:1.8;font-weight:300;max-width:400px}
+.about-p+.about-p{margin-top:14px}
+.sk{border-top:1px solid var(--border);padding:18px 0}
+.sk:first-of-type{border-top:none}
+.sk-t{font-family:var(--mono);font-size:.4375rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g3);margin-bottom:6px}
+.sk-i{font-size:.8125rem;color:var(--g1);font-weight:300}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.stat-item{background:rgba(110,203,138,.04);border:1px solid var(--border);border-radius:10px;padding:18px}
+.stat-n{font-size:clamp(28px,3vw,44px);font-weight:800;color:var(--green);line-height:1;margin-bottom:4px}
+.stat-l{font-family:var(--mono);font-size:.375rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g3)}
+
+/* CONTACT */
+.contact{padding:80px 0}
+.contact-card{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:clamp(40px,5vw,72px);position:relative;overflow:hidden}
+.contact-card::before{
+  content:'';position:absolute;bottom:-40px;right:-40px;width:250px;height:250px;
+  background:radial-gradient(circle,rgba(110,203,138,.08) 0%,transparent 70%);pointer-events:none
+}
+.c-lbl{display:block;margin-bottom:24px}
+.c-h{font-size:clamp(40px,8vw,100px);font-weight:900;letter-spacing:-.05em;line-height:.86;margin-bottom:40px}
+.c-h span{color:var(--green)}
+.c-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-top:28px;border-top:1px solid var(--border)}
+.c-btn{font-family:var(--sans);font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--green);padding:14px 32px;border:none;border-radius:8px;cursor:pointer;transition:opacity .25s}
+.c-btn:hover{opacity:.85}
+.c-outline{font-family:var(--sans);font-size:.6875rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g1);padding:14px 24px;border:1px solid var(--border);border-radius:8px;transition:border-color .2s,color .2s}
+.c-outline:hover{border-color:var(--green);color:var(--white)}
+.ft{margin-top:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft span{font-family:var(--mono);font-size:.375rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
+
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}.proj-card{grid-template-columns:36px 1fr;border-radius:10px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <span class="nav-l">AMMAR<span>.</span></span>
+    <ul class="links">
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-badge"><span class="dot"></span> Available for work</div>
+    <h1 class="hero-name">Am<br>mar<span>.</span></h1>
+    <p class="hero-desc"><strong>Full-Stack Developer</strong> & <strong>Computer Vision Engineer</strong> from Banda Aceh — building systems that grow, adapt, and ship.</p>
+    <div class="tech-row">
+      <span class="tech-chip">Python</span>
+      <span class="tech-chip">Laravel</span>
+      <span class="tech-chip">YOLOv8</span>
+      <span class="tech-chip">React</span>
+      <span class="tech-chip">OpenCV</span>
+    </div>
+  </div>
+</section>
+
+<div class="organic-divider"><svg viewBox="0 0 1200 24" preserveAspectRatio="none"><path d="M0 12 Q150 2 300 12 T600 12 T900 12 T1200 12"/></svg></div>
+
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="proj-header">
+      <div><span class="lbl">Selected Work</span><h2>Projects</h2></div>
+      <span class="lbl">3 Projects</span>
+    </div>
+    <div class="proj-cards">
+      <div class="proj-card">
+        <span class="pc-n">01</span>
+        <div>
+          <h3 class="pc-t">Smart Traffic System</h3>
+          <p class="pc-s">YOLOv8 & Computer Vision · 2025</p>
+          <p class="pc-d">Real-time vehicle detection and congestion prediction on live CCTV streams.</p>
+          <div class="pc-tags"><span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span><span>Laravel</span></div>
+        </div>
+        <div><span class="pc-y">2025</span><span class="pc-a">→</span></div>
+      </div>
+      <div class="proj-card">
+        <span class="pc-n">02</span>
+        <div>
+          <h3 class="pc-t">Mail Management System</h3>
+          <p class="pc-s">OCR & Web Development · 2025</p>
+          <p class="pc-d">Automated mail intake with OCR extraction and full audit trail.</p>
+          <div class="pc-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>PaddleOCR</span><span>Python</span></div>
+        </div>
+        <div><span class="pc-y">2025</span><span class="pc-a">→</span></div>
+      </div>
+      <div class="proj-card">
+        <span class="pc-n">03</span>
+        <div>
+          <h3 class="pc-t">Algorithm Minigame Arcade</h3>
+          <p class="pc-s">React & Interactive Logic · 2026</p>
+          <p class="pc-d">Interactive games visualising sorting and pathfinding algorithms.</p>
+          <div class="pc-tags"><span>React</span><span>Framer Motion</span><span>TypeScript</span></div>
+        </div>
+        <div><span class="pc-y">2026</span><span class="pc-a">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="organic-divider"><svg viewBox="0 0 1200 24" preserveAspectRatio="none"><path d="M0 12 Q150 22 300 12 T600 12 T900 12 T1200 12"/></svg></div>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <span class="lbl" style="display:block;margin-bottom:24px">About</span>
+    <div class="about-grid">
+      <div class="about-card main">
+        <h2 class="about-h">Building<br>Systems<br>That <span>Grow</span>.</h2>
+        <p class="about-p">IT student from Banda Aceh, Indonesia — at the intersection of computer vision, full-stack web dev, and real-world deployment.</p>
+        <p class="about-p">Code that ships — not demos. Built with reliability, data integrity, and the end user in mind.</p>
+      </div>
+      <div class="about-card">
+        <div class="sk">
+          <div class="sk-t">Web Development</div>
+          <div class="sk-i">Laravel · PHP · React · Next.js · MySQL</div>
+        </div>
+        <div class="sk">
+          <div class="sk-t">Data & Vision</div>
+          <div class="sk-i">Python · YOLOv8 · OpenCV · TensorFlow · Pandas</div>
+        </div>
+        <div class="sk">
+          <div class="sk-t">Design & Tooling</div>
+          <div class="sk-i">Figma · Tailwind · Git · Linux · REST APIs</div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-item"><div class="stat-n">2+</div><div class="stat-l">Years Exp.</div></div>
+          <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">Projects</div></div>
+          <div class="stat-item"><div class="stat-n">3</div><div class="stat-l">Domains</div></div>
+          <div class="stat-item"><div class="stat-n">∞</div><div class="stat-l">Curiosity</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <span class="lbl c-lbl">Contact</span>
+      <h2 class="c-h">Let's <span>Build</span><br>Something.</h2>
+      <div class="c-actions">
+        <a href="mailto:amarnfl238@gmail.com" class="c-btn">Get in Touch</a>
+        <a href="#" class="c-outline">LinkedIn ↗</a>
+        <a href="#" class="c-outline">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="ft">
+      <span>© 2026 Ammar</span>
+      <span style="display:flex;align-items:center;gap:6px"><span class="dot"></span> Available</span>
+    </div>
+  </div>
+</section>
+</body>
+</html>
