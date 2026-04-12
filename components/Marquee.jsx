@@ -20,13 +20,13 @@ export default function Marquee({ text, direction = 1, bg = "bg-white", fg = "te
   const chunk = Array.from({ length: 4 }).map((_, i) => (
     <span key={i} className="px-8 whitespace-nowrap">
       {text}
-      <span className="inline-block ml-8 text-red-600">•</span>
+      <span className="inline-block ml-8 text-red-600 scale-150 align-middle">•</span>
     </span>
   ));
 
   return (
-    <div ref={container} className={`w-full overflow-hidden flex items-center h-24 sm:h-32 ${bg} ${fg}`}>
-      <div className="marquee-track flex font-sans font-black uppercase text-4xl sm:text-6xl tracking-tighter w-max" style={{ transform: direction === -1 ? 'translateX(-50%)' : 'none' }}>
+    <div ref={container} className={`relative w-full overflow-hidden flex items-center py-8 lg:py-12 ${bg} ${fg}`}>
+      <div className="marquee-track flex font-sans font-black uppercase text-5xl sm:text-7xl tracking-[-0.05em] leading-none w-max" style={{ transform: direction === -1 ? 'translateX(-50%)' : 'none' }}>
         {chunk}
       </div>
     </div>

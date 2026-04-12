@@ -10,18 +10,6 @@ export default function ManifestoSection() {
   const container = useRef(null);
 
   useGSAP(() => {
-    // Parallax background
-    gsap.to(container.current, {
-      yPercent: 10,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-
     // Reveal text
     gsap.from('.manifesto-text', {
       y: 50,
@@ -37,12 +25,12 @@ export default function ManifestoSection() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="relative w-full bg-black text-white min-h-[80vh] flex flex-col items-center justify-center py-40 px-6 lg:px-16 z-10" style={{ transformOrigin: 'top center' }}>
+    <section ref={container} className="w-full bg-black text-white min-h-[80vh] flex flex-col items-center justify-center py-32 px-6 lg:px-16">
       
       {/* 50/50 Editorial Alignment */}
       <div className="max-w-7xl w-full flex flex-col md:flex-row justify-between items-start gap-12 md:gap-32">
         <div className="flex-1">
-           <h2 className="manifesto-text text-6xl lg:text-[10vw] font-black uppercase tracking-tighter leading-[0.85]">
+           <h2 className="manifesto-text text-6xl lg:text-[10vw] font-black uppercase tracking-[-0.06em] leading-[0.80] -ml-2">
              BORN<br/>FROM<br/><span className="text-red-600">NOISE.</span>
            </h2>
         </div>

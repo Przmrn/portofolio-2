@@ -28,7 +28,7 @@ export default function FooterSection() {
       
       <div className="max-w-7xl w-full flex flex-col md:flex-row items-end justify-between gap-16 mb-40 mt-16">
          <div className="flex-1 overflow-hidden">
-            <h2 className="footer-reveal text-6xl lg:text-[10vw] font-black uppercase tracking-tighter leading-[0.85] mb-4">
+            <h2 className="footer-reveal text-6xl lg:text-[10vw] font-black uppercase tracking-[-0.06em] leading-[0.80] mb-4 -ml-2">
               LET'S<br/>BUILD<br/>IT.
             </h2>
          </div>

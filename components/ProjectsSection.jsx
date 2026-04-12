@@ -1,5 +1,6 @@
 'use client';
 import { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,19 +12,19 @@ const projects = [
     title: 'Smart Traffic Vision',
     type: 'Computer Vision',
     year: '2025',
-    img: 'https://images.unsplash.com/photo-1541888086082-dd3b1154ce17?auto=format&fit=crop&q=80&w=1600&h=1200', // Premium minimal architecture/road
+    img: 'https://images.unsplash.com/photo-1541888086082-dd3b1154ce17?auto=format&fit=crop&q=70&w=1200&h=900',
   },
   {
     title: 'Financial Ledger',
     type: 'FinTech Backend',
     year: '2024',
-    img: 'https://images.unsplash.com/photo-1620325867502-221ddb5faa5f?auto=format&fit=crop&q=80&w=1600&h=1200', // Premium abstract data
+    img: 'https://images.unsplash.com/photo-1620325867502-221ddb5faa5f?auto=format&fit=crop&q=70&w=1200&h=900',
   },
   {
     title: 'Object Detect AI',
     type: 'Machine Learning',
     year: '2023',
-    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1600&h=1200', // Premium hardware/tech
+    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=70&w=1200&h=900',
   },
 ];
 
@@ -31,9 +32,10 @@ export default function ProjectsSection() {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    // Parallax effect on all project images
+    // Parallax effect on all project images — use transform only (GPU)
     gsap.utils.toArray('.proj-img-wrap').forEach((wrap) => {
       const img = wrap.querySelector('img');
+      if (!img) return;
       gsap.to(img, {
         yPercent: 15,
         ease: 'none',
@@ -66,7 +68,7 @@ export default function ProjectsSection() {
       
       {/* Section Header */}
       <div className="max-w-7xl mx-auto flex flex-col items-start gap-4 mb-32">
-        <h3 className="hero-text-reveal text-6xl md:text-8xl font-black uppercase tracking-tighter">
+        <h3 className="hero-text-reveal text-6xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] -ml-1">
           Select Works
         </h3>
         <p className="font-mono text-xs tracking-widest uppercase text-gray-500 max-w-sm">
@@ -86,16 +88,18 @@ export default function ProjectsSection() {
               <img 
                 src={proj.img} 
                 alt={proj.title}
-                className="absolute inset-0 w-full h-[120%] object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-[120%] object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out will-change-transform"
                 style={{ top: '-10%' }}
               />
               {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-black/opacity-0 group-hover:bg-black/10 transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
             </div>
             
             {/* Labels under image */}
             <div className="flex justify-between items-start pt-6 border-t-0 border-black/10 mt-6">
-              <h4 className="proj-label text-3xl font-bold uppercase tracking-tight">{proj.title}</h4>
+              <h4 className="proj-label text-3xl font-bold uppercase tracking-[-0.04em]">{proj.title}</h4>
               <div className="proj-label flex flex-col items-end gap-1">
                 <span className="font-mono text-xs uppercase tracking-widest text-gray-400">{proj.type}</span>
                 <span className="font-mono text-xs uppercase tracking-widest text-gray-400">{proj.year}</span>
@@ -104,10 +108,10 @@ export default function ProjectsSection() {
           </div>
         ))}
         
-        {/* The Red Block accent component (Editorial highlight) */}
+        {/* The Red Block accent component */}
         <div className="proj-item w-full lg:w-1/2 aspect-square lg:self-center bg-red-600 text-white flex flex-col items-center justify-center cursor-pointer transition-transform duration-500 hover:scale-[0.98]">
            <span className="proj-label text-xl font-mono uppercase tracking-widest mb-4 opacity-70">Archive</span>
-           <h4 className="proj-label text-5xl font-black uppercase tracking-tight">View All</h4>
+           <h4 className="proj-label text-4xl lg:text-5xl font-black uppercase tracking-[-0.05em]">View All</h4>
         </div>
 
       </div>

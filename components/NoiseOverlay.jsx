@@ -1,81 +1,53 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
+/**
+ * NoiseOverlay — Performance-optimised film grain.
+ * 
+ * Instead of putImageData on a full-viewport canvas every frame (expensive),
+ * we generate a tiny 150×150 noise tile ONCE and tile it with CSS.
+ * A simple CSS animation shifts background-position to create flicker.
+ * Cost: ~0ms per frame (GPU-composited, no JS in the loop).
+ */
 export default function NoiseOverlay() {
-  const canvasRef = useRef(null);
+  const ref = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    // Generate a small noise tile once
+    const size = 150;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
     const ctx = canvas.getContext('2d');
-    
-    let w = window.innerWidth;
-    let h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
+    const imgData = ctx.createImageData(size, size);
+    const d = imgData.data;
 
-    const buildNoise = () => {
-      const imgData = ctx.createImageData(w, h);
-      const buffer32 = new Uint32Array(imgData.data.buffer);
-      const len = buffer32.length;
-      for (let i = 0; i < len; i++) {
-        if (Math.random() < 0.2) {
-          buffer32[i] = 0x0f000000; // very subtle black noise
-        }
-      }
-      return imgData;
-    };
-
-    let noiseData = [];
-    const frameCount = 10;
-    
-    for (let i = 0; i < frameCount; i++) {
-      noiseData.push(buildNoise());
+    for (let i = 0; i < d.length; i += 4) {
+      const v = Math.random() < 0.15 ? 0 : 255;
+      d[i] = d[i + 1] = d[i + 2] = v;
+      d[i + 3] = Math.random() < 0.15 ? 18 : 0; // very sparse, subtle
     }
+    ctx.putImageData(imgData, 0, 0);
 
-    let frame = 0;
-    let animationId;
-
-    const render = () => {
-      ctx.putImageData(noiseData[frame], 0, 0);
-      frame = (frame + 1) % frameCount;
-      // throttle to create that dirty 15fps film effect
-      setTimeout(() => {
-        animationId = requestAnimationFrame(render);
-      }, 50);
-    };
-
-    render();
-
-    const handleResize = () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-      noiseData = [];
-      for (let i = 0; i < frameCount; i++) {
-        noiseData.push(buildNoise());
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-    };
+    if (ref.current) {
+      ref.current.style.backgroundImage = `url(${canvas.toDataURL('image/png')})`;
+    }
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={ref}
+      aria-hidden="true"
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 50,
         pointerEvents: 'none',
-        opacity: 0.6,
-        mixBlendMode: 'multiply'
+        opacity: 0.5,
+        mixBlendMode: 'multiply',
+        backgroundRepeat: 'repeat',
+        animation: 'grain-shift 0.4s steps(4) infinite',
+        willChange: 'background-position',
       }}
     />
   );

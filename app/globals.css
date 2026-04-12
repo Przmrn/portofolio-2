@@ -6,6 +6,7 @@
   --font-mono: 'Space Mono', monospace;
   --color-bg: #FFFFFF;
   --color-ink: #000000;
+  --color-primary: #FFFFFF;
   --color-red: #FF0000;
   --color-gray: #666666;
   --color-muted: #999999;
@@ -23,3 +24,19 @@ a{color:inherit;text-decoration:none}
 .line-mask{overflow:hidden;display:block}
 .status-dot{width:6px;height:6px;border-radius:50%;background:#FF0000;animation:blink 2s ease-in-out infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes grain-shift {
+  0%   { background-position: 0 0; }
+  25%  { background-position: -30px 40px; }
+  50%  { background-position: 60px -20px; }
+  75%  { background-position: -40px -60px; }
+  100% { background-position: 20px 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

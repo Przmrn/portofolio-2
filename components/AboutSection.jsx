@@ -23,13 +23,13 @@ export default function AboutSection() {
   }, { scope: container });
 
   return (
-    <section id="about" ref={container} className="w-full bg-white text-black py-40 px-6 lg:px-16 pb-64 relative z-20">
+    <section id="about" ref={container} className="w-full bg-white text-black pt-32 pb-64 px-6 lg:px-16">
       
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
         
         {/* Core Description - Column 1/3 */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-          <h3 className="about-reveal text-4xl font-black uppercase tracking-[-0.03em]">Logic Over Ego</h3>
+          <h3 className="about-reveal text-4xl font-black uppercase tracking-[-0.05em] leading-[0.85] -ml-1">Logic Over Ego</h3>
           <p className="about-reveal text-gray-600 font-medium leading-relaxed">
             I am a software engineer focused on building durable backends, computer vision pipelines, and seamless frontends. I believe in architectural integrity, zero-bloat dependencies, and designing for scale from day zero.
           </p>

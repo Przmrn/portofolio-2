@@ -36,13 +36,13 @@ function WebGLBlobs() {
 
     return (
       <mesh ref={meshRef} position={position} scale={scale}>
-        <sphereGeometry args={[1, 128, 128]} />
+        <sphereGeometry args={[1, 64, 64]} />
         <MeshDistortMaterial
           color={color}
-          roughness={0.08}
-          metalness={0.92}
-          distort={distort}
-          speed={speed * 3}
+          roughness={0.3}
+          metalness={0.2}
+          distort={distort * 0.8}
+          speed={speed * 1.5}
         />
       </mesh>
     );
@@ -66,10 +66,10 @@ function WebGLBlobs() {
       gl={{ antialias: true, alpha: true }}
       style={{ background: 'transparent' }}
     >
-      <directionalLight position={[8, 10, 6]}  intensity={5.0} color="#ffffff" />
-      <directionalLight position={[-6,  4, 2]} intensity={1.2} color="#d0d8e0" />
-      <directionalLight position={[0,  -6, 2]} intensity={0.6} color="#E8E0D0" />
-      <ambientLight intensity={0.08} />
+      <directionalLight position={[10, 10, 10]} intensity={2.0} color="#ffffff" />
+      <directionalLight position={[-10, -10, -10]} intensity={1.5} color="#ff0000" />
+      <directionalLight position={[-5, 5, 5]} intensity={0.8} color="#ffffff" />
+      <ambientLight intensity={0.5} />
       {blobs.map((blob, i) => (
         <Blob key={i} {...blob} />
       ))}
@@ -108,8 +108,7 @@ function CSSBlobs() {
             left: b.x,
             top: b.y,
             width: b.size,
-            height: b.size,
-            borderRadius: '50%',
+            height: b.size,            borderRadius: '50%',
             background: `radial-gradient(circle at 35% 35%, ${b.color}ee, ${b.color}cc 60%, ${b.color}88)`,
             filter: 'blur(2px)',
             animation: `blob-float ${b.dur}s ease-in-out ${b.delay}s infinite`,
@@ -134,7 +133,7 @@ export default function MetaballScene({ visible }) {
   return (
     <div
       style={{
-        position: 'fixed',
+        position: 'absolute',
         inset: 0,
         zIndex: 0,
         opacity: visible ? 1 : 0,

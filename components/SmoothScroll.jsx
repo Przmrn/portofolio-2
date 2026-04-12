@@ -8,12 +8,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.05, smoothWheel: true, wheelMultiplier: 0.8 });
+    const lenis = new Lenis({
+      lerp: 0.09,           // was 0.03 — much snappier now
+      smoothWheel: true,
+      wheelMultiplier: 0.9,  // was 0.6 — feels native-responsive
+      smoothTouch: false,    // disable on touch — native scroll is better on mobile
+    });
+
     lenis.on('scroll', ScrollTrigger.update);
+
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
-    return () => { gsap.ticker.remove(tick); lenis.destroy(); };
+
+    return () => {
+      gsap.ticker.remove(tick);
+      lenis.destroy();
+    };
   }, []);
+
   return <>{children}</>;
 }

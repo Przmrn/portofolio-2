@@ -1,68 +1,67 @@
-'use client';
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import React from 'react';
+import PixelCard from './PixelCard';
 
 export default function HeroSection() {
-  const container = useRef(null);
-  
-  useGSAP(() => {
-    // Elegant fade and slide-up for text elements
-    gsap.from('.hero-text-reveal', {
-      y: 100,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.1,
-      ease: 'power4.out',
-      delay: 0.2
-    });
-  }, { scope: container });
-
   return (
-    <section ref={container} className="relative w-full min-h-screen flex flex-col justify-between pt-8 pb-12 px-6 lg:px-16" style={{ backgroundColor: '#FFFFFF' }}>
-      {/* Top Nav alignment */}
-      <header className="flex justify-between items-start w-full">
-        <div className="overflow-hidden">
-          <h2 className="hero-text-reveal text-sm tracking-tighter font-medium uppercase font-sans">
-            Ammar.
-          </h2>
-        </div>
-        <div className="flex gap-12 text-sm font-mono uppercase text-gray-500 tracking-widest">
-          <div className="overflow-hidden"><a href="#works" className="hero-text-reveal block hover:text-black transition-colors">Works</a></div>
-          <div className="overflow-hidden"><a href="#about" className="hero-text-reveal block hover:text-black transition-colors">Info</a></div>
-          <div className="overflow-hidden"><a href="#contact" className="hero-text-reveal block hover:text-black transition-colors">Contact</a></div>
-        </div>
-      </header>
-
-      {/* Center Layout split */}
-      <div className="w-full flex flex-col lg:flex-row items-end justify-between gap-12 lg:gap-24 mb-16">
+    <PixelCard
+      variant="brutalist"
+      className="w-full min-h-screen border-none rounded-none bg-white text-black"
+    >
+      <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between pointer-events-auto">
         
-        {/* Massive Name left side with tight tracking */}
-        <div className="flex-1">
-          <div className="overflow-hidden">
-            <h1 className="hero-text-reveal text-[18vw] leading-[0.85] font-black uppercase tracking-[-0.05em] text-black">
-              AMMAR
-            </h1>
+        {/* Top Header Row */}
+        <div className="flex justify-between items-start">
+          {/* Top Left */}
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
+            <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+            AMMAR_DEV
+          </div>
+
+          {/* Top Right */}
+          <div className="flex flex-col items-end gap-1 font-mono text-[10px] uppercase tracking-widest text-gray-400">
+            <span>LATITUDE: 5.5483° N</span>
+            <span>FOCAL DEPTH: YOLOv8</span>
           </div>
         </div>
 
-        {/* Roles / Intro right side */}
-        <div className="flex-1 max-w-sm ml-auto pb-4">
-          <div className="overflow-hidden mb-8">
-            <p className="hero-text-reveal text-lg font-medium leading-relaxed tracking-tight text-gray-900">
-              Full-Stack Developer & Computer Vision Engineer — building systems that matter with clean code and quiet precision.
+        {/* Center / Main Title */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-8 md:left-12 flex flex-col pointer-events-none select-none">
+          <h1 className="text-[14vw] font-black leading-[0.8] tracking-tighter text-black m-0">
+            AMMAR
+          </h1>
+          <h1 
+            className="text-[14vw] font-black leading-[0.8] tracking-tighter text-transparent ml-8 md:ml-24 m-0"
+            style={{ WebkitTextStroke: '2px black' }}
+          >
+            DEVELOPER
+          </h1>
+        </div>
+
+        {/* Bottom Content Row */}
+        <div className="flex justify-between items-end relative z-10 w-full mt-auto">
+          {/* Bottom Left */}
+          <div className="flex flex-col gap-4 max-w-sm md:max-w-md">
+            <p className="font-sans text-sm md:text-base leading-relaxed text-gray-800">
+              Full-Stack Developer & Computer Vision Engineer — <br className="hidden md:block" />
+              building systems that matter with clean code and quiet precision.
             </p>
+            <div className="flex flex-col gap-1 font-mono text-[10px] md:text-xs uppercase tracking-widest text-gray-500">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
+                AVAILABLE FOR FREELANCE
+              </div>
+              <span className="text-gray-400">[ ARCHIVE 2026 ]</span>
+              <span className="text-gray-400 mt-2">COMPUTER VISION & BACKEND SYSTEMS</span>
+            </div>
           </div>
-          
-          <div className="overflow-hidden flex gap-4 items-center">
-             <div className="status-dot hero-text-reveal"></div>
-             <p className="hero-text-reveal font-mono text-xs tracking-widest uppercase text-gray-500">
-               Available for Freelance
-             </p>
+
+          {/* Bottom Right */}
+          <div className="font-mono text-xs uppercase tracking-widest border border-gray-200 px-4 py-2 hover:bg-black hover:text-white transition-colors cursor-pointer bg-white/50 backdrop-blur-sm pointer-events-auto">
+            EXPLORE DEPTH
           </div>
         </div>
-        
+
       </div>
-    </section>
+    </PixelCard>
   );
 }
