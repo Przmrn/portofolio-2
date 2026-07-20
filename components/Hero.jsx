@@ -1,6 +1,13 @@
 "use client";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import MagnetLines from "./MagnetLines";
+import dynamic from "next/dynamic";
+
+/* ── Spline: SSR-safe dynamic import (avoids hydration errors) ── */
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const fadeUp = (delay = 0) => ({
   initial:    { opacity: 0, y: 28 },
@@ -9,6 +16,17 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function Hero() {
+  /* ── Device capability check — skip Spline on mobile / low-end ── */
+  const [canRender3D, setCanRender3D] = useState(false);
+  const [splineLoaded, setSplineLoaded] = useState(false);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const isLowEnd =
+      typeof navigator !== "undefined" && navigator.hardwareConcurrency <= 2;
+    setCanRender3D(!isMobile && !isLowEnd);
+  }, []);
+
   return (
     <section
       id="hero"
@@ -26,8 +44,9 @@ export default function Hero() {
           position:  "absolute",
           top:       "88px",
           right:     "5vw",
-          zIndex:    5,
+          zIndex:    10,
           textAlign: "right",
+          pointerEvents: "none",
         }}
       >
         <p style={{
@@ -77,7 +96,7 @@ export default function Hero() {
           left:      "4vw",
           top:       "50%",
           transform: "translateY(-52%)",
-          zIndex:    4,
+          zIndex:    10,
           pointerEvents: "none",
         }}
       >
@@ -97,28 +116,31 @@ export default function Hero() {
         </h1>
       </motion.div>
 
-      {/* ── MagnetLines — dead center ─────────────────────── */}
+      {/* ── Spline 3D scene — positioned next to the hero name ── */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 0.5 }}
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: splineLoaded ? 1 : 0, scale: 1 }}
+        transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position:  "absolute",
-          top:       "50%",
-          left:      "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex:    10,
+          position: "absolute",
+          top:      0,
+          right:    0,
+          width:    "60%",
+          height:   "100%",
+          zIndex:   2,
         }}
       >
-        <MagnetLines
-          rows={13}
-          cols={20}
-          cellSize={34}
-          lineLength={20}
-          lineColor="#111111"
-          lineOpacity={0.22}
-          maxDist={220}
-        />
+        {canRender3D && (
+          <Spline
+            scene="https://prod.spline.design/NOnlHZHEI7OUUNuc/scene.splinecode"
+            onLoad={() => setSplineLoaded(true)}
+            style={{
+              width:   "100%",
+              height:  "100%",
+              display: "block",
+            }}
+          />
+        )}
       </motion.div>
 
       {/* ── Bottom info strip ─────────────────────────────── */}
@@ -134,7 +156,8 @@ export default function Hero() {
           display:        "flex",
           justifyContent: "space-between",
           alignItems:     "center",
-          zIndex:         5,
+          zIndex:         10,
+          pointerEvents:  "none",
         }}
       >
         <span style={{

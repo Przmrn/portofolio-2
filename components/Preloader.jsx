@@ -1,112 +1,145 @@
-'use client';
-import { useRef, useState, useEffect, useCallback } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { Progress } from '@/components/ui/progress';
+"use client";
+import { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Preloader({ onComplete }) {
   const overlayRef = useRef(null);
   const titleRef = useRef(null);
   const barWrapRef = useRef(null);
+  const barFillRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
 
-  // 1. Simulate loading: drive progress from 0 → 100 over ~2.5s
+  /* 1. Drive progress 0 → 100 over ~2.5s */
   useEffect(() => {
     const proxy = { v: 0 };
     const tween = gsap.to(proxy, {
       v: 100,
       duration: 2.5,
-      ease: 'power2.inOut',
+      ease: "power2.inOut",
       onUpdate: () => setProgress(Math.round(proxy.v)),
       onComplete: () => setDone(true),
     });
     return () => tween.kill();
   }, []);
 
-  // 2. Entrance animation: text pops up as progress begins
+  /* 2. Entrance animation */
   useGSAP(() => {
     if (!titleRef.current || !barWrapRef.current) return;
-
     const tl = gsap.timeline({ delay: 0.2 });
-
-    // Text reveals: start hidden, animate up
     tl.fromTo(
       titleRef.current,
       { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
       0
     );
-
-    // Progress bar container fades in
     tl.fromTo(
       barWrapRef.current,
       { opacity: 0, scaleX: 0.6 },
-      { opacity: 1, scaleX: 1, duration: 0.6, ease: 'power2.out' },
+      { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" },
       0.3
     );
   }, { scope: overlayRef });
 
-  // 3. Exit animation: once progress hits 100
+  /* 3. Exit animation */
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
 
   useEffect(() => {
     if (!done) return;
-
     const tl = gsap.timeline({
       onComplete: () => onCompleteRef.current?.(),
     });
-
-    // Fade out the text first
     tl.to(titleRef.current, {
-      y: -20,
-      opacity: 0,
-      duration: 0.4,
-      ease: 'power2.in',
+      y: -20, opacity: 0, duration: 0.4, ease: "power2.in",
     });
-
-    // Fade out the progress bar
     tl.to(barWrapRef.current, {
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power2.in',
-    }, '-=0.2');
-
-    // Slide the entire overlay up and out
+      opacity: 0, duration: 0.3, ease: "power2.in",
+    }, "-=0.2");
     tl.to(overlayRef.current, {
-      y: '-100%',
-      duration: 0.8,
-      ease: 'power3.inOut',
-    }, '-=0.1');
-
+      y: "-100%", duration: 0.8, ease: "power3.inOut",
+    }, "-=0.1");
     return () => tl.kill();
   }, [done]);
 
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black"
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#080707",
+      }}
     >
-      {/* AMMAR.DEV title */}
+      {/* Title */}
       <h1
         ref={titleRef}
-        className="text-white font-black text-4xl md:text-5xl lg:text-6xl tracking-[-0.04em] mb-8 opacity-0 select-none"
-        style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+        style={{
+          fontFamily: "var(--font-display, 'Archivo Black', Impact, sans-serif)",
+          fontWeight: 400,
+          fontSize: "clamp(36px, 6vw, 64px)",
+          letterSpacing: "0.042em",
+          textTransform: "uppercase",
+          color: "#ffffff",
+          marginBottom: "32px",
+          opacity: 0,
+          userSelect: "none",
+        }}
       >
-        AMMAR<span className="text-red-600">.</span>DEV
+        A <span style={{ color: "#ebff00" }}>//</span> M
       </h1>
 
-      {/* Progress bar container */}
-      <div ref={barWrapRef} className="w-full max-w-sm px-6 opacity-0">
-        <Progress
-          value={progress}
-          className="h-[3px] bg-white/10 rounded-full"
-        />
+      {/* Progress bar */}
+      <div
+        ref={barWrapRef}
+        style={{
+          width: "100%",
+          maxWidth: "320px",
+          padding: "0 24px",
+          opacity: 0,
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            height: "2px",
+            background: "rgba(255,255,255,0.1)",
+            borderRadius: "1px",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            ref={barFillRef}
+            style={{
+              width: `${progress}%`,
+              height: "100%",
+              background: "#ebff00",
+              transition: "width 0.1s linear",
+            }}
+          />
+        </div>
 
-        {/* Percentage counter */}
-        <div className="flex justify-between mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-          <span>Loading</span>
+        {/* Counter */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "12px",
+            fontFamily: "var(--font-mono, 'IBM Plex Mono', monospace)",
+            fontSize: "10px",
+            fontWeight: 600,
+            letterSpacing: "0.109em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.3)",
+          }}
+        >
+          <span>LOADING</span>
           <span>{progress}%</span>
         </div>
       </div>

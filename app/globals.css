@@ -1,42 +1,299 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
-@import "tailwindcss";
+/* ══════════════════════════════════════════════════════════════════════
+   Brutalist Editorial Design System — globals.css
+   Acid-lit brutalist atelier: acid yellow against obsidian and bone white
+   ══════════════════════════════════════════════════════════════════════ */
 
-@theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'Space Mono', monospace;
-  --color-bg: #FFFFFF;
-  --color-ink: #000000;
-  --color-primary: #FFFFFF;
-  --color-red: #FF0000;
-  --color-gray: #666666;
-  --color-muted: #999999;
-  --color-border: #000000;
+/* ── CSS Custom Properties ──────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --acid-lime:   #ebff00;
+  --obsidian:    #080707;
+  --pure-black:  #000000;
+  --bone-white:  #ffffff;
+  --fog:         #c8c8c8;
+  --slate:       #383838;
+
+  /* Typography — font families set via next/font CSS variables */
+  --font-display:  var(--font-archivo), 'Archivo Black', Impact, sans-serif;
+  --font-mono:     var(--font-ibm-plex-mono), 'IBM Plex Mono', 'JetBrains Mono', monospace;
+  --font-body:     var(--font-be-vietnam), 'Be Vietnam Pro', 'Inter', system-ui, sans-serif;
+  --font-button:   var(--font-inter), 'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --section-gap:   48px;
+  --card-padding:  16px;
+  --element-gap:   10px;
+
+  /* Border Radius */
+  --radius-tag:    4px;
+  --radius-card:   24px;
+  --radius-pill:   84px;
+  --radius-image:  24px;
+  --radius-button: 4px;
+
+  /* Elevation */
+  --shadow-cta:    0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-card:   0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{--gutter:clamp(24px,4vw,64px)}
-body{background:#FFF;color:#000;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5}
-::selection{background:#FF0000;color:#FFF}
-::-webkit-scrollbar{width:0}
-a{color:inherit;text-decoration:none}
-.label{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:#999}
-.container{max-width:1200px;margin:0 auto;padding:0 var(--gutter)}
-.line-mask{overflow:hidden;display:block}
-.status-dot{width:6px;height:6px;border-radius:50%;background:#FF0000;animation:blink 2s ease-in-out infinite;flex-shrink:0}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+/* ── Reset ──────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@keyframes grain-shift {
-  0%   { background-position: 0 0; }
-  25%  { background-position: -30px 40px; }
-  50%  { background-position: 60px -20px; }
-  75%  { background-position: -40px -60px; }
-  100% { background-position: 20px 30px; }
+html {
+  scroll-behavior: smooth;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bone-white);
+  color: var(--obsidian);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 0; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+
+/* ── Typography Utilities ───────────────────────────────────────────── */
+
+/* Display heading — Archivo Black (FK Raster substitute) */
+.display-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.0;
+  letter-spacing: 0.042em;
+  text-transform: uppercase;
+}
+
+.display-heading--sm {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.0;
+  letter-spacing: 0.042em;
+  text-transform: uppercase;
+}
+
+/* Mono label — IBM Plex Mono, the signature metadata style */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.0;
+  letter-spacing: 0.086em;
+  text-transform: uppercase;
+}
+
+.label-mono--xs {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: 0.109em;
+  text-transform: uppercase;
+}
+
+.label-mono--sm {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.label-mono--brand {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: 0.109em;
+  text-transform: uppercase;
+}
+
+/* Body — Be Vietnam Pro */
+.body-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Button text — Inter Medium */
+.button-text {
+  font-family: var(--font-button);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+}
+
+/* ── Surfaces ───────────────────────────────────────────────────────── */
+.surface-bone    { background: var(--bone-white); color: var(--obsidian); }
+.surface-obsidian { background: var(--obsidian); color: var(--bone-white); }
+.surface-fog     { background: var(--fog); }
+.surface-slate   { background: var(--slate); color: var(--bone-white); }
+
+/* ── Scroll Morphs ─────────────────────────────────────────────────── */
+.scroll-morph {
+  isolation: isolate;
+}
+
+.scroll-morph__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.scroll-morph__accent {
+  position: absolute;
+  top: 0;
+  left: 5vw;
+  right: 5vw;
+  z-index: 2;
+  height: 2px;
+  background: var(--acid-lime);
+  pointer-events: none;
+}
+
+/* ── Component Patterns ─────────────────────────────────────────────── */
+
+/* Acid Lime pill (time badge, CTA) */
+.pill-lime {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--acid-lime);
+  color: var(--obsidian);
+  border-radius: var(--radius-pill);
+  padding: 4px 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.086em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+}
+
+/* Outlined action button */
+.btn-outlined {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-button);
+  padding: 4px 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.086em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  color: inherit;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-outlined:hover {
+  background: var(--obsidian);
+  color: var(--bone-white);
+}
+
+.surface-obsidian .btn-outlined:hover {
+  background: var(--bone-white);
+  color: var(--obsidian);
+}
+
+/* Metadata tag [BRACKETED] */
+.tag-bracket {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.086em;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: var(--radius-tag);
+  border: 1px solid var(--fog);
+}
+
+/* ── Animations ─────────────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes tick {
+  from { opacity: 1; }
+  50%  { opacity: 0.4; }
+  to   { opacity: 1; }
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scroll-morph__inner,
+  .scroll-morph__accent {
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .display-heading {
+    font-size: 32px;
+  }
+  .display-heading--sm {
+    font-size: 24px;
+  }
+}
+
+/* Hide Spline Watermark */
+.spline-wrapper a, .spline-wrapper div:not(canvas) {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

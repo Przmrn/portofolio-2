@@ -1,38 +1,37 @@
-'use client';
-import { useState } from 'react';
-import SmoothScroll from '../components/SmoothScroll';
-import Preloader from '../components/Preloader';
-import NoiseOverlay from '../components/NoiseOverlay';
-import HeroSection from '../components/HeroSection';
-import Marquee from '../components/Marquee';
-import ProjectsSection from '../components/ProjectsSection';
-import ManifestoSection from '../components/ManifestoSection';
-import AboutSection from '../components/AboutSection';
-import FooterSection from '../components/FooterSection';
+"use client";
+import { useState } from "react";
+import SmoothScroll from "../components/SmoothScroll";
+import Preloader from "../components/Preloader";
+import TopBar from "../components/TopBar";
+import ScrollMorph from "../components/ScrollMorph";
+import HeroBrutalist from "../components/HeroBrutalist";
+import ProjectsGrid from "../components/ProjectsGrid";
+import AboutBrutalist from "../components/AboutBrutalist";
+import ContactSection from "../components/ContactSection";
+import BackToTopCTA from "../components/BackToTopCTA";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   return (
-    <SmoothScroll>
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
-      
-      {/* Subtle dirt/film grain over everything for editorial feel */}
-      <NoiseOverlay />
-
-      <main className="bg-white min-h-screen text-black flex flex-col selection:bg-red-600 selection:text-white">
-        {!loading && (
-          <>
-            <HeroSection />
-            <Marquee text="IT DEVELOPER" />
-            <ProjectsSection />
-            <ManifestoSection />
-            <Marquee text="QUIET TOOLS" bg="bg-red-600" fg="text-white" direction={-1} />
-            <AboutSection />
-            <FooterSection />
-          </>
-        )}
-      </main>
-    </SmoothScroll>
+    <>
+      {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
+      <SmoothScroll>
+        <TopBar />
+        <ScrollMorph first index={0}>
+          <HeroBrutalist />
+        </ScrollMorph>
+        <ScrollMorph index={1}>
+          <ProjectsGrid />
+        </ScrollMorph>
+        <ScrollMorph index={2}>
+          <AboutBrutalist />
+        </ScrollMorph>
+        <ScrollMorph tone="dark" last index={3}>
+          <ContactSection />
+        </ScrollMorph>
+        <BackToTopCTA />
+      </SmoothScroll>
+    </>
   );
 }

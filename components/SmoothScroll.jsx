@@ -8,11 +8,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      ScrollTrigger.refresh();
+      return undefined;
+    }
+
     const lenis = new Lenis({
-      lerp: 0.09,           // was 0.03 — much snappier now
+      autoRaf: false,
+      lerp: 0.065,
       smoothWheel: true,
-      wheelMultiplier: 0.9,  // was 0.6 — feels native-responsive
-      smoothTouch: false,    // disable on touch — native scroll is better on mobile
+      syncTouch: true,
+      syncTouchLerp: 0.06,
+      touchInertiaExponent: 1.6,
+      wheelMultiplier: 0.72,
+      touchMultiplier: 0.95,
+      anchors: {
+        duration: 1.25,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      },
     });
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -20,6 +37,7 @@ export default function SmoothScroll({ children }) {
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
+    ScrollTrigger.refresh();
 
     return () => {
       gsap.ticker.remove(tick);
