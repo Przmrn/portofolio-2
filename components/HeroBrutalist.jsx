@@ -23,7 +23,7 @@ export default function HeroBrutalist() {
       id="hero"
       style={{
         position: "relative",
-        height: "100vh",
+        height: "100%",
         overflow: "hidden",
         background: "#ffffff",
       }}

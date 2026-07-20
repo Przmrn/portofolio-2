@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
-import SmoothScroll from "../components/SmoothScroll";
 import Preloader from "../components/Preloader";
 import TopBar from "../components/TopBar";
-import ScrollMorph from "../components/ScrollMorph";
+import FullPageScroll, { PageProvider } from "../components/FullPageScroll";
+import PageDots from "../components/PageDots";
 import HeroBrutalist from "../components/HeroBrutalist";
 import ProjectsGrid from "../components/ProjectsGrid";
 import AboutBrutalist from "../components/AboutBrutalist";
 import ContactSection from "../components/ContactSection";
-import BackToTopCTA from "../components/BackToTopCTA";
+
+const SLIDE_COUNT = 4;
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -16,22 +17,16 @@ export default function Home() {
   return (
     <>
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
-      <SmoothScroll>
+      <PageProvider slideCount={SLIDE_COUNT}>
         <TopBar />
-        <ScrollMorph first index={0}>
+        <FullPageScroll>
           <HeroBrutalist />
-        </ScrollMorph>
-        <ScrollMorph index={1}>
           <ProjectsGrid />
-        </ScrollMorph>
-        <ScrollMorph index={2}>
           <AboutBrutalist />
-        </ScrollMorph>
-        <ScrollMorph tone="dark" last index={3}>
           <ContactSection />
-        </ScrollMorph>
-        <BackToTopCTA />
-      </SmoothScroll>
+        </FullPageScroll>
+        <PageDots />
+      </PageProvider>
     </>
   );
 }

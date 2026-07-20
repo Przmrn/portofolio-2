@@ -43,34 +43,10 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
 html, body {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
   background: var(--bone-white);
   color: var(--obsidian);
   font-family: var(--font-body);
@@ -78,7 +54,6 @@ html, body {
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 0; }
@@ -167,25 +142,119 @@ ul, ol { list-style: none; }
 .surface-fog     { background: var(--fog); }
 .surface-slate   { background: var(--slate); color: var(--bone-white); }
 
-/* ── Scroll Morphs ─────────────────────────────────────────────────── */
-.scroll-morph {
-  isolation: isolate;
+/* ══════════════════════════════════════════════════════════════════════
+   Full-Page Scroll System
+   ══════════════════════════════════════════════════════════════════════ */
+
+.full-page-scroll {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.scroll-morph__inner {
-  position: relative;
-  z-index: 1;
-}
-
-.scroll-morph__accent {
+.full-page-slide {
   position: absolute;
-  top: 0;
-  left: 5vw;
-  right: 5vw;
-  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform, opacity, filter;
+}
+
+/* Ensure section content fills the slide */
+.full-page-slide > section {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Hide scrollbar but allow scroll */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.full-page-slide > section::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Page Dots Navigation ──────────────────────────────────────────── */
+.page-dots {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.page-dots__dot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  flex-direction: row-reverse;
+}
+
+.page-dots__line {
+  display: block;
+  width: 20px;
   height: 2px;
+  background: var(--fog);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease;
+}
+
+.page-dots__dot--active .page-dots__line {
+  width: 36px;
   background: var(--acid-lime);
+}
+
+.page-dots__dot:hover .page-dots__line {
+  width: 28px;
+  background: var(--obsidian);
+}
+
+.page-dots__dot--active:hover .page-dots__line {
+  background: var(--acid-lime);
+  width: 36px;
+}
+
+.page-dots__label {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  color: var(--obsidian);
   pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-dots__dot:hover .page-dots__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Dark tone adaptation for dots */
+.full-page-scroll[data-tone="dark"] .page-dots__line {
+  background: var(--slate);
+}
+
+.full-page-scroll[data-tone="dark"] .page-dots__dot:hover .page-dots__line {
+  background: var(--bone-white);
+}
+
+.full-page-scroll[data-tone="dark"] .page-dots__dot--active .page-dots__line {
+  background: var(--acid-lime);
+}
+
+.full-page-scroll[data-tone="dark"] .page-dots__label {
+  color: var(--bone-white);
 }
 
 /* ── Component Patterns ─────────────────────────────────────────────── */
@@ -252,6 +321,16 @@ ul, ol { list-style: none; }
   border: 1px solid var(--fog);
 }
 
+/* ── Scroll Indicator ──────────────────────────────────────────────── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
 /* ── Animations ─────────────────────────────────────────────────────── */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -271,14 +350,6 @@ ul, ol { list-style: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  .scroll-morph__inner,
-  .scroll-morph__accent {
-    transform: none !important;
-    filter: none !important;
-    opacity: 1 !important;
-    clip-path: none !important;
-  }
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────── */
@@ -288,6 +359,23 @@ ul, ol { list-style: none; }
   }
   .display-heading--sm {
     font-size: 24px;
+  }
+
+  .page-dots {
+    right: 12px;
+    gap: 14px;
+  }
+
+  .page-dots__line {
+    width: 14px;
+  }
+
+  .page-dots__dot--active .page-dots__line {
+    width: 24px;
+  }
+
+  .page-dots__label {
+    display: none;
   }
 }
 

@@ -1,22 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import TimeBadge from "./TimeBadge";
+import { usePageContext } from "./FullPageScroll";
 
 const NAV_LINKS = [
-  { label: "WORK",      href: "#projects",  icon: "⊙" },
-  { label: "ABOUT",     href: "#about",     icon: null },
-  { label: "REACH OUT", href: "#contact",   icon: null },
+  { label: "WORK",      page: 1, icon: "⊙" },
+  { label: "ABOUT",     page: 2, icon: null },
+  { label: "REACH OUT", page: 3, icon: null },
 ];
 
 export default function TopBar() {
-  const [scrolled, setScrolled] = useState(false);
+  const { current, goTo } = usePageContext();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // Adapt colors based on current slide tone
+  const isDark = current === 3;
+  const fg = isDark ? "#ffffff" : "#080707";
+  const bg = current === 0
+    ? "transparent"
+    : isDark
+      ? "rgba(8,7,7,0.92)"
+      : "rgba(255,255,255,0.92)";
+  const blur = current === 0 ? "none" : "blur(8px)";
 
   return (
     <motion.header
@@ -33,34 +37,48 @@ export default function TopBar() {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "20px 5vw",
-        background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(8px)" : "none",
-        transition: "background 0.3s, backdrop-filter 0.3s",
+        background: bg,
+        backdropFilter: blur,
+        transition: "background 0.4s ease, backdrop-filter 0.4s ease",
       }}
     >
       {/* Left — Brand */}
-      <a href="#" className="label-mono--brand" style={{ color: "#080707" }}>
+      <button
+        onClick={() => goTo(0)}
+        className="label-mono--brand"
+        style={{
+          color: fg,
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          padding: 0,
+          transition: "color 0.4s ease",
+        }}
+      >
         [AMMAR]
-      </a>
+      </button>
 
       {/* Center — Nav */}
       <nav style={{ display: "flex", alignItems: "center", gap: "28px" }}>
         {NAV_LINKS.map((link) => (
-          <a
+          <button
             key={link.label}
-            href={link.href}
+            onClick={() => goTo(link.page)}
             className="label-mono"
             style={{
-              color: "#080707",
-              transition: "opacity 0.2s",
+              color: fg,
+              background: "none",
+              border: "none",
               cursor: "pointer",
+              padding: 0,
+              transition: "opacity 0.2s, color 0.4s ease",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             {link.label}
             {link.icon && <span style={{ marginLeft: "4px" }}>{link.icon}</span>}
-          </a>
+          </button>
         ))}
       </nav>
 

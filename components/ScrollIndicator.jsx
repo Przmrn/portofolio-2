@@ -1,9 +1,9 @@
 "use client";
 
-
 export default function ScrollIndicator() {
   return (
     <div
+      className="scroll-indicator"
       style={{
         position: "absolute",
         bottom: "72px",

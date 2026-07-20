@@ -20,7 +20,8 @@ export default function AboutBrutalist() {
 
       style={{
         background: "#ffffff",
-        padding: "100px 5vw 120px",
+        padding: "88px 5vw 60px",
+        height: "100%",
         borderTop: "1px solid #c8c8c8",
       }}
     >

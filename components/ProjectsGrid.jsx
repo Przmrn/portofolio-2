@@ -37,7 +37,8 @@ export default function ProjectsGrid() {
       id="projects"
       style={{
         background: "#ffffff",
-        padding: "100px 5vw 80px",
+        padding: "88px 5vw 60px",
+        height: "100%",
       }}
     >
       {/* Section heading */}

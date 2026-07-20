@@ -31,7 +31,8 @@ export default function ContactSection() {
       style={{
         background: "#080707",
         color: "#ffffff",
-        padding: "100px 5vw 80px",
+        padding: "88px 5vw 40px",
+        height: "100%",
       }}
     >
       {/* Section heading */}
