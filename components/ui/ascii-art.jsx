@@ -28,6 +28,8 @@ const ASCII_CHARSETS = {
   squares: " ▢▣▤▥▦▧▨▩",
   hearts: " ♡♥",
   math: " +-×÷=≠≈∞",
+  brutalist: " .:-=+*#%@",
+  clean: "  .:+#@",
 };
 
 const isCharsetPreset = (value) => {
@@ -125,9 +127,9 @@ export const AsciiArt = ({
   style = {},
   animateOnView = true,
   objectFit = "cover",
-  spotlightRadius = 150,
+  spotlightRadius = 180,
   spotlightColor = "#ebff00",
-  hoverStrength = 28,
+  hoverStrength = 24,
   fontWeight = 500,
 }) => {
   const mouseRef = useRef({
@@ -270,11 +272,16 @@ export const AsciiArt = ({
           const a = data[idx + 3];
 
           const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-          const adjustedBrightness = a === 0 ? 0 : brightness;
+          
+          let charIndex;
+          if (a < 20 || brightness > 0.94) {
+            charIndex = 0;
+          } else if (brightness < 0.08) {
+            charIndex = effectiveCharset.length - 1;
+          } else {
+            charIndex = Math.floor(brightness * (effectiveCharset.length - 1));
+          }
 
-          const charIndex = Math.floor(
-            adjustedBrightness * (effectiveCharset.length - 1)
-          );
           const char = effectiveCharset[charIndex] || " ";
 
           row.push({ char, r, g, b });
@@ -499,7 +506,7 @@ export const AsciiArt = ({
     frameId = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(frameId);
+      if (frameId) cancelAnimationFrame(frameId);
     };
   }, [
     isLoaded,
@@ -509,6 +516,7 @@ export const AsciiArt = ({
     animationDuration,
     drawCanvas,
     asciiData,
+    hasAnimated,
   ]);
 
   useIsomorphicLayoutEffect(() => {

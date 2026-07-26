@@ -1,21 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 
+const getTimeString = () => {
+  if (typeof window === "undefined") return "";
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes().toString().padStart(2, "0");
+  const period = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 || 12;
+  return `BNA(ID) ${h12}:${m} ${period}`;
+};
+
 export default function TimeBadge() {
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(getTimeString);
 
   useEffect(() => {
-    const fmt = () => {
-      const now = new Date();
-      const h = now.getHours();
-      const m = now.getMinutes().toString().padStart(2, "0");
-      const period = h >= 12 ? "PM" : "AM";
-      const h12 = h % 12 || 12;
-      return `BNA(ID) ${h12}:${m} ${period}`;
-    };
-
-    setTime(fmt());
-    const id = setInterval(() => setTime(fmt()), 1000);
+    const id = setInterval(() => setTime(getTimeString()), 1000);
     return () => clearInterval(id);
   }, []);
 

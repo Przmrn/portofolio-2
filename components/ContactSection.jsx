@@ -29,7 +29,7 @@ export default function ContactSection() {
       id="contact"
 
       style={{
-        background: "#080707",
+        background: "#0e0e0e",
         color: "#ffffff",
         padding: "88px 5vw 40px",
         height: "100%",

@@ -44,7 +44,10 @@ export default function Preloader({ onComplete }) {
 
   /* 3. Exit animation */
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     if (!done) return;
@@ -92,7 +95,7 @@ export default function Preloader({ onComplete }) {
           userSelect: "none",
         }}
       >
-        A <span style={{ color: "#ebff00" }}>//</span> M
+        A <span style={{ color: "#ebff00" }}>{"//"}</span> M
       </h1>
 
       {/* Progress bar */}

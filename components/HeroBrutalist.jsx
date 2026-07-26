@@ -1,23 +1,41 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import ErrorBoundary from "./ErrorBoundary";
 import ScrollIndicator from "./ScrollIndicator";
-import { AsciiArt } from "./ui/ascii-art";
+
+const AsciiArt = dynamic(
+  () => import("./ui/ascii-art").then((mod) => mod.AsciiArt),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 
 const HERO_ASCII_SRC =
   "data:image/svg+xml;charset=utf-8," +
   encodeURIComponent(`
     <svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="1200" fill="white" />
+      
+      <!-- Central Typography Monogram -->
       <g fill="black" font-family="Arial Black, Impact, sans-serif" font-weight="900">
-        <text x="50%" y="52%" font-size="250" letter-spacing="-10" text-anchor="middle" dominant-baseline="middle">A//M</text>
+        <text x="600" y="600" font-size="280" letter-spacing="-10" text-anchor="middle" dominant-baseline="central">A//M</text>
       </g>
-      <path d="M150 838 L1050 318" stroke="black" stroke-width="18" stroke-linecap="square" opacity="0.16" />
-      <path d="M208 914 L992 462" stroke="black" stroke-width="8" stroke-linecap="square" opacity="0.12" />
+
+      <!-- Sleek Accent Lines -->
+      <line x1="120" y1="920" x2="1080" y2="280" stroke="black" stroke-width="18" stroke-linecap="round" opacity="0.8" />
+      <line x1="180" y1="980" x2="1020" y2="440" stroke="black" stroke-width="8" stroke-linecap="round" opacity="0.4" />
+
+      <!-- Corner Crosshairs -->
+      <path d="M 140 200 L 140 140 L 200 140" stroke="black" stroke-width="10" fill="none" />
+      <path d="M 1060 200 L 1060 140 L 1000 140" stroke="black" stroke-width="10" fill="none" />
+      <path d="M 140 1000 L 140 1060 L 200 1060" stroke="black" stroke-width="10" fill="none" />
+      <path d="M 1060 1000 L 1060 1060 L 1000 1060" stroke="black" stroke-width="10" fill="none" />
     </svg>
   `);
 
 export default function HeroBrutalist() {
-
   return (
     <section
       id="hero"
@@ -57,7 +75,7 @@ export default function HeroBrutalist() {
             lineHeight: 0.95,
           }}
         >
-          A <span style={{ color: "#ebff00" }}>//</span> M
+          A <span style={{ color: "#ebff00" }}>{"//"}</span> M
         </h1>
 
         {/* Bio */}
@@ -109,30 +127,32 @@ export default function HeroBrutalist() {
           position: "absolute",
           top: "10%",
           right: "2vw",
-          width: "45%",
+          width: "48%",
           height: "80%",
-          zIndex: 2,
+          zIndex: 5,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           pointerEvents: "auto",
         }}
       >
-        <AsciiArt
-          src={HERO_ASCII_SRC}
-          resolution={128}
-          charset="dense"
-          color="#080707"
-          inverted
-          animated={false}
-          animationStyle="none"
-          fontFamily="'IBM Plex Mono', 'JetBrains Mono', monospace"
-          fontWeight={600}
-          spotlightRadius={180}
-          spotlightColor="#ebff00"
-          hoverStrength={24}
-          style={{ width: "100%", height: "100%", opacity: 0.92 }}
-        />
+        <ErrorBoundary fallback={null}>
+          <AsciiArt
+            src={HERO_ASCII_SRC}
+            resolution={92}
+            charset="dense"
+            color="#080707"
+            inverted
+            animated={false}
+            animationStyle="none"
+            fontFamily="'IBM Plex Mono', 'JetBrains Mono', monospace"
+            fontWeight={600}
+            spotlightRadius={180}
+            spotlightColor="#ebff00"
+            hoverStrength={22}
+            style={{ width: "100%", height: "100%", opacity: 0.94 }}
+          />
+        </ErrorBoundary>
       </div>
 
       {/* ── Bottom bar ─────────────────────────────────── */}

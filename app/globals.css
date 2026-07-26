@@ -352,6 +352,31 @@ ul, ol { list-style: none; }
   }
 }
 
+/* ── Back to Top Button ────────────────────────────────────────────── */
+.back-to-top:hover {
+  border-color: var(--acid-lime) !important;
+  background: var(--acid-lime) !important;
+  box-shadow: 0 4px 20px rgba(235, 255, 0, 0.3) !important;
+}
+
+.back-to-top:hover svg {
+  stroke: var(--obsidian) !important;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--acid-lime);
+  outline-offset: 3px;
+}
+
+.back-to-top:active {
+  transform: scale(0.92);
+}
+
+/* ── Pull Switch ───────────────────────────────────────────────────── */
+.pull-switch {
+  will-change: transform;
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .display-heading {
@@ -376,6 +401,17 @@ ul, ol { list-style: none; }
 
   .page-dots__label {
     display: none;
+  }
+
+  .back-to-top {
+    bottom: 20px !important;
+    left: 20px !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .pull-switch {
+    bottom: 16px !important;
   }
 }
 
