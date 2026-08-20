@@ -80,8 +80,7 @@ export default function HeroBrutalist() {
 
         {/* Bio */}
         <p className="body-text" style={{ color: "#383838", maxWidth: "380px", marginBottom: "20px" }}>
-          Building systems at the intersection of computer vision, full-stack
-          web development, and real-world deployment. Based in Banda Aceh, Indonesia.
+            Building full-stack web applications from front-end interfaces to back-end APIs.
         </p>
 
         {/* Availability */}

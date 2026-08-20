@@ -47,12 +47,10 @@ export default function AboutBrutalist() {
         {/* Left — Bio */}
         <div>
           <p className="body-text" style={{ color: "#383838", marginBottom: "20px", maxWidth: "420px" }}>
-            IT student from Banda Aceh, Indonesia. I work at the intersection of
-            computer vision, full-stack web development, and real-world deployment.
+              Building full-stack web applications from front-end interfaces to back-end APIs.
           </p>
           <p className="body-text" style={{ color: "#383838", maxWidth: "420px" }}>
-            I care about code that ships — not just demos. Every project is built
-            with reliability, data integrity, and the end user in mind.
+              Focused on building solid web applications, clear system architecture, and reliable APIs.
           </p>
         </div>
 

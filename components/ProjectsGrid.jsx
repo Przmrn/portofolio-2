@@ -9,7 +9,7 @@ const PROJECTS = [
     desc:  "Real-time vehicle detection and congestion prediction pipeline running on live CCTV streams. Processes HD video to extract density maps and flag critical junctions.",
     tags:  ["PYTHON", "YOLOV8", "OPENCV", "FASTAPI", "LARAVEL"],
     year:  "2025",
-    image: "/project-traffic.png",
+    // image: "/project-traffic.png",
   },
   {
     id:    "02",
@@ -18,7 +18,7 @@ const PROJECTS = [
     desc:  "Automated mail intake system with OCR-powered data extraction, status tracking, and a full audit trail. Replaced entirely manual logging.",
     tags:  ["LARAVEL", "PHP", "MYSQL", "PADDLEOCR", "PYTHON"],
     year:  "2025",
-    image: "/project-mail.png",
+    // image: "/project-mail.png",
   },
   {
     id:    "03",
@@ -27,7 +27,16 @@ const PROJECTS = [
     desc:  "Browser-based games that visualise sorting and pathfinding algorithms in real time. Built as an interactive learning tool for CS fundamentals.",
     tags:  ["REACT", "FRAMER MOTION", "TYPESCRIPT"],
     year:  "2026",
-    image: "/project-arcade.png",
+    // image: "/project-arcade.png",
+  },
+  {
+    id:    "04",
+    title: "Terminal AI Agent",
+    sub:   "Node.js & LLM Integration",
+    desc:  "Interactive CLI AI agent built from scratch using pure Node.js. Integrates with LLM APIs for intelligent prompt execution and terminal workflow automation.",
+    tags:  ["NODE.JS", "LLM API", "JAVASCRIPT", "CLI"],
+    year:  "2026",
+    // image: "/project-agent.png",
   },
 ];
 

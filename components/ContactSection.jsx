@@ -86,10 +86,10 @@ export default function ContactSection() {
           }}
         >
           <span className="label-mono" style={{ color: "#ffffff" }}>
-            VIDEO CALL
+            CALL
           </span>
           <a href={`mailto:${email}?subject=Let's%20Talk`} className="pill-lime" style={{ textDecoration: "none" }}>
-            BOOK A CALL ↗
+            CALL ↗
           </a>
         </div>
 
