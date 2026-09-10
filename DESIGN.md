@@ -1,194 +1,220 @@
-# Alejandro Mejias — Style Reference
-> Acid-lit brutalist atelier, acid yellow against obsidian and bone white
+# monopo saigon — Style Reference
+> Liquid iridescence behind editorial silence — a monochrome editorial gallery floating on molten light.
 
-**Theme:** mixed
+**Theme:** light
 
-Alejandro Mejias operates as a brutalist editorial portfolio: near-total monochrome canvases (white and deep black sections alternate) are interrupted by a single electric lime accent (#ebff00) that only appears on contact actions, time stamps, and avatar CTAs. Typography is the identity — a custom wide-compact grotesque (FK Raster Grotesk) at 32–48px carries every section heading, while IBM Plex Mono at 10–18px with aggressive positive tracking handles every label, tag, and metadata string. The signature element is a glossy 3D-rendered abstract 'A' sculpture that anchors major sections like a sculptural logo-mascot. Layout is edge-to-edge with very tight gutters, a fixed three-zone top bar (left brand, center nav, right status pill), and floating corner CTAs. Components feel architectural: sharp 4px button corners, soft 24px image corners, and occasional oversized pill radii up to 84px create deliberate contrast. The overall atmosphere is a high-design atelier's workshop log — restrained, opinionated, and unapologetically loud where it matters.
+Monopo Saigon runs on radical monochrome discipline: pure black and white with whisper-thin grays, wrapped around massive Roobert typography that breathes across full-bleed canvases. The signature contrast lives between austere editorial restraint (sharp 0px corners on navigation and text links, generous whitespace, 4px-based rhythm) and a single expressive gesture — full-pill 75px-radius buttons that float like liquid over imagery. Hero environments lean into iridescent, fluid, chromatic atmospheres (greens dissolving into amber into deep oxblood) while the interface itself never picks up a hue, creating the feeling of a black-and-white editorial gallery floating on a river of liquid light. Type sets the temperature: weight 300 at 78px whispers, weight 400 at 225px fills the viewport, and weight 400 at 11px labels everything else with confident minimalism. Motion is expressive but patient — cubic-bezier(0.19, 1, 0.22, 1) ease curves stretching up to 1.25s transform transitions, letting elements glide rather than snap.
 
-## Colors
+## Tokens — Colors
 
-| Name | Value | Role |
-|------|-------|------|
-| Acid Lime | `#ebff00` | Green action color for filled buttons, selected navigation states, and focused conversion moments |
-| Obsidian | `#080707` | Body and heading text, dominant border color, dark section canvas — near-pure black for maximum contrast |
-| Pure Black | `#000000` | High-frequency borders, icons, decorative strokes, image outlines — the structural black that outlines every other element |
-| Bone White | `#ffffff` | Light section canvas, card surfaces, inverted text on dark sections and lime buttons |
-| Fog | `#c8c8c8` | Placeholder surfaces, muted image backgrounds, subtle borders, disabled state fills |
-| Slate | `#383838` | Secondary dark surfaces, dark mode card backgrounds, subdued text on dark canvases |
+| Name | Value | Token | Role |
+|------|-------|-------|------|
+| Obsidian | `#000000` | `--color-obsidian` | Primary text, SVG strokes, overlay fills — pure black carries all foreground information and graphic marks |
+| Paper | `#ffffff` | `--color-paper` | Light text on dark surfaces, inverse labels, and high-contrast captions. Do not promote it to the primary CTA color |
+| Inkstone | `#181818` | `--color-inkstone` | Footer body copy and secondary headings — softened black for long-form reading blocks |
+| Felt Gray | `#6d6d6d` | `--color-felt-gray` | Muted helper text, address blocks, legal copy — quiet annotations that recede without disappearing |
+| Slate Pill | `#636363` | `--color-slate-pill` | Filled neutral button background — the only solid fill used for actions like Accept |
+| Ash Mist | `#9a9a9a` | `--color-ash-mist` | Mid-tone neutral for disabled or low-contrast surfaces in the surface stack |
+| Pewter | `#808080` | `--color-pewter` | Secondary mid-tone neutral for hover or muted state layers |
+| Iridescent Fade | `linear-gradient(90deg, rgb(160, 224, 171), rgb(255, 172, 46) 50%, rgb(165, 45, 37))` | `--color-iridescent-fade` | Chromatic accent appearing only inside the hero gradient wash — molten oxblood anchor of the iridescent atmosphere, not used in interface controls |
 
-## Typography
+## Tokens — Typography
 
-### FK Raster Grotesk Compact Trial Sharp — Display headlines for section titles (e.g. 'FEATURED WORK'). The wide, compact, near-square grotesque proportions at 32–48px with 1.0 line-height and +0.042em tracking are the site's signature — every section is announced with this single cut, no fallback weights exist
-- **Substitute:** Druk Wide, Antonio, Tungsten Bold (all require commercial license); free alternative: Archivo Black at 90% width transform
+### Roobert — Primary typeface across all interface text, navigation, hero headlines, body, lists, and footers. The custom sans carries geometric clarity with humanist warmth; its wide weight range (300 whisper through 600 anchor) lets the system breathe from monumental 225px headlines down to 11px labels · `--font-roobert`
+- **Substitute:** Inter or Söhne — both share Roobert's geometric-humanist balance and clean aperture
+- **Weights:** 300, 400, 600
+- **Sizes:** 11px, 12px, 16px, 18px, 29px, 30px, 39px, 45px, 54px, 78px, 94px, 225px
+- **Line height:** 0.70–2.34 (tight 0.70–0.76 on display sizes, generous 1.58 on body)
+- **Role:** Primary typeface across all interface text, navigation, hero headlines, body, lists, and footers. The custom sans carries geometric clarity with humanist warmth; its wide weight range (300 whisper through 600 anchor) lets the system breathe from monumental 225px headlines down to 11px labels
+
+### Raleway — Reserved for specific heading contexts where a slightly more elegant, narrower sans introduces contrast — appears sparingly as a counterpoint to Roobert's bolder presence · `--font-raleway`
+- **Substitute:** Montserrat or Jost
 - **Weights:** 400
-- **Sizes:** 32px, 48px
-- **Line height:** 1.00
-- **Letter spacing:** 0.042em
+- **Sizes:** 54px
+- **Line height:** 1.39
+- **Role:** Reserved for specific heading contexts where a slightly more elegant, narrower sans introduces contrast — appears sparingly as a counterpoint to Roobert's bolder presence
 
-### IBM Plex Mono — All uppercase labels, metadata tags, navigation items, technical strings, section indices like '014 — TODAY' and '[GOOD DESIGN AWARD WINNER 2023/24]'. The 0.086em–0.109em positive tracking on the 10–11px sizes is the monospace's defining behavior — tiny, widely-spaced, all-caps annotations that read like typeset engineering labels
-- **Substitute:** JetBrains Mono, Space Mono, IBM Plex Mono (Google)
-- **Weights:** 500, 600
-- **Sizes:** 10px, 11px, 14px, 18px
-- **Line height:** 1.00–1.40
-- **Letter spacing:** -0.05em, 0.086em, 0.109em
-
-### Be Vietnam Pro — Long-form body copy and link text. Stays at 16px only — the design avoids type-size variation in body text, relying on monospace labels for hierarchy instead
-- **Substitute:** Inter, system-ui, sans-serif
+### system-ui — Micro UI labels, cookie banner body, fine print — browser default fallback ensuring legibility at the smallest scale without committing to a custom face · `--font-system-ui`
 - **Weights:** 400
-- **Sizes:** 16px
-- **Line height:** 1.40
-
-### Inter Medium — Button text — the one place a humanist sans is used at 500 weight with slight negative tracking for legibility in small pill CTAs
-- **Substitute:** Inter, system-ui
-- **Weights:** 500
-- **Sizes:** 16px
-- **Line height:** 1.20
-- **Letter spacing:** -0.012em
-
-### system sans-serif — Icon-adjacent micro-text and fallback rendering for system UI
-- **Substitute:** system-ui
-- **Weights:** 400
-- **Sizes:** 12px
-- **Line height:** 1.20
+- **Sizes:** 9px, 16px
+- **Line height:** 1.15–1.32
+- **Role:** Micro UI labels, cookie banner body, fine print — browser default fallback ensuring legibility at the smallest scale without committing to a custom face
 
 ### Type Scale
 
-| Role | Size | Line Height | Letter Spacing |
-|------|------|-------------|----------------|
-| caption | 10px | 1 | 0.86px |
-| body | 16px | 1.4 | — |
-| subheading | 18px | 1.4 | -0.9px |
-| heading-sm | 32px | 1 | 1.344px |
-| heading | 48px | 1 | 2.016px |
+| Role | Size | Line Height | Letter Spacing | Token |
+|------|------|-------------|----------------|-------|
+| caption | 12px | 1.19 | — | `--text-caption` |
+| body-sm | 16px | 1.15 | — | `--text-body-sm` |
+| body | 18px | 1.21 | — | `--text-body` |
+| subheading | 39px | 1.19 | — | `--text-subheading` |
+| subheading-lg | 45px | 1.15 | — | `--text-subheading-lg` |
+| heading-sm | 54px | 1.39 | — | `--text-heading-sm` |
+| heading | 78px | 1.1 | — | `--text-heading` |
+| heading-lg | 94px | 0.76 | — | `--text-heading-lg` |
+| display | 225px | 1.25 | — | `--text-display` |
 
-## Spacing & Layout
+## Tokens — Spacing & Shapes
 
-**Density:** compact
+**Base unit:** 4px
 
-- **Section gap:** 48px
-- **Card padding:** 16px
-- **Element gap:** 10px
+**Density:** spacious
+
+### Spacing Scale
+
+| Name | Value | Token |
+|------|-------|-------|
+| 8 | 8px | `--spacing-8` |
+| 12 | 12px | `--spacing-12` |
+| 28 | 28px | `--spacing-28` |
+| 40 | 40px | `--spacing-40` |
+| 48 | 48px | `--spacing-48` |
+| 64 | 64px | `--spacing-64` |
+| 68 | 68px | `--spacing-68` |
+| 152 | 152px | `--spacing-152` |
 
 ### Border Radius
 
-- **tags:** 4px
-- **cards:** 24px
-- **pills:** 72-84px
-- **images:** 24px
-- **buttons:** 4px
-- **special:** 30-40px
+| Element | Value |
+|---------|-------|
+| tags | 75px |
+| cards | 0px |
+| images | 0px |
+| inputs | 0px |
+| buttons | 75px |
+
+### Layout
+
+- **Page max-width:** 1078px
+- **Section gap:** 46px
+- **Card padding:** 34px
+- **Element gap:** 14px
 
 ## Components
 
-### Top Bar
-**Role:** Persistent three-zone navigation header
+### Ghost Pill Button (Dark Surface)
+**Role:** Primary action button used over iridescent or dark hero media
 
-Full-width strip with three flex-aligned zones: left brand label '[ALEJANDRO MEJIAS]' in 10px IBM Plex Mono 600 uppercase with 0.109em tracking, center nav links ('WORK ⊙', 'ABOUT', 'REACH OUT') at 11px IBM Plex Mono 500, right status pill (see Time Badge). Fixed/sticky behavior. No background fill — transparent over white or black canvas. 48px vertical padding.
+Transparent background, 1px solid rgba(255,255,255,0.3) border, #ffffff text, 75px border-radius (full pill), 11px vertical and 33px horizontal padding, Roobert 16px weight 400. The translucent border dissolves into the iridescent background while the pill silhouette stays unmistakable.
 
-### Time Status Badge
-**Role:** Live local-time indicator pill
+### Ghost Pill Button (Light Surface)
+**Role:** Secondary action on white or light gray sections
 
-Acid Lime (#ebff00) filled pill containing live time like 'MEL(AU) 4:33 PM' at 11px IBM Plex Mono 600 uppercase. Pill radius 72–84px. 4px vertical / 8px horizontal padding. Sits in the top-right zone. Functions as a self-aware status indicator — the only place lime appears in the header.
+Transparent background, 1px solid #000000 border, #000000 text, 75px border-radius, 11px vertical and 33px horizontal padding, Roobert 16px weight 400. Mirrors the dark-surface variant — same geometry, inverted palette.
 
-### Book a Call Floating CTA
-**Role:** Persistent contact action
+### Filled Neutral Pill
+**Role:** Cookie consent and utilitarian confirmations
 
-Acid Lime (#ebff00) filled pill with circular avatar image (24px) on the left, 'BOOK A CALL' label in 11px IBM Plex Mono 600 uppercase, and an arrow '↗' icon. 4px vertical / 16px horizontal padding. Border-radius 84px. Fixed to the bottom-right corner. Inverts to dark-mode compatible when over black sections.
+rgba(55,55,55,0.78) background (functionally Slate Pill #636363), #ffffff text, 1px solid #ffffff border, 75px border-radius, 11px vertical and 33px horizontal padding. The only solid-filled action in the system — used sparingly for compliance and consent, never for primary marketing CTAs.
 
-### Section Display Heading
-**Role:** Page-level section title
+### Underline-Free Text Link
+**Role:** Inline navigation, menu items, language switcher, footer links
 
-FK Raster Grotesk Compact Trial Sharp, 48px (or 32px for sub-sections), weight 400, line-height 1.00, letter-spacing 0.042em. Always uppercase. All-caps presentation in a wide-compact grotesque is the signature. No color override needed — uses Obsidian (#080707) on light and Bone White (#ffffff) on dark.
+No background, no border, 0px radius. Roobert 12–16px weight 400, color shifts between #ffffff (on dark) and #000000 (on light). Underlines are absent — context and weight set the link apart from body copy. Generous line-height (1.36 at 11px, 1.19 at 12px) keeps stacked menus airy.
 
-### Metadata Tag (Bracketed)
-**Role:** Categorical / contextual label
+### Hero Display Headline
+**Role:** Full-viewport editorial title
 
-10–11px IBM Plex Mono 600 uppercase, letter-spacing 0.086–0.109em, wrapped in square brackets like '[GOOD DESIGN AWARD WINNER 2023/24]' or '[FRONTROW] [2025]'. Obsidian text on light, Bone White on dark. The square-bracket punctuation is part of the system — they read like archival catalog codes.
+Roobert 225px weight 400, line-height 1.25, #ffffff over iridescent dark media. Letter-spacing normal. The headline is the hero — no subhead, no CTA, just one monumental phrase centered in the viewport breathing against fluid light.
 
-### Project Card (Image)
-**Role:** Portfolio work entry
+### Section Heading (Whisper Weight)
+**Role:** Atmospheric headline for manifesto or feature sections
 
-Large rectangular image (full column width), 24px border-radius, Obsidian (#000000) 1px border or no border. Above the image: project name in 14px IBM Plex Mono 500 left-aligned + year in same style right-aligned (e.g. 'FINGERTIP.COM' / '2024'). Below: optional metadata. No card background — image sits directly on canvas.
+Roobert 78px weight 300, line-height 1.10. The 300-weight at this scale is anti-convention — most sites push 600–700 here. The whisper weight lets the headline feel like it is being spoken, not shouted, giving the editorial chamber its hushed authority.
 
-### Video Watch Card
-**Role:** Embedded video preview thumbnail
+### Section Heading (Anchor Weight)
+**Role:** Bold editorial divider or statement
 
-Small card (~180px wide) with 4px border-radius, 1px Obsidian border, containing a square photo thumbnail and a bottom strip with 'FRONTROW [2025]' label and '[WATCH] ↗' action in 10–11px IBM Plex Mono 500. Lives in the hero zone as a self-contained unit.
+Roobert 94px weight 400, line-height 0.76. The tight line-height (0.76) is dramatic — text lines almost touch, creating a dense typographic block that reads as art object. Used for large statement moments where the text itself is visual.
 
-### Contact Row
-**Role:** Structured contact entry (video call / email / connect)
+### Project Card / List Row
+**Role:** Featured work entry — paired image and title
 
-Two-column row on dark canvas. Left: label in 11px IBM Plex Mono 600 uppercase ('VIDEO CALL', 'EMAIL', 'CONNECT') in Bone White. Right: corresponding value — acid-lime CTA pill for call, outlined 4px-radius input-style button containing the email for email, horizontal row of social links for connect. 48px row gap between rows. 1px hairline divider between rows.
+Transparent background, 0px border-radius, no shadow. Image bleeds full-width within the 1078px container; title sits below in Roobert 16–18px weight 400. No card chrome — the card is content, not a container. Spacing between rows controlled by 14–46px gaps depending on section density.
 
-### Outlined Action Button
-**Role:** Secondary contact / display action
+### Language Switcher
+**Role:** Top-bar locale selector (EN / VN / 中文)
 
-Transparent background, 1px Obsidian (#080707) or Bone White border (on dark), 4px border-radius, contains a value string in 11px IBM Plex Mono 600 uppercase plus a small copy icon. 4px vertical / 16px horizontal padding. Used for email display, secondary actions.
+Three inline text links in Roobert 12px weight 400, color #ffffff or #000000 depending on surface, 0px radius, separated by visual whitespace rather than dividers. Active locale carries the same color but slightly heavier visual weight through spacing alone.
 
-### Social Link
-**Role:** External platform entry
+### Rotating Scroll Indicator
+**Role:** Bottom-left circular badge prompting downward exploration
 
-Icon (16–20px) + platform name in 11px IBM Plex Mono 600 uppercase with 0.086em tracking. Bone White on dark, Obsidian on light. Inline horizontal row. No underlines, no hover effects beyond opacity.
+Circular SVG badge with text tracing the circumference ('SCROLL DOWN · SCROLL DOWN'), rotating continuously at slow tempo. Sits at 0,0 of the bottom-left corner with small offset. Ink black stroke on transparent fill — a typographic punctuation mark, not a button.
 
-### 3D Sculpture Element
-**Role:** Brand-defining decorative anchor
+### Footer Address Block
+**Role:** Studio contact information
 
-A glossy 3D-rendered abstract 'A' letterform in Pure Black with subtle highlight gradients (reads as obsidian glass). Centered in major sections at ~280–340px width. Functions as the site mascot/logo in 3D form. No background — floats on the section canvas. Renders as the only non-flat element in the system.
+Roobert 11px weight 400 line-height 1.36, #6d6d6d Felt Gray text. Tight 8px top margins between lines create a compact address stack that recedes into the page. No dividers or labels — the muted gray does the work.
 
-### Corner Tab (W. Honors)
-**Role:** Edge-attached utility label
+### Cookie Banner
+**Role:** Compliance notice with single accept action
 
-Vertical text strip attached to the right edge of the viewport. 11px IBM Plex Mono 600, 0.086em tracking, rotated 90°. Functions as a secondary nav hint (e.g. 'W. Honors'). 1px Obsidian left border.
+Fixed bottom bar, rgba(55,55,55,0.78) Slate Pill background, white body text in system-ui 9–16px, paired with Filled Neutral Pill 'Accept' button. Minimal copy, single action, no settings — the banner respects attention by asking for nothing beyond consent.
 
-### Scroll Indicator
-**Role:** Hero exit affordance
+### Top Navigation Bar
+**Role:** Persistent header with logo, locale, and menu
 
-Centered at the bottom of the hero: 'SCROLL ↓' in 10–11px IBM Plex Mono 600 uppercase with 0.109em tracking. Obsidian text, no background. Tells the user the page is vertical and scrollable.
+Fixed transparent header 66px tall. Logo wordmark top-left (Roobert 16px weight 400 'monopo saigon'), language switcher centered, menu stack right-aligned (WORK / MANIFESTO / SAIGON SOULS / TEAM / CONTACT at 11–12px weight 400). No background fill — the header is invisible until content scrolls behind it.
+
+### Iridescent Hero Backdrop
+**Role:** Atmospheric media behind hero headlines
+
+Full-viewport organic gradient or video: soft sage green (rgb 160,224,171) dissolving through molten amber (rgb 255,172,46) into deep oxblood (rgb 165,45,37). Applied as a flowing, liquid texture — never as a flat gradient. This is the only chromatic surface in the entire system and exists only behind text, never as UI fill.
 
 ## Do's and Don'ts
 
 ### Do
-- Use IBM Plex Mono 500–600 at 10–11px with 0.086–0.109em positive tracking for every label, tag, and metadata string — uppercase by default
-- Reserve FK Raster Grotesk Compact Trial Sharp at 32–48px / line-height 1.0 for section titles only — never use it for body or subheadings
-- Use Acid Lime (#ebff00) exclusively on time badges, the 'Book a Call' CTA, and avatar pills — never as a background fill for large sections
-- Apply 4px border-radius to all buttons, tags, and outlined actions; 24px radius to all images; 72–84px radius only to pill-shaped elements
-- Maintain a three-zone top bar layout (left brand / center nav / right status pill) on every page
-- Pair Obsidian text on Bone White for light sections and Bone White text on Obsidian for dark sections — never mix
-- Use 48px vertical padding as the standard section separator rhythm
+- Set display headlines at 225px Roobert weight 400 and let them own the viewport — never crowd them with subheads or CTAs
+- Use the 75px pill radius exclusively for buttons and tags — keep all other elements (cards, images, inputs) at 0px radius for sharp editorial contrast
+- Reserve color for one iridescent hero backdrop per page — keep all interface text, borders, and fills strictly in the black/white/gray scale
+- Use weight 300 at 78px for manifesto and atmospheric headlines to create whisper authority — never push above weight 400 at this scale
+- Set line-height to 0.70–0.76 on display sizes above 78px to let lines lock together as typographic art objects
+- Apply cubic-bezier(0.19, 1, 0.22, 1) easing to transform and color transitions with durations of 0.8–1.25s for patient, gliding motion
+- Keep all interactive text links at 0px radius with no underlines — let spacing, color, and context signal affordance
 
 ### Don't
-- Do not introduce additional chromatic colors — the lime is the ONLY accent in the system and adding others breaks the discipline
-- Do not use soft shadows, blurs, or gradient backgrounds on any UI element — the system is intentionally flat except for the 3D sculpture
-- Do not use 16px+ border-radius on buttons or tags — they must read as sharp/precise (4px)
-- Do not set body type above 18px — the design uses size contrast between 11px labels and 48px displays, not intermediate steps
-- Do not place body copy centered — all body and labels are left-aligned, with only display headings occasionally centered
-- Do not use border-radius below 4px or use perfectly square corners — 4px is the minimum precision radius
-- Do not stack more than two text weights in a single component — the system relies on monospace + display grotesque only
-
-## Elevation
-
-- **Floating CTA (Book a Call):** `0 4px 12px rgba(0,0,0,0.15)`
-- **Video Watch Card:** `0 2px 8px rgba(0,0,0,0.08)`
+- Never introduce a chromatic UI color — black, white, and gray are the interface palette; the iridescent gradient is media only
+- Never use box-shadow or elevation on cards, buttons, or images — the system relies on flat surfaces and hairline 1px borders
+- Never set border-radius between 1px and 74px — the system jumps from sharp 0px to full 75px pill, no intermediate rounding
+- Never use bold or heavy weights (600+) above 45px — large sizes should whisper at 300 or speak at 400, never shout
+- Never center-align body copy in address blocks, lists, or project descriptions — left-align with 8–14px line gaps for editorial flow
+- Never add gradients to buttons, badges, or UI controls — gradients belong only in the hero atmospheric media
+- Never use Raleway for body or navigation — it is a heading accent only, and even there it appears sparingly
+- Never fill the canvas with imagery — the system is text-dominant with one hero-sized visual gesture per page
 
 ## Surfaces
 
-- **Bone Canvas** (`#ffffff`) — Default light section background, hero, project galleries
-- **Acid Highlight** (`#ebff00`) — Time badge, contact CTA, occasional section accent
-- **Fog Plate** (`#c8c8c8`) — Image placeholders, product mockup backgrounds, neutral cards
-- **Slate Card** (`#383838`) — Elevated dark surface inside dark sections
-- **Obsidian Ground** (`#080707`) — Dark contact/footer section, near-black canvas
+| Level | Name | Value | Purpose |
+|-------|------|-------|---------|
+| 1 | Paper | `#ffffff` | Primary canvas — most sections sit on pure white |
+| 2 | Slate Pill | `#636363` | Filled button surface for cookie consent and neutral actions |
+| 3 | Obsidian | `#000000` | Dark overlay and inverse section — full-bleed dark bands behind iridescent media |
+| 4 | Ash Mist | `#9a9a9a` | Quiet mid-tone layer for inset panels or disabled zones |
+
+## Elevation
+
+The system deliberately avoids shadow elevation. Surfaces are distinguished by color inversion (white to black bands) and hairline 1px borders rather than stacked shadows. The lone 'elevation' gesture is the translucent slate pill on the cookie banner, which uses background opacity rather than shadow to separate from content.
 
 ## Imagery
 
-The visual language is 99% flat monochrome UI punctuated by one signature 3D rendered element: a glossy black abstract 'A' letterform sculpture that appears as a hero anchor and section mascot. Project imagery is presented as large rectangular product mockup screenshots on neutral Fog (#c8c8c8) backgrounds within 24px-radius frames — no lifestyle photography, no environmental context. A small embedded video thumbnail card uses a candid portrait photo. Imagery is always contained (never full-bleed decorative), always sharp-edged or softly rounded at 24px, and always monochrome or desaturated. Icons are mono-stroke monochrome in 1.5–2px weight, paired with monospace labels. The role of imagery is showcase and identification, not decoration — the design IS the decoration.
+Imagery is theatrical and singular: one massive iridescent fluid texture dominates the hero — organic greens dissolving through amber into oxblood like oil on water or molten glass. It reads as full-bleed atmospheric media, possibly video or shader-driven canvas, and occupies the entire viewport as a singular sensory moment rather than a repeated pattern. Project showcases use contained editorial photography (tight product crops, campaign stills) presented without frames or borders — the image is the content. No illustration, no icons beyond tiny UI glyphs, no decorative shapes. Iconography is minimal or absent; the rotating circular text badge functions as the system's only typographic ornament. Overall density: text-dominant with one hero-sized visual gesture, then long quiet editorial stretches of typography and product imagery.
 
 ## Layout
 
-Full-bleed edge-to-edge layout with no centered max-width container. Top bar spans 100% width with three flex zones: brand label top-left, nav center, status pill top-right. The hero is a wide left-right split: descriptive text block on the left, metadata credits top-right, and the 3D 'A' sculpture dominating the center. Below the fold, project galleries use a 2-column image grid with full-bleed edges. Contact section flips to a dark Obsidian canvas maintaining the same edge-to-edge treatment. Navigation is a single sticky top bar — no sidebar, no mega-menu, no breadcrumbs. Section transitions are immediate (no gradients, no fades) — the only section break mechanism is the canvas flip from white to black. Spacing is compact: 48px between major sections, 10px between text rows, 4–16px component padding. Floating corner elements (Book a Call pill bottom-right, Honors tab right edge) layer over the layout as fixed UI chrome.
+Layout is max-width contained at 1078px, centered, with full-bleed dark hero sections breaking the container. The hero is full-viewport: centered monumental headline floating over iridescent media, minimal navigation floating at top, single rotating badge at bottom-left. Body sections follow a spacious editorial rhythm — generous 46px section gaps create breathing room between blocks, alternating between white and dark (black with white type) bands. Content arrangement is asymmetric: text-left/image-right and image-left/text-right alternations dominate, with no centered stacks outside the hero. Card grids appear as single-column project lists rather than multi-column grids — each project gets the full width with its image and title. Navigation is a transparent top bar with logo left, locale center, menu right — no sticky color shift, no shadow, just invisible persistence. The footer is a compact three-column address block (Tokyo, Saigon, London) with quiet 11px copy. Overall: editorial magazine pacing in a digital frame.
 
-## Similar Brands
+## Motion Personality
 
-- **Locomotive (locomotive.ca)** — Same editorial monochrome portfolio language with a single accent color, tight grid, and large display grotesque headings
-- **Rauno Freiberg (raunofreiberg.com)** — Same monospace metadata + large compressed display type combo, monochrome canvas with single vivid accent, edge-to-edge layout
-- **Pentagram partners (pentagram.com)** — Same brutalist editorial aesthetic with sharp 4px buttons, bracketed metadata, and a persistent top bar treatment
-- **Werkstätte-Haberzeth** — Same monospace-label + display-grotesque contrast, acid accent against monochrome, 3D sculptural logo mark as section anchor
+Motion is expressive but unhurried — the system treats transitions as slow camera moves rather than UI snaps. The signature curve is cubic-bezier(0.19, 1, 0.22, 1) (a gentle ease-out) applied to transform, color, and opacity at 0.8s and 1.25s durations. Shorter easing uses plain 'ease' at 0.4s for color and opacity micro-transitions. A rotating animation runs continuously on the scroll-indicator badge at slow tempo. Transforms dominate over positional animation — elements glide, slide, and reveal through transform rather than repositioning layout. The 1.25s duration on transforms (69 occurrences) signals that the studio prefers patience over responsiveness; nothing should feel abrupt. Border transitions (6 occurrences) and flex-basis shifts are rare and reserved for layout reveals, not micro-interactions.
+
+## Portfolio Adaptation — Ammar
+
+- **Hero headline:** "Built, Unbound" — monumental Roobert 400 over iridescent wash, white. No subhead, no CTA.
+- **Menu:** WORK / MANIFESTO / STACK / CONTACT — underline-free 11–12px links, scroll to sections.
+- **Locale center:** EN / ID (visual only, EN active).
+- **Work list:** 4 project rows, single-column, 0px images, 46px gaps. Existing `/project-*.png` assets reused; missing asset falls back to obsidian typographic block.
+- **Manifesto:** whisper 78px weight 300 — "Building systems that work. Code that ships."
+- **Expertise (dark band):** anchor 94px statement + skill rows + stats, white on obsidian.
+- **Contact:** ghost pill light + large email link, left-aligned editorial flow.
+- **Footer:** three-column address (Banda Aceh / Jakarta / Remote) in 11px Felt Gray on obsidian.

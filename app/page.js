@@ -1,48 +1,28 @@
-"use client";
-import { useState } from "react";
-import dynamic from "next/dynamic";
-import Preloader from "../components/Preloader";
-import TopBar from "../components/TopBar";
-import FullPageScroll, { PageProvider } from "../components/FullPageScroll";
-import PageDots from "../components/PageDots";
-import HeroBrutalist from "../components/HeroBrutalist";
-import ProjectsGrid from "../components/ProjectsGrid";
-import AboutBrutalist from "../components/AboutBrutalist";
-import ContactSection from "../components/ContactSection";
-import BackToTop from "../components/BackToTop";
-import ErrorBoundary from "../components/ErrorBoundary";
+import TopNavigation from "../components/ui/TopNavigation";
+import SmoothScroll from "../components/ui/SmoothScroll";
+import IridescentHero from "../components/ui/IridescentHero";
+import Manifesto from "../components/ui/Manifesto";
+import WorkList from "../components/ui/WorkList";
+import Expertise from "../components/ui/Expertise";
+import ContactEditorial from "../components/ui/ContactEditorial";
+import Footer from "../components/ui/Footer";
 
-const PullSwitch = dynamic(() => import("../components/PullSwitch"), {
-  ssr: false,
-  loading: () => null,
-});
-
-const SLIDE_COUNT = 4;
-
+/* magazine pacing, normal document scroll.
+   Full-bleed dark hero breaks the 1078px container; body sections
+   alternate paper / obsidian bands with generous 46px+ rhythm. */
 export default function Home() {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <>
-      {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
-
-      {/* Only mount the full page tree after the preloader has finished */}
-      {loaded && (
-        <PageProvider slideCount={SLIDE_COUNT}>
-          <TopBar />
-          <FullPageScroll>
-            <HeroBrutalist />
-            <ProjectsGrid />
-            <AboutBrutalist />
-            <ContactSection />
-          </FullPageScroll>
-          <PageDots />
-          <BackToTop />
-          <ErrorBoundary>
-            <PullSwitch />
-          </ErrorBoundary>
-        </PageProvider>
-      )}
+      <SmoothScroll />
+      <TopNavigation />
+      <main>
+        <IridescentHero />
+        <Manifesto />
+        <WorkList />
+        <Expertise />
+        <ContactEditorial />
+      </main>
+      <Footer />
     </>
   );
 }
