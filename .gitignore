@@ -42,3 +42,7 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# unused files
+PORTOFOLIO_CONTENT.md
+agy session.txt

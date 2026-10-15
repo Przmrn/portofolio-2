@@ -1,0 +1,18 @@
+/* ScrambledText — inherits the parent headline's type/color (monopo:
+ * no forced font, no forced color, no outer margin). */
+.textBlock {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.textBlock p {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+.char {
+  will-change: transform;
+  display: inline-block;
+}

@@ -1,5 +1,6 @@
 import TopNavigation from "../components/ui/TopNavigation";
 import SmoothScroll from "../components/ui/SmoothScroll";
+import LoadingScreen from "../components/ui/LoadingScreen";
 import IridescentHero from "../components/ui/IridescentHero";
 import Manifesto from "../components/ui/Manifesto";
 import WorkList from "../components/ui/WorkList";
@@ -13,6 +14,7 @@ import Footer from "../components/ui/Footer";
 export default function Home() {
   return (
     <>
+      <LoadingScreen />
       <SmoothScroll />
       <TopNavigation />
       <main>

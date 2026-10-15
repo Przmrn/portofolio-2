@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import { Inter, Raleway } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -39,6 +40,10 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${inter.variable} ${raleway.variable}`}>
       <body suppressHydrationWarning>
         {children}
+        {/* Vanta.js hero background — p5 first (head), topology effect after.
+            Local files (npm registry unreachable): public/scripts/*. */}
+        <Script src="/scripts/p5.min.js" strategy="beforeInteractive" />
+        <Script src="/scripts/vanta.topology.v2.js" strategy="afterInteractive" />
         <SpeedInsights />
       </body>
     </html>
